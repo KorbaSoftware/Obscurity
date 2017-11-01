@@ -13,7 +13,7 @@ public class ObscurityMain extends ApplicationAdapter {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		img = new Texture("android/assets/badlogic.jpg");
+		img = new Texture("badlogic.jpg");
 	}
 
 	@Override
