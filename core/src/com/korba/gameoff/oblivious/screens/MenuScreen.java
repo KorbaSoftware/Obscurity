@@ -14,18 +14,19 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.korba.gameoff.oblivious.ObscurityMain;
+import com.korba.gameoff.oblivious.ObscurityGame;
+import com.korba.gameoff.oblivious.screens.dev.DevScreen;
 
 public class MenuScreen implements Screen{
 
     private SpriteBatch batch;
-    private ObscurityMain game;
+    private ObscurityGame game;
     private Camera camera;
     private Viewport viewport;
     private Stage stage;
     private Texture background;
 
-    public MenuScreen(SpriteBatch batch, ObscurityMain game){
+    public MenuScreen(SpriteBatch batch, ObscurityGame game){
         this.batch = batch;
         this.game = game;
         camera = new OrthographicCamera();

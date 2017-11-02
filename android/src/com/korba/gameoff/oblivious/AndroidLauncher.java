@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
-import com.korba.gameoff.oblivious.ObscurityMain;
 
 public class AndroidLauncher extends AndroidApplication {
 	@Override
@@ -15,7 +14,7 @@ public class AndroidLauncher extends AndroidApplication {
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
 		config.hideStatusBar = true;
 		config.useImmersiveMode = true;
-		initialize(new ObscurityMain(), config);
+		initialize(new ObscurityGame(), config);
 	}
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	private void hideSystemUi() {
