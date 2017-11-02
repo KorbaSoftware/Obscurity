@@ -85,13 +85,6 @@ public class DevScreen implements Screen {
 
     }
 
-    @Override
-    public void dispose() {
-        stage.dispose();
-        batch.dispose();
-        game.dispose();
-    }
-
     private void clearScreen(){
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
@@ -143,5 +136,12 @@ public class DevScreen implements Screen {
         } else {
             return new DevKuba(batch, game);
         }
+    }
+
+    @Override
+    public void dispose() {
+        stage.dispose();
+        batch.dispose();
+        game.dispose();
     }
 }
