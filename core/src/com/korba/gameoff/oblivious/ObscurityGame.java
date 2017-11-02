@@ -3,16 +3,15 @@ package com.korba.gameoff.oblivious;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.korba.gameoff.oblivious.config.*;
 import com.korba.gameoff.oblivious.screens.MenuScreen;
 
 public class ObscurityGame extends Game {
 	private SpriteBatch batch;
-    private boolean devMode;
     private Cursor customCursor;
 	
 	@Override
 	public void create () {
-		devMode = true;
 		batch = new SpriteBatch();
 
 		createCustomCursor();
@@ -36,6 +35,6 @@ public class ObscurityGame extends Game {
 	}
 
 	public boolean isDevMode(){
-		return this.devMode;
+		return LauncherConfig.IS_DEVMODE;
 	}
 }
