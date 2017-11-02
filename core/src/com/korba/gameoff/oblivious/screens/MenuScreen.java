@@ -44,14 +44,8 @@ public class MenuScreen implements Screen{
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
-        camera.update();
-        batch.setProjectionMatrix(camera.combined);
-        batch.begin();
-        batch.draw(background, 0, 0, game.ACTUAL_WIDTH, game.ACTUAL_HEIGHT);
-        batch.end();
-        stage.draw();
+        clearScreen();
+        draw();
 
     }
 
@@ -139,9 +133,34 @@ public class MenuScreen implements Screen{
         Table table = new Table();
         table.left().bottom().padBottom(20).padLeft(20);
         Image logo = new Image(new Texture("korba_logo.png"));
+        if(game.isDevMode()) {
+            final MenuScreen menu = this;
+            logo.addListener(new InputListener() {
+                @Override
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    game.setScreen(new DevScreen(batch, game, menu));
+                    return super.touchDown(event, x, y, pointer, button);
+                }
+            });
+        }
         table.add(logo);
         table.setFillParent(true);
         return table;
     }
+
+    private void clearScreen(){
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
+    }
+
+    private void draw(){
+        camera.update();
+        batch.setProjectionMatrix(camera.combined);
+        batch.begin();
+        batch.draw(background, 0, 0, game.ACTUAL_WIDTH, game.ACTUAL_HEIGHT);
+        batch.end();
+        stage.draw();
+    }
+
 
 }
