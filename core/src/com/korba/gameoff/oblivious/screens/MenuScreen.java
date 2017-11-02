@@ -2,6 +2,7 @@ package com.korba.gameoff.oblivious.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -15,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.korba.gameoff.oblivious.ObscurityGame;
+import com.korba.gameoff.oblivious.assets.MenuAssets;
 import com.korba.gameoff.oblivious.config.LauncherConfig;
 import com.korba.gameoff.oblivious.screens.dev.DevScreen;
 
@@ -26,17 +28,21 @@ public class MenuScreen implements Screen{
     private Viewport viewport;
     private Stage stage;
     private Texture background;
+    private AssetManager manager;
 
     public MenuScreen(SpriteBatch batch, ObscurityGame game){
         this.batch = batch;
         this.game = game;
+        manager = game.getAssetManager();
+        MenuAssets.loadTextures(manager);
+        manager.finishLoading();
         camera = new OrthographicCamera();
         viewport = new FitViewport(LauncherConfig.WIDTH, LauncherConfig.HEIGHT, camera);
         stage =  new Stage(viewport, batch);
         stage.addActor(setMenuButtons());
         stage.addActor(setGameLogo());
         stage.addActor(setCompanyLogo());
-        background = new Texture("menu_background.png");
+        background = manager.get(MenuAssets.BACKGROUND, Texture.class);
     }
 
     @Override
@@ -81,7 +87,7 @@ public class MenuScreen implements Screen{
     private Table setMenuButtons(){
         Table table = new Table();
         table.right().bottom().padBottom(20).padRight(20);
-        Image newGame = new Image(new Texture("buttons/new_game.png"));
+        Image newGame = new Image(manager.get(MenuAssets.NEW_GAME, Texture.class));
         newGame.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -89,7 +95,7 @@ public class MenuScreen implements Screen{
                 return super.touchDown(event, x, y, pointer, button);
             }
         });
-        Image loadGame = new Image(new Texture("buttons/load_game.png"));
+        Image loadGame = new Image(manager.get(MenuAssets.LOAD_GAME, Texture.class));
         loadGame.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -97,7 +103,7 @@ public class MenuScreen implements Screen{
                 return super.touchDown(event, x, y, pointer, button);
             }
         });
-        Image options = new Image(new Texture("buttons/options.png"));
+        Image options = new Image(manager.get(MenuAssets.OPTIONS, Texture.class));
         options.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -105,7 +111,7 @@ public class MenuScreen implements Screen{
                 return super.touchDown(event, x, y, pointer, button);
             }
         });
-        Image exitGame = new Image(new Texture("buttons/exit.png"));
+        Image exitGame = new Image(manager.get(MenuAssets.EXIT, Texture.class));
         exitGame.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -131,7 +137,7 @@ public class MenuScreen implements Screen{
     private Table setGameLogo(){
         Table table = new Table();
         table.center().top().padTop(20);
-        Image logo = new Image(new Texture("game_logo.png"));
+        Image logo = new Image(manager.get(MenuAssets.GAME_LOGO, Texture.class));
         table.add(logo);
         table.setFillParent(true);
         return table;
@@ -140,7 +146,7 @@ public class MenuScreen implements Screen{
     private Table setCompanyLogo(){
         Table table = new Table();
         table.left().bottom().padBottom(20).padLeft(20);
-        Image logo = new Image(new Texture("korba_logo.png"));
+        Image logo = new Image(manager.get(MenuAssets.KORBA_LOGO, Texture.class));
         if(game.isDevMode()) {
             final MenuScreen menu = this;
             logo.addListener(new InputListener() {
