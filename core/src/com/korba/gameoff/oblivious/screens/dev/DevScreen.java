@@ -105,8 +105,12 @@ public class DevScreen implements Screen {
             logo.addListener(new InputListener() {
                 @Override
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    return true;
+                }
+
+                @Override
+                public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                     game.setScreen(menu);
-                    return super.touchDown(event, x, y, pointer, button);
                 }
             });
         table.add(logo);
@@ -120,8 +124,12 @@ public class DevScreen implements Screen {
         newButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 game.setScreen(chooseScreen(devType));
-                return super.touchDown(event, x, y, pointer, button);
             }
         });
         this.devButtons.add(newButton).pad(5,5,5,5);

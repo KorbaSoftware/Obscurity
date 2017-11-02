@@ -109,8 +109,12 @@ public class MenuScreen implements Screen{
         exitGame.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 Gdx.app.exit();
-                return super.touchDown(event, x, y, pointer, button);
             }
         });
         table.add(newGame);
@@ -142,8 +146,12 @@ public class MenuScreen implements Screen{
             logo.addListener(new InputListener() {
                 @Override
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    return true;
+                }
+
+                @Override
+                public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                     game.setScreen(new DevScreen(batch, game, menu));
-                    return super.touchDown(event, x, y, pointer, button);
                 }
             });
         }
