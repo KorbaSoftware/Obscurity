@@ -1,4 +1,4 @@
-package com.korba.gameoff.oblivious.screens;
+package com.korba.gameoff.oblivious.screens.dev;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -15,9 +15,15 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.korba.gameoff.oblivious.ObscurityGame;
-import com.korba.gameoff.oblivious.config.LauncherConfig;
+import com.korba.gameoff.oblivious.screens.*;
 
 public class DevScreen implements Screen {
+
+    public enum Dev {
+        FRUK,
+        KAMIL,
+        KUBA
+    }
 
     private SpriteBatch batch;
     private ObscurityGame game;
@@ -32,26 +38,17 @@ public class DevScreen implements Screen {
         this.game = game;
         this.menu = menu;
         camera = new OrthographicCamera();
-        viewport = new FitViewport(LauncherConfig.WIDTH, LauncherConfig.HEIGHT, camera);
+        viewport = new FitViewport(game.ACTUAL_WIDTH, game.ACTUAL_HEIGHT, camera);
         stage =  new Stage(viewport, batch);
         stage.addActor(setBackButton());
         devButtons = new Table();
         devButtons.center().top();
         devButtons.padLeft(5).padTop(20);
-        //example
-        MenuScreen menuScreen = new MenuScreen(batch, game);
-        addDeveloperButton(menuScreen);
-        addDeveloperButton(menuScreen);
-        addDeveloperButton(menuScreen);
-        addDeveloperButton(menuScreen);
-        addDeveloperButton(menuScreen);
-        devButtons.row().padTop(5).padBottom(5);
-        addDeveloperButton(menuScreen);
-        addDeveloperButton(menuScreen);
-        addDeveloperButton(menuScreen);
-        addDeveloperButton(menuScreen);
-        addDeveloperButton(menuScreen);
-        // end of example
+
+        addDeveloperButton(new Texture(Gdx.files.internal("buttons/dev_fruk.png")), Dev.FRUK);
+        addDeveloperButton(new Texture(Gdx.files.internal("buttons/dev_kamil.png")), Dev.KAMIL);
+        addDeveloperButton(new Texture(Gdx.files.internal("buttons/dev_kuba.png")), Dev.KUBA);
+
         devButtons.setFillParent(true);
         stage.addActor(devButtons);
     }
@@ -107,7 +104,7 @@ public class DevScreen implements Screen {
         stage.draw();
     }
 
-    private Table setBackButton(){
+    public Table setBackButton(){
         Table table = new Table();
         table.left().bottom().padBottom(20).padLeft(20);
         Image logo = new Image(new Texture("korba_logo.png"));
@@ -123,17 +120,27 @@ public class DevScreen implements Screen {
         return table;
     }
 
-    private void addDeveloperButton(Screen screen){
-        Image newButton = new Image(new Texture("buttons/dev_screen.png"));
-        final Screen testScreen = screen;
+    private void addDeveloperButton(Texture texture, Dev dev){
+        Image newButton = new Image(texture);
+        final Dev devType = dev;
         newButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(testScreen);
+                game.setScreen(chooseScreen(devType));
                 return super.touchDown(event, x, y, pointer, button);
             }
         });
         this.devButtons.add(newButton).pad(5,5,5,5);
+    }
 
+    private Screen chooseScreen(Dev dev) {
+
+        if(Dev.FRUK.equals(dev)) {
+           return new DevFruk(batch, game);
+        } else if(Dev.KAMIL.equals(dev)) {
+            return new DevKamil(batch, game);
+        } else {
+            return new DevKuba(batch, game);
+        }
     }
 }

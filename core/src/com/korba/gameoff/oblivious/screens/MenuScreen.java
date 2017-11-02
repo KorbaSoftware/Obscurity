@@ -15,7 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.korba.gameoff.oblivious.ObscurityGame;
-import com.korba.gameoff.oblivious.config.LauncherConfig;
+import com.korba.gameoff.oblivious.screens.dev.DevScreen;
 
 public class MenuScreen implements Screen{
 
@@ -30,7 +30,7 @@ public class MenuScreen implements Screen{
         this.batch = batch;
         this.game = game;
         camera = new OrthographicCamera();
-        viewport = new FitViewport(LauncherConfig.WIDTH, LauncherConfig.HEIGHT, camera);
+        viewport = new FitViewport(game.ACTUAL_WIDTH, game.ACTUAL_HEIGHT, camera);
         stage =  new Stage(viewport, batch);
         stage.addActor(setMenuButtons());
         stage.addActor(setGameLogo());
@@ -160,7 +160,7 @@ public class MenuScreen implements Screen{
         camera.update();
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
-        batch.draw(background, 0, 0, LauncherConfig.WIDTH, LauncherConfig.HEIGHT);
+        batch.draw(background, 0, 0, game.ACTUAL_WIDTH, game.ACTUAL_HEIGHT);
         batch.end();
         stage.draw();
     }
