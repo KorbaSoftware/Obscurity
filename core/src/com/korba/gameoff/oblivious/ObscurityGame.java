@@ -1,8 +1,10 @@
 package com.korba.gameoff.oblivious;
 
 import com.badlogic.gdx.*;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.korba.gameoff.oblivious.assets.Assets;
 import com.korba.gameoff.oblivious.config.*;
 import com.korba.gameoff.oblivious.screens.MenuScreen;
 import com.korba.gameoff.oblivious.tools.*;
@@ -15,11 +17,14 @@ public class ObscurityGame extends Game {
     private Cursor customCursor;
 
     private boolean showLogger = false;
+    private AssetManager manager;
 	
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-
+		manager = new AssetManager();
+		Assets.loadCursor(manager);
+		manager.finishLoading();
 		createCustomCursor();
        	setScreen(new MenuScreen(batch, this));
 	}
@@ -45,7 +50,7 @@ public class ObscurityGame extends Game {
 	}
 
 	private void createCustomCursor() {
-		customCursor = Gdx.graphics.newCursor(new Pixmap(Gdx.files.internal("custom_cursor.png")), 0, 0);
+		customCursor = Gdx.graphics.newCursor(manager.get(Assets.CURSOR, Pixmap.class), 0, 0);
 		Gdx.graphics.setCursor(customCursor);
 	}
 	
@@ -53,9 +58,15 @@ public class ObscurityGame extends Game {
 	public void dispose () {
 		batch.dispose();
 		customCursor.dispose();
+		manager.dispose();
 	}
 
 	public boolean isDevMode(){
 		return LauncherConfig.IS_DEVMODE;
 	}
+
+	public AssetManager getAssetManager(){
+		return manager;
+	}
+
 }
