@@ -9,15 +9,54 @@ import java.lang.StringBuilder;
 
 public class LoggerDev {
 
-    private static final String loggerTag = "LoggerDev";
+    private final String loggerTag = "LoggerDev";
 
     private Logger log;
 
     private Array<String> logArray;
     private long startTime;
 
+    private final int DEBUG = 3;
+
     public LoggerDev() {
         log = new Logger(loggerTag);
+        log.setLevel(DEBUG);
+        logArray = new Array<String>();
+    }
+
+    public void info(String message) {
+        log.info(message);
+        addToLogArray(message);
+    }
+
+    public void debug(String message) {
+        log.debug(message);
+        addToLogArray(message);
+    }
+
+    public void error(String message, Throwable exception) {
+        log.error(message, exception);
+        addToLogArray(message + ":" + exception.getMessage().substring(0, 50));
+    }
+
+    public void error(String message) {
+        log.error(message);
+        addToLogArray(message);
+    }
+
+    public String getLatestLogs() {
+        final java.lang.StringBuilder builder = new StringBuilder();
+        builder.append(getFPS());
+        for(String str : logArray)
+            builder.append(System.lineSeparator()).append(str);
+
+        return builder.toString();
+    }
+
+    private void addToLogArray(String message) {
+        if(logArray.size > 9)
+            logArray.removeIndex(0);
+        logArray.add(message);
     }
 
     private String getFPS() {
@@ -30,36 +69,5 @@ public class LoggerDev {
 
         return fps;
     }
-
-    private void info(String message) {
-        log.info(message);
-        addToLogArray(message);
-    }
-
-    private void debug(String message) {
-        log.debug(message);
-        addToLogArray(message);
-    }
-
-    private void error(String message, Throwable exception) {
-        log.error(message, exception);
-        addToLogArray(message + ":" + exception.getMessage().substring(0, 50));
-    }
-
-    private void addToLogArray(String message) {
-        if(logArray.size > 9)
-            logArray.removeIndex(0);
-        logArray.add(message);
-    }
-
-    private String getLatestLogs() {
-        final java.lang.StringBuilder builder = new StringBuilder();
-        builder.append(getFPS());
-        for(String str : logArray)
-            builder.append(System.lineSeparator()).append(str);
-
-        return builder.toString();
-    }
-
 
 }
