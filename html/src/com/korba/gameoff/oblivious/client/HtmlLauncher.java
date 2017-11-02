@@ -3,7 +3,7 @@ package com.korba.gameoff.oblivious.client;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.gwt.GwtApplication;
 import com.badlogic.gdx.backends.gwt.GwtApplicationConfiguration;
-import com.korba.gameoff.oblivious.ObscurityMain;
+import com.korba.gameoff.oblivious.ObscurityGame;
 
 public class HtmlLauncher extends GwtApplication {
 
@@ -14,6 +14,6 @@ public class HtmlLauncher extends GwtApplication {
 
         @Override
         public ApplicationListener createApplicationListener () {
-                return new ObscurityMain();
+                return new ObscurityGame();
         }
 }
