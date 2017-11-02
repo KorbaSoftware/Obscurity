@@ -53,5 +53,5 @@ public class DevKamil extends BasicScreen {
 
         screensTable.add(btnChangeScreen).pad(5, 5, 5, 5);
     }
-    
+
 }
