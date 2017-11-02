@@ -35,6 +35,7 @@ public class ObscurityGame extends Game {
 		if(!showLogger)
 			return;
 
+		devLOG.drawLogs();
 		//TODO draw logger in corner of the screen
 	}
 

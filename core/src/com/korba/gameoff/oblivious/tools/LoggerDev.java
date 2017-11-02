@@ -2,6 +2,7 @@ package com.korba.gameoff.oblivious.tools;
 
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.*;
+import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.utils.*;
 
 import java.lang.*;
@@ -44,7 +45,12 @@ public class LoggerDev {
         addToLogArray(message);
     }
 
-    public String getLatestLogs() {
+    public void drawLogs() {
+        String allLogsToShow = getLatestLogs();
+
+    }
+
+    private String getLatestLogs() {
         final java.lang.StringBuilder builder = new StringBuilder();
         builder.append(getFPS());
         for(String str : logArray)
