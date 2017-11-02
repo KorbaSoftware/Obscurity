@@ -4,6 +4,7 @@ import com.badlogic.gdx.*;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.korba.gameoff.oblivious.assets.Assets;
 import com.korba.gameoff.oblivious.config.*;
 import com.korba.gameoff.oblivious.screens.MenuScreen;
 
@@ -16,14 +17,14 @@ public class ObscurityGame extends Game {
 	public void create () {
 		batch = new SpriteBatch();
 		manager = new AssetManager();
-		manager.load("custom_cursor.png", Pixmap.class);
+		Assets.loadCursor(manager);
 		manager.finishLoading();
 		createCustomCursor();
        	setScreen(new MenuScreen(batch, this));
 	}
 
 	private void createCustomCursor() {
-		customCursor = Gdx.graphics.newCursor(manager.get("custom_cursor.png", Pixmap.class), 0, 0);
+		customCursor = Gdx.graphics.newCursor(manager.get(Assets.CURSOR, Pixmap.class), 0, 0);
 		Gdx.graphics.setCursor(customCursor);
 	}
 
