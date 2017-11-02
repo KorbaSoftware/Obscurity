@@ -6,8 +6,6 @@ import com.korba.gameoff.oblivious.screens.MenuScreen;
 
 public class ObscurityGame extends Game {
 	private SpriteBatch batch;
-    public static final int ACTUAL_WIDTH = 1280;
-    public static final int ACTUAL_HEIGHT = 720;
     private boolean devMode;
 	
 	@Override
