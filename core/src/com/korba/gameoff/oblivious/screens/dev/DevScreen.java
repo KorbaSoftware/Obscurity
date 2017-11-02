@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.korba.gameoff.oblivious.ObscurityGame;
+import com.korba.gameoff.oblivious.config.LauncherConfig;
 import com.korba.gameoff.oblivious.screens.*;
 
 public class DevScreen implements Screen {
@@ -38,7 +39,7 @@ public class DevScreen implements Screen {
         this.game = game;
         this.menu = menu;
         camera = new OrthographicCamera();
-        viewport = new FitViewport(game.ACTUAL_WIDTH, game.ACTUAL_HEIGHT, camera);
+        viewport = new FitViewport(LauncherConfig.WIDTH, LauncherConfig.HEIGHT, camera);
         stage =  new Stage(viewport, batch);
         stage.addActor(setBackButton());
         devButtons = new Table();

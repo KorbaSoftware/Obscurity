@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.utils.viewport.*;
 import com.korba.gameoff.oblivious.*;
+import com.korba.gameoff.oblivious.config.LauncherConfig;
 
 public class DevFruk implements Screen {
 
@@ -19,7 +20,7 @@ public class DevFruk implements Screen {
         this.game = game;
 
         camera = new OrthographicCamera();
-        viewport = new FitViewport(game.ACTUAL_WIDTH, game.ACTUAL_HEIGHT, camera);
+        viewport = new FitViewport(LauncherConfig.WIDTH, LauncherConfig.HEIGHT, camera);
         stage = new Stage(viewport, batch);
     }
 
