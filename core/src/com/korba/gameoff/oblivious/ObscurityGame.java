@@ -4,10 +4,8 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.korba.gameoff.oblivious.screens.MenuScreen;
 
-public class ObscurityMain extends Game {
+public class ObscurityGame extends Game {
 	private SpriteBatch batch;
-    public static final int ACTUAL_WIDTH = 1280;
-    public static final int ACTUAL_HEIGHT = 720;
     private boolean devMode;
 	
 	@Override
