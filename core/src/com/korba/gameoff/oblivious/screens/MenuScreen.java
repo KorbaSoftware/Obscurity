@@ -71,7 +71,9 @@ public class MenuScreen implements Screen{
 
     @Override
     public void dispose() {
-
+        game.dispose();
+        batch.dispose();
+        stage.dispose();
     }
 
     private Table setMenuButtons(){
@@ -161,6 +163,5 @@ public class MenuScreen implements Screen{
         batch.end();
         stage.draw();
     }
-
 
 }

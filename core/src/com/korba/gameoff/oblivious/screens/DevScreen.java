@@ -35,20 +35,21 @@ public class DevScreen implements Screen {
         stage =  new Stage(viewport, batch);
         stage.addActor(setBackButton());
         devButtons = new Table();
-        devButtons.left().top();
+        devButtons.center().top();
         devButtons.padLeft(5).padTop(20);
         //example
-        addDeveloperButton(new MenuScreen(batch, game));
-        addDeveloperButton(new MenuScreen(batch, game));
-        addDeveloperButton(new MenuScreen(batch, game));
-        addDeveloperButton(new MenuScreen(batch, game));
-        addDeveloperButton(new MenuScreen(batch, game));
+        MenuScreen menuScreen = new MenuScreen(batch, game);
+        addDeveloperButton(menuScreen);
+        addDeveloperButton(menuScreen);
+        addDeveloperButton(menuScreen);
+        addDeveloperButton(menuScreen);
+        addDeveloperButton(menuScreen);
         devButtons.row().padTop(5).padBottom(5);
-        addDeveloperButton(new MenuScreen(batch, game));
-        addDeveloperButton(new MenuScreen(batch, game));
-        addDeveloperButton(new MenuScreen(batch, game));
-        addDeveloperButton(new MenuScreen(batch, game));
-        addDeveloperButton(new MenuScreen(batch, game));
+        addDeveloperButton(menuScreen);
+        addDeveloperButton(menuScreen);
+        addDeveloperButton(menuScreen);
+        addDeveloperButton(menuScreen);
+        addDeveloperButton(menuScreen);
         // end of example
         devButtons.setFillParent(true);
         stage.addActor(devButtons);
@@ -87,7 +88,9 @@ public class DevScreen implements Screen {
 
     @Override
     public void dispose() {
-
+        stage.dispose();
+        batch.dispose();
+        game.dispose();
     }
 
     private void clearScreen(){
