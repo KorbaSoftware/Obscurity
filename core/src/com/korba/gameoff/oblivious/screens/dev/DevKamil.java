@@ -29,16 +29,6 @@ public class DevKamil extends BasicScreen {
         stage.addActor(screensTable);
     }
 
-    @Override
-    public void show() {
-        super.show();
-    }
-
-    @Override
-    public void render(float delta) {
-        super.render(delta);
-    }
-
     private void additionalScreen(Screen devScreen, String buttonText) {
         TextButton btnChangeScreen = new TextButton(buttonText, new Skin(Gdx.files.internal("skins/default_ui_skin.json")));
         final Screen screen = devScreen;
@@ -46,8 +36,12 @@ public class DevKamil extends BasicScreen {
         btnChangeScreen.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 game.setScreen(screen);
-                return super.touchDown(event, x, y, pointer, button);
             }
         });
 
