@@ -13,6 +13,8 @@ public class ObscurityGame extends Game {
 
 	private SpriteBatch batch;
     private Cursor customCursor;
+
+    private boolean showLogger = false;
 	
 	@Override
 	public void create () {
@@ -25,6 +27,20 @@ public class ObscurityGame extends Game {
 	@Override
 	public void render () {
 		super.render();
+		input();
+		drawLogger();
+	}
+
+	private void drawLogger() {
+		if(!showLogger)
+			return;
+
+		//TODO draw logger in corner of the screen
+	}
+
+	private void input() {
+		if(Gdx.input.isKeyJustPressed(Input.Keys.X))
+			showLogger = !showLogger;
 	}
 
 	private void createCustomCursor() {
