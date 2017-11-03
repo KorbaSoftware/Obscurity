@@ -18,14 +18,12 @@ public class ObscurityGame extends Game {
     private Cursor customCursor;
 
     private boolean showLogger = false;
-    private AssetManager manager;
-	
+
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		manager = new AssetManager();
-		Assets.loadCursor(manager);
-		manager.finishLoading();
+		Assets.loadInitialAssets();
+
 		createCustomCursor();
        	setScreen(new LoadingScreen(batch, this));
 	}
@@ -51,7 +49,7 @@ public class ObscurityGame extends Game {
 	}
 
 	private void createCustomCursor() {
-		customCursor = Gdx.graphics.newCursor(manager.get(Assets.CURSOR, Pixmap.class), 0, 0);
+		customCursor = Gdx.graphics.newCursor(Assets.manager.get(Assets.CURSOR, Pixmap.class), 0, 0);
 		Gdx.graphics.setCursor(customCursor);
 	}
 	
@@ -59,15 +57,11 @@ public class ObscurityGame extends Game {
 	public void dispose () {
 		batch.dispose();
 		customCursor.dispose();
-		manager.dispose();
+		Assets.manager.dispose();
 	}
 
 	public boolean isDevMode(){
 		return GameConfig.IS_DEVMODE;
-	}
-
-	public AssetManager getAssetManager(){
-		return manager;
 	}
 
 }

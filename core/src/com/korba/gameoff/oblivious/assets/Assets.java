@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.Texture;
 
 public class Assets {
 
+    public static final AssetManager manager = new AssetManager();
+
     // Textures
     public static final String LOAD_GAME    = "buttons/load_game.png";
     public static final String NEW_GAME     = "buttons/new_game.png";
@@ -19,7 +21,20 @@ public class Assets {
     //Pixmaps
     public static final String CURSOR       = "custom_cursor.png";
 
-    public static void loadGameAssets(AssetManager manager){
+    public static void loadInitialAssets() {
+        loadCursor();
+        loadLoadingAssets();
+
+        manager.finishLoading();
+    }
+
+    public static void loadRemainingAssets() {
+        loadGameAssets();
+
+        manager.finishLoading();
+    }
+
+    private static void loadGameAssets(){
         manager.load(LOAD_GAME, Texture.class);
         manager.load(NEW_GAME, Texture.class);
         manager.load(EXIT, Texture.class);
@@ -28,12 +43,12 @@ public class Assets {
         manager.load(PLAYER, Texture.class);
     }
 
-    public static void loadLoadingAssets(AssetManager manager){
+    private static void loadLoadingAssets(){
         manager.load(KORBA_LOGO, Texture.class);
         manager.load(GAME_LOGO, Texture.class);
     }
 
-    public static void loadCursor(AssetManager manager){
+    private static void loadCursor(){
         manager.load(CURSOR, Pixmap.class);
     }
 }
