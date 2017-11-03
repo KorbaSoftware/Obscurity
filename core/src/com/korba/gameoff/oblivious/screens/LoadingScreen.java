@@ -16,7 +16,6 @@ import com.korba.gameoff.oblivious.config.LauncherConfig;
 
 public class LoadingScreen implements Screen {
 
-    private AssetManager manager;
     private Image gameLogo;
     private Image korbaLogo;
     private SpriteBatch batch;
@@ -30,19 +29,16 @@ public class LoadingScreen implements Screen {
     public LoadingScreen(SpriteBatch batch, ObscurityGame game) {
         this.batch = batch;
         this.game = game;
-        manager = game.getAssetManager();
-        getLoadingAssets(manager);
+        getLoadingAssets();
         camera = new OrthographicCamera();
         viewport = new FitViewport(LauncherConfig.WIDTH, LauncherConfig.HEIGHT, camera);
         stage = new Stage(viewport, batch);
         stage.addActor(korbaLogo);
     }
 
-    private void getLoadingAssets(AssetManager manager){
-        Assets.loadLoadingAssets(manager);
-        manager.finishLoading();
-        gameLogo = new Image(manager.get(Assets.GAME_LOGO, Texture.class));
-        korbaLogo = new Image(manager.get(Assets.KORBA_LOGO, Texture.class));
+    private void getLoadingAssets(){
+        gameLogo = new Image(Assets.manager.get(Assets.GAME_LOGO, Texture.class));
+        korbaLogo = new Image(Assets.manager.get(Assets.KORBA_LOGO, Texture.class));
     }
 
     private void loading(float delta){
@@ -58,7 +54,7 @@ public class LoadingScreen implements Screen {
                 isFirstTime = false;
             }
         }
-        if(manager.update() && (timer > LauncherConfig.LOADING_SCREEN_LOGO_LIFETIME *2)){
+        if(Assets.manager.update() && (timer > LauncherConfig.LOADING_SCREEN_LOGO_LIFETIME *2)){
             game.setScreen(new MenuScreen(batch, game));
         }
     }
@@ -79,7 +75,7 @@ public class LoadingScreen implements Screen {
     public void show() {
         Gdx.input.setInputProcessor(this.stage);
         korbaLogo.setPosition(LauncherConfig.WIDTH/2 - korbaLogo.getWidth()/2, LauncherConfig.HEIGHT/2 - korbaLogo.getHeight()/2);
-        Assets.loadGameAssets(manager);
+        Assets.loadRemainingAssets();
     }
 
     @Override
@@ -112,7 +108,6 @@ public class LoadingScreen implements Screen {
     public void dispose() {
         stage.dispose();
         batch.dispose();
-        manager.dispose();
         game.dispose();
     }
 }

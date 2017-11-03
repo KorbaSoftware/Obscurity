@@ -47,7 +47,7 @@ public class DevKuba extends BasicScreen {
         world = new World(new Vector2(0, 0), true);
         debugRenderer = new Box2DDebugRenderer();
         worldCreator = new WorldCreator(game, world, tiledMap);
-        player = new Player(world, worldCreator.getPlayerPosition(), game.getAssetManager());
+        player = new Player(world, worldCreator.getPlayerPosition());
         inputProcessor = new CustomInputProcessor(player);
 
     }

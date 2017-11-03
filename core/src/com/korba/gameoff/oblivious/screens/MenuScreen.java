@@ -28,19 +28,17 @@ public class MenuScreen implements Screen{
     private Viewport viewport;
     private Stage stage;
     private Texture background;
-    private AssetManager manager;
 
     public MenuScreen(SpriteBatch batch, ObscurityGame game){
         this.batch = batch;
         this.game = game;
-        manager = game.getAssetManager();
         camera = new OrthographicCamera();
         viewport = new FitViewport(LauncherConfig.WIDTH, LauncherConfig.HEIGHT, camera);
         stage =  new Stage(viewport, batch);
         stage.addActor(setMenuButtons());
         stage.addActor(setGameLogo());
         stage.addActor(setCompanyLogo());
-        background = manager.get(Assets.BACKGROUND, Texture.class);
+        background = Assets.manager.get(Assets.BACKGROUND, Texture.class);
     }
 
     @Override
@@ -52,6 +50,102 @@ public class MenuScreen implements Screen{
     public void render(float delta) {
         clearScreen();
         draw();
+    }
+
+    private void clearScreen(){
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
+    }
+
+    private void draw(){
+        camera.update();
+        batch.setProjectionMatrix(camera.combined);
+        batch.begin();
+        batch.draw(background, 0, 0, LauncherConfig.WIDTH, LauncherConfig.HEIGHT);
+        batch.end();
+        stage.draw();
+    }
+
+    private Table setMenuButtons(){
+        Table table = new Table();
+        table.right().bottom().padBottom(20).padRight(20);
+        Image newGame = new Image(Assets.manager.get(Assets.NEW_GAME, Texture.class));
+        newGame.addListener(new InputListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                //TODO
+                return super.touchDown(event, x, y, pointer, button);
+            }
+        });
+        Image loadGame = new Image(Assets.manager.get(Assets.LOAD_GAME, Texture.class));
+        loadGame.addListener(new InputListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                //TODO
+                return super.touchDown(event, x, y, pointer, button);
+            }
+        });
+        Image options = new Image(Assets.manager.get(Assets.OPTIONS, Texture.class));
+        options.addListener(new InputListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                //TODO
+                return super.touchDown(event, x, y, pointer, button);
+            }
+        });
+        Image exitGame = new Image(Assets.manager.get(Assets.EXIT, Texture.class));
+        exitGame.addListener(new InputListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                Gdx.app.exit();
+            }
+        });
+        table.add(newGame);
+        table.row().padTop(20);
+        table.add(loadGame);
+        table.row().padTop(20);
+        table.add(options);
+        table.row().padTop(20);
+        table.add(exitGame);
+        table.setFillParent(true);
+        return table;
+    }
+
+    private Table setGameLogo(){
+        Table table = new Table();
+        table.center().top().padTop(20);
+        Image logo = new Image(Assets.manager.get(Assets.GAME_LOGO, Texture.class));
+        table.add(logo);
+        table.setFillParent(true);
+        return table;
+    }
+
+    private Table setCompanyLogo(){
+        Table table = new Table();
+        table.left().bottom().padBottom(20).padLeft(20);
+        Image logo = new Image(Assets.manager.get(Assets.KORBA_LOGO, Texture.class));
+        if(game.isDevMode()) {
+            final MenuScreen menu = this;
+            logo.addListener(new InputListener() {
+                @Override
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    return true;
+                }
+
+                @Override
+                public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                    game.setScreen(new DevScreen(batch, game, menu));
+                }
+            });
+        }
+        table.add(logo);
+        table.setFillParent(true);
+        return table;
     }
 
     @Override
@@ -79,102 +173,5 @@ public class MenuScreen implements Screen{
         game.dispose();
         batch.dispose();
         stage.dispose();
-        manager.dispose();
-    }
-
-    private Table setMenuButtons(){
-        Table table = new Table();
-        table.right().bottom().padBottom(20).padRight(20);
-        Image newGame = new Image(manager.get(Assets.NEW_GAME, Texture.class));
-        newGame.addListener(new InputListener() {
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                //TODO
-                return super.touchDown(event, x, y, pointer, button);
-            }
-        });
-        Image loadGame = new Image(manager.get(Assets.LOAD_GAME, Texture.class));
-        loadGame.addListener(new InputListener() {
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                //TODO
-                return super.touchDown(event, x, y, pointer, button);
-            }
-        });
-        Image options = new Image(manager.get(Assets.OPTIONS, Texture.class));
-        options.addListener(new InputListener() {
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                //TODO
-                return super.touchDown(event, x, y, pointer, button);
-            }
-        });
-        Image exitGame = new Image(manager.get(Assets.EXIT, Texture.class));
-        exitGame.addListener(new InputListener() {
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                return true;
-            }
-
-            @Override
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                Gdx.app.exit();
-            }
-        });
-        table.add(newGame);
-        table.row().padTop(20);
-        table.add(loadGame);
-        table.row().padTop(20);
-        table.add(options);
-        table.row().padTop(20);
-        table.add(exitGame);
-        table.setFillParent(true);
-        return table;
-    }
-
-    private Table setGameLogo(){
-        Table table = new Table();
-        table.center().top().padTop(20);
-        Image logo = new Image(manager.get(Assets.GAME_LOGO, Texture.class));
-        table.add(logo);
-        table.setFillParent(true);
-        return table;
-    }
-
-    private Table setCompanyLogo(){
-        Table table = new Table();
-        table.left().bottom().padBottom(20).padLeft(20);
-        Image logo = new Image(manager.get(Assets.KORBA_LOGO, Texture.class));
-        if(game.isDevMode()) {
-            final MenuScreen menu = this;
-            logo.addListener(new InputListener() {
-                @Override
-                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                    return true;
-                }
-
-                @Override
-                public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                    game.setScreen(new DevScreen(batch, game, menu));
-                }
-            });
-        }
-        table.add(logo);
-        table.setFillParent(true);
-        return table;
-    }
-
-    private void clearScreen(){
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
-    }
-
-    private void draw(){
-        camera.update();
-        batch.setProjectionMatrix(camera.combined);
-        batch.begin();
-        batch.draw(background, 0, 0, LauncherConfig.WIDTH, LauncherConfig.HEIGHT);
-        batch.end();
-        stage.draw();
     }
 }

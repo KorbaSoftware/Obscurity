@@ -15,10 +15,10 @@ public class Player extends Sprite {
     public Body body;
     private TextureRegion playerStand;
 
-    public Player(World world, Vector2 position, AssetManager manager){
+    public Player(World world, Vector2 position){
         this.world = world;
         definePlayer(position);
-        playerStand = new TextureRegion(manager.get(Assets.PLAYER, Texture.class), 0, 0, 32, 64);
+        playerStand = new TextureRegion(Assets.manager.get(Assets.PLAYER, Texture.class), 0, 0, 32, 64);
         setRegion(playerStand);
 
     }
