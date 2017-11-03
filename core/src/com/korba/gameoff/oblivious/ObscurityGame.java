@@ -62,7 +62,7 @@ public class ObscurityGame extends Game {
 	}
 
 	public boolean isDevMode(){
-		return LauncherConfig.IS_DEVMODE;
+		return GameConfig.IS_DEVMODE;
 	}
 
 	public AssetManager getAssetManager(){
