@@ -14,6 +14,7 @@ public class Assets {
     public static final String BACKGROUND   = "menu_background.png";
     public static final String KORBA_LOGO   = "korba_logo.png";
     public static final String GAME_LOGO    = "game_logo.png";
+    public static final String PLAYER       = "characters/player/lysy64.png";
 
     //Pixmaps
     public static final String CURSOR       = "custom_cursor.png";
@@ -27,6 +28,7 @@ public class Assets {
         manager.load(BACKGROUND, Texture.class);
         manager.load(KORBA_LOGO, Texture.class);
         manager.load(GAME_LOGO, Texture.class);
+        manager.load(PLAYER, Texture.class);
     }
 
     public static void loadCursor(AssetManager manager){
