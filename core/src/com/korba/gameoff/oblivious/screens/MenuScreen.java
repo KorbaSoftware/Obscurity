@@ -52,7 +52,6 @@ public class MenuScreen implements Screen{
     public void render(float delta) {
         clearScreen();
         draw();
-
     }
 
     @Override
@@ -177,5 +176,4 @@ public class MenuScreen implements Screen{
         batch.end();
         stage.draw();
     }
-
 }

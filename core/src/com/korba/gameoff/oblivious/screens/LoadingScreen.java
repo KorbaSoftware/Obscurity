@@ -76,7 +76,7 @@ public class LoadingScreen implements Screen {
     public void show() {
         Gdx.input.setInputProcessor(this.stage);
         korbaLogo.setPosition(LauncherConfig.WIDTH/2 - korbaLogo.getWidth()/2, LauncherConfig.HEIGHT/2 - korbaLogo.getHeight()/2);
-        Assets.loadMenuTextures(manager);
+        Assets.loadGameAssets(manager);
     }
 
     @Override

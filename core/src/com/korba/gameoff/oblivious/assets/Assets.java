@@ -19,8 +19,7 @@ public class Assets {
     //Pixmaps
     public static final String CURSOR       = "custom_cursor.png";
 
-
-    public static void loadMenuTextures(AssetManager manager){
+    public static void loadGameAssets(AssetManager manager){
         manager.load(LOAD_GAME, Texture.class);
         manager.load(NEW_GAME, Texture.class);
         manager.load(EXIT, Texture.class);
@@ -37,5 +36,4 @@ public class Assets {
     public static void loadCursor(AssetManager manager){
         manager.load(CURSOR, Pixmap.class);
     }
-
 }
