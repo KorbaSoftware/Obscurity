@@ -1,7 +1,6 @@
 package com.korba.gameoff.oblivious.screens.dev;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.*;
@@ -33,19 +32,23 @@ public class DevKuba extends BasicScreen {
     private CustomInputProcessor inputProcessor;
 
 
-    public DevKuba(SpriteBatch batch, ObscurityGame game) {
+    public DevKuba(SpriteBatch batch, ObscurityGame game){
+        super(batch, game);
+    }
+
+    public DevKuba(SpriteBatch batch, ObscurityGame game, String path) {
         super(batch, game);
         camera = new OrthographicCamera();
-        viewport = new FitViewport(LauncherConfig.WIDTH / GameConfig.PPM,
-                LauncherConfig.HEIGHT / GameConfig.PPM, this.camera);
+        viewport = new FitViewport(LauncherConfig.WIDTH / GameConfig.PPM / 2,
+                LauncherConfig.HEIGHT / GameConfig.PPM / 2, this.camera);
         mapLoader = new TmxMapLoader();
-        tiledMap = mapLoader.load("maps/tmx/test.tmx");
-        mapRenderer = new OrthogonalTiledMapRenderer(tiledMap, 1 / GameConfig.PPM);
+        tiledMap = mapLoader.load(path);
+        mapRenderer = new OrthogonalTiledMapRenderer(tiledMap, 1f / GameConfig.PPM);
         world = new World(new Vector2(0, 0), true);
         debugRenderer = new Box2DDebugRenderer();
-        player = new Player(world);
-        inputProcessor = new CustomInputProcessor(player);
         worldCreator = new WorldCreator(game, world, tiledMap);
+        player = new Player(world, worldCreator.getPlayerPosition());
+        inputProcessor = new CustomInputProcessor(player);
 
     }
 
@@ -53,6 +56,7 @@ public class DevKuba extends BasicScreen {
         world.step(1 / 60f, 6, 2);
         camera.position.x = player.body.getPosition().x;
         camera.position.y = player.body.getPosition().y;
+        player.update(delta);
         camera.update();
         mapRenderer.setView(camera);
     }
@@ -60,12 +64,13 @@ public class DevKuba extends BasicScreen {
     @Override
     public void render(float delta) {
     update(delta);
-        Gdx.gl.glClearColor(0, 0, 1, 1);
+        Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
         mapRenderer.render();
         debugRenderer.render(world, camera.combined);
         this.batch.setProjectionMatrix(camera.combined);
         this.batch.begin();
+        player.draw(batch);
         this.batch.end();
     }
 
