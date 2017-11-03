@@ -48,17 +48,17 @@ public class LoadingScreen implements Screen {
     private void loading(float delta){
         timer += delta;
 
-        if(timer > LauncherConfig.LOADING_SCREEN_DELAY1){
+        if(timer > LauncherConfig.LOADING_SCREEN_LOGO_LIFETIME){
             korbaLogo.addAction(Actions.removeActor());
             if(isFirstTime) {
                 stage.addActor(gameLogo);
                 gameLogo.setPosition(LauncherConfig.WIDTH/2 - gameLogo.getWidth()/2, LauncherConfig.HEIGHT/2 - gameLogo.getHeight()/2);
-                gameLogo.addAction(Actions.sequence(Actions.delay(LauncherConfig.LOADING_SCREEN_DELAY1/2), Actions.fadeOut(LauncherConfig.LOADING_SCREEN_DELAY1/2)));
+                gameLogo.addAction(Actions.sequence(Actions.delay(LauncherConfig.LOADING_SCREEN_LOGO_LIFETIME /2), Actions.fadeOut(LauncherConfig.LOADING_SCREEN_LOGO_LIFETIME /2)));
 
                 isFirstTime = false;
             }
         }
-        if(manager.update() && (timer > LauncherConfig.LOADING_SCREEN_DELAY1*2)){
+        if(manager.update() && (timer > LauncherConfig.LOADING_SCREEN_LOGO_LIFETIME *2)){
             game.setScreen(new MenuScreen(batch, game));
         }
     }
@@ -70,7 +70,7 @@ public class LoadingScreen implements Screen {
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
         batch.end();
-        korbaLogo.addAction(Actions.sequence(Actions.delay(LauncherConfig.LOADING_SCREEN_DELAY1/2), Actions.fadeOut(LauncherConfig.LOADING_SCREEN_DELAY1/2)));
+        korbaLogo.addAction(Actions.sequence(Actions.delay(LauncherConfig.LOADING_SCREEN_LOGO_LIFETIME /2), Actions.fadeOut(LauncherConfig.LOADING_SCREEN_LOGO_LIFETIME /2)));
         stage.draw();
         stage.act(delta);
     }

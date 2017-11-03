@@ -79,6 +79,7 @@ public class MenuScreen implements Screen{
         game.dispose();
         batch.dispose();
         stage.dispose();
+        manager.dispose();
     }
 
     private Table setMenuButtons(){
