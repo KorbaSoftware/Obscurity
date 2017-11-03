@@ -26,9 +26,12 @@ public class Assets {
         manager.load(EXIT, Texture.class);
         manager.load(OPTIONS, Texture.class);
         manager.load(BACKGROUND, Texture.class);
+        manager.load(PLAYER, Texture.class);
+    }
+
+    public static void loadLoadingAssets(AssetManager manager){
         manager.load(KORBA_LOGO, Texture.class);
         manager.load(GAME_LOGO, Texture.class);
-        manager.load(PLAYER, Texture.class);
     }
 
     public static void loadCursor(AssetManager manager){

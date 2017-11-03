@@ -34,8 +34,6 @@ public class MenuScreen implements Screen{
         this.batch = batch;
         this.game = game;
         manager = game.getAssetManager();
-        Assets.loadMenuTextures(manager);
-        manager.finishLoading();
         camera = new OrthographicCamera();
         viewport = new FitViewport(LauncherConfig.WIDTH, LauncherConfig.HEIGHT, camera);
         stage =  new Stage(viewport, batch);
