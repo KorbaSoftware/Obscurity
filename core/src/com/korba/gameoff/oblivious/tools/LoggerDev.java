@@ -65,11 +65,11 @@ public class LoggerDev {
         logArray.add(message);
     }
 
-    private String getFPS() {
-        String fps = "";
+    public String getFPS() {
+        String fps = "fps: ";
         startTime = TimeUtils.nanoTime();
         if (TimeUtils.nanoTime() - startTime > 1000000000) /* 1,000,000,000ns == one second */{
-            fps = "fps: " + Gdx.graphics.getFramesPerSecond();
+            fps += Gdx.graphics.getFramesPerSecond();
             startTime = TimeUtils.nanoTime();
         }
 
