@@ -34,8 +34,6 @@ public class MenuScreen implements Screen{
         this.batch = batch;
         this.game = game;
         manager = game.getAssetManager();
-        Assets.loadMenuTextures(manager);
-        manager.finishLoading();
         camera = new OrthographicCamera();
         viewport = new FitViewport(LauncherConfig.WIDTH, LauncherConfig.HEIGHT, camera);
         stage =  new Stage(viewport, batch);
@@ -54,7 +52,6 @@ public class MenuScreen implements Screen{
     public void render(float delta) {
         clearScreen();
         draw();
-
     }
 
     @Override
@@ -82,6 +79,7 @@ public class MenuScreen implements Screen{
         game.dispose();
         batch.dispose();
         stage.dispose();
+        manager.dispose();
     }
 
     private Table setMenuButtons(){
@@ -179,5 +177,4 @@ public class MenuScreen implements Screen{
         batch.end();
         stage.draw();
     }
-
 }
