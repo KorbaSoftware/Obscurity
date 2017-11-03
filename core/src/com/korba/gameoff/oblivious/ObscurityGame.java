@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.korba.gameoff.oblivious.assets.Assets;
 import com.korba.gameoff.oblivious.config.*;
+import com.korba.gameoff.oblivious.screens.LoadingScreen;
 import com.korba.gameoff.oblivious.screens.MenuScreen;
 
 public class ObscurityGame extends Game {
@@ -20,7 +21,7 @@ public class ObscurityGame extends Game {
 		Assets.loadCursor(manager);
 		manager.finishLoading();
 		createCustomCursor();
-       	setScreen(new MenuScreen(batch, this));
+       	setScreen(new LoadingScreen(batch, this));
 	}
 
 	private void createCustomCursor() {

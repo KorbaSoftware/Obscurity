@@ -19,20 +19,21 @@ public class Assets {
     //Pixmaps
     public static final String CURSOR       = "custom_cursor.png";
 
-
-    public static void loadMenuTextures(AssetManager manager){
+    public static void loadGameAssets(AssetManager manager){
         manager.load(LOAD_GAME, Texture.class);
         manager.load(NEW_GAME, Texture.class);
         manager.load(EXIT, Texture.class);
         manager.load(OPTIONS, Texture.class);
         manager.load(BACKGROUND, Texture.class);
+        manager.load(PLAYER, Texture.class);
+    }
+
+    public static void loadLoadingAssets(AssetManager manager){
         manager.load(KORBA_LOGO, Texture.class);
         manager.load(GAME_LOGO, Texture.class);
-        manager.load(PLAYER, Texture.class);
     }
 
     public static void loadCursor(AssetManager manager){
         manager.load(CURSOR, Pixmap.class);
     }
-
 }

@@ -1,5 +1,6 @@
 package com.korba.gameoff.oblivious.screens.dev.kubatest;
 
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -14,10 +15,10 @@ public class Player extends Sprite {
     public Body body;
     private TextureRegion playerStand;
 
-    public Player(World world, Vector2 position){
+    public Player(World world, Vector2 position, AssetManager manager){
         this.world = world;
         definePlayer(position);
-        playerStand = new TextureRegion(new Texture("characters/player/lysy64.png"), 0, 0, 32, 64);
+        playerStand = new TextureRegion(manager.get(Assets.PLAYER, Texture.class), 0, 0, 32, 64);
         setRegion(playerStand);
 
     }
