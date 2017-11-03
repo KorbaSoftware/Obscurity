@@ -12,16 +12,28 @@ import com.korba.gameoff.oblivious.tools.*;
 
 public class ObscurityGame extends Game {
 
+	public enum GameState {
+		LOADING,
+		IN_MENU,
+		PAUSED,
+		INSIDE,
+		OUTSIDE,
+		FIGHT,
+		CUTSCENE
+	}
+
 	public final static LoggerDev devLOG = new LoggerDev();
 
 	private SpriteBatch batch;
     private Cursor customCursor;
+    private GameState gameState;
 
     private boolean showLogger = false;
 
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
+		gameState = GameState.LOADING;
 		Assets.loadInitialAssets();
 
 		createCustomCursor();
@@ -52,16 +64,24 @@ public class ObscurityGame extends Game {
 		customCursor = Gdx.graphics.newCursor(Assets.manager.get(Assets.CURSOR, Pixmap.class), 0, 0);
 		Gdx.graphics.setCursor(customCursor);
 	}
-	
+
+	public boolean isDevMode(){
+		return GameConfig.IS_DEVMODE;
+	}
+
+	public void setGameState(GameState gameState) {
+		this.gameState = gameState;
+	}
+
+	public GameState getGameState(){
+		return gameState;
+	}
+
 	@Override
 	public void dispose () {
 		batch.dispose();
 		customCursor.dispose();
 		Assets.manager.dispose();
-	}
-
-	public boolean isDevMode(){
-		return GameConfig.IS_DEVMODE;
 	}
 
 }
