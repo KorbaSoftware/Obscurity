@@ -25,7 +25,7 @@ public class LoadingScreen implements Screen {
     private Viewport viewport;
     private Stage stage;
     private float timer = 0;
-    private boolean logoFlag = true;
+    private boolean isFirstTime = true;
 
     public LoadingScreen(SpriteBatch batch, ObscurityGame game) {
         this.batch = batch;
@@ -50,11 +50,11 @@ public class LoadingScreen implements Screen {
 
         if(timer > LauncherConfig.LOADING_SCREEN_DELAY1){
             korbaLogo.addAction(Actions.removeActor());
-            if(logoFlag) {
+            if(isFirstTime) {
                 stage.addActor(gameLogo);
                 gameLogo.setPosition(LauncherConfig.WIDTH/2 - gameLogo.getWidth()/2, LauncherConfig.HEIGHT/2 - gameLogo.getHeight()/2);
+                isFirstTime = false;
             }
-            logoFlag = false;
         }
         if(manager.update() && (timer > LauncherConfig.LOADING_SCREEN_DELAY2)){
             game.setScreen(new MenuScreen(batch, game));
