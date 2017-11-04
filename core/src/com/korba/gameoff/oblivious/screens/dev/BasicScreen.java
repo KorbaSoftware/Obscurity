@@ -20,6 +20,10 @@ public class BasicScreen implements Screen {
     protected  Camera camera;
     protected  Viewport viewport;
 
+    protected BasicScreen(){
+
+    }
+
     protected  BasicScreen(SpriteBatch batch, ObscurityGame game) {
         this.batch = batch;
         this.game = game;
