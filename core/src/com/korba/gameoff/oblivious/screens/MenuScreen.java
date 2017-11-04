@@ -33,7 +33,7 @@ public class MenuScreen implements Screen{
         this.batch = batch;
         this.game = game;
         game.setGameState(ObscurityGame.GameState.IN_MENU);
-        
+
         camera = new OrthographicCamera();
         viewport = new FitViewport(LauncherConfig.WIDTH, LauncherConfig.HEIGHT, camera);
         stage =  new Stage(viewport, batch);

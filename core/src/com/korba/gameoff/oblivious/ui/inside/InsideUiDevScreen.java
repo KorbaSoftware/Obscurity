@@ -16,6 +16,8 @@ public class InsideUiDevScreen implements Screen{
     private Viewport viewport;
     private Stage stage;
 
+    private InsideUI insideUI;
+
     public InsideUiDevScreen(SpriteBatch batch, ObscurityGame game) {
         this.batch = batch;
         this.game = game;
@@ -23,6 +25,8 @@ public class InsideUiDevScreen implements Screen{
         camera = new OrthographicCamera();
         viewport = new FitViewport(LauncherConfig.WIDTH, LauncherConfig.HEIGHT, camera);
         stage = new Stage(viewport, batch);
+
+        insideUI = new InsideUI(game, batch, stage);
     }
 
     @Override

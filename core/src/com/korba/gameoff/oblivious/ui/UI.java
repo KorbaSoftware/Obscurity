@@ -1,4 +1,6 @@
 package com.korba.gameoff.oblivious.ui;
 
-public interface UI {
+import com.badlogic.gdx.utils.*;
+
+public interface UI extends Disposable {
 }
