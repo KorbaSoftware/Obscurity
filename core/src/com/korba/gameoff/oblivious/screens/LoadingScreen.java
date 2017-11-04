@@ -60,7 +60,7 @@ public class LoadingScreen implements Screen {
     }
 
     private void draw(float delta){
-        Gdx.gl.glClearColor(255, 192, 203, 1);
+        Gdx.gl.glClearColor(1, 0.411f, 0.7f, 1);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
         camera.update();
         batch.setProjectionMatrix(camera.combined);

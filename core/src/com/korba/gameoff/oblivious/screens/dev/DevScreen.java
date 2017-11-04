@@ -17,6 +17,8 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.korba.gameoff.oblivious.ObscurityGame;
 import com.korba.gameoff.oblivious.config.LauncherConfig;
 import com.korba.gameoff.oblivious.screens.*;
+import com.korba.gameoff.oblivious.screens.dev.kubatest.GameTestScreen;
+import com.korba.gameoff.oblivious.screens.dev.kubatest.MapType;
 
 public class DevScreen implements Screen {
 
@@ -48,11 +50,7 @@ public class DevScreen implements Screen {
 
         addDeveloperButton(new Texture(Gdx.files.internal("buttons/dev_fruk.png")), Dev.FRUK);
         addDeveloperButton(new Texture(Gdx.files.internal("buttons/dev_kamil.png")), Dev.KAMIL);
-        addDeveloperButton(new Texture(Gdx.files.internal("buttons/dev_kuba.png")), Dev.KUBA, "maps/tmx/test1.tmx");
-        devButtons.row().pad(5,5,5,5);
-        devButtons.add();
-        devButtons.add();
-        addDeveloperButton(new Texture(Gdx.files.internal("buttons/dev_kuba.png")), Dev.KUBA, "maps/tmx/test.tmx");
+        addDeveloperButton(new Texture(Gdx.files.internal("buttons/dev_kuba.png")), Dev.KUBA);
 
         devButtons.setFillParent(true);
         stage.addActor(devButtons);
@@ -89,12 +87,12 @@ public class DevScreen implements Screen {
 
     }
 
-    private void clearScreen(){
+    protected void clearScreen(){
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
     }
 
-    private void draw(){
+    protected void draw(){
         camera.update();
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
@@ -122,24 +120,6 @@ public class DevScreen implements Screen {
         return table;
     }
 
-    private void addDeveloperButton(Texture texture, Dev dev, String path){
-        Image newButton = new Image(texture);
-        final Dev devType = dev;
-        final String fpath = path;
-        newButton.addListener(new InputListener() {
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                return true;
-            }
-
-            @Override
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(chooseScreen(devType, fpath));
-            }
-        });
-        this.devButtons.add(newButton).pad(5,5,5,5);
-    }
-
     private void addDeveloperButton(Texture texture, Dev dev){
         Image newButton = new Image(texture);
         final Dev devType = dev;
@@ -155,17 +135,6 @@ public class DevScreen implements Screen {
             }
         });
         this.devButtons.add(newButton).pad(5,5,5,5);
-    }
-
-    private Screen chooseScreen(Dev dev, String path) {
-
-        if(Dev.FRUK.equals(dev)) {
-           return new DevFruk(batch, game);
-        } else if(Dev.KAMIL.equals(dev)) {
-            return new DevKamil(batch, game);
-        } else {
-            return new DevKuba(batch, game, path);
-        }
     }
 
     private Screen chooseScreen(Dev dev) {
