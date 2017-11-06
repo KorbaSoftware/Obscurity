@@ -39,6 +39,7 @@ public class MenuScreen implements Screen{
         stage.addActor(setGameLogo());
         stage.addActor(setCompanyLogo());
         background = Assets.manager.get(Assets.BACKGROUND, Texture.class);
+
     }
 
     @Override
@@ -69,7 +70,7 @@ public class MenuScreen implements Screen{
     private Table setMenuButtons(){
         Table table = new Table();
         table.right().bottom().padBottom(20).padRight(20);
-        Image newGame = new Image(Assets.manager.get(Assets.NEW_GAME, Texture.class));
+        Image newGame = new Image(Assets.getTexture(Assets.NEW_GAME));
         newGame.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -77,7 +78,7 @@ public class MenuScreen implements Screen{
                 return super.touchDown(event, x, y, pointer, button);
             }
         });
-        Image loadGame = new Image(Assets.manager.get(Assets.LOAD_GAME, Texture.class));
+        Image loadGame = new Image(Assets.getTexture(Assets.LOAD_GAME));
         loadGame.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -85,7 +86,7 @@ public class MenuScreen implements Screen{
                 return super.touchDown(event, x, y, pointer, button);
             }
         });
-        Image options = new Image(Assets.manager.get(Assets.OPTIONS, Texture.class));
+        Image options = new Image(Assets.getTexture(Assets.OPTIONS));
         options.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -93,7 +94,7 @@ public class MenuScreen implements Screen{
                 return super.touchDown(event, x, y, pointer, button);
             }
         });
-        Image exitGame = new Image(Assets.manager.get(Assets.EXIT, Texture.class));
+        Image exitGame = new Image(Assets.getTexture(Assets.EXIT));
         exitGame.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -119,7 +120,7 @@ public class MenuScreen implements Screen{
     private Table setGameLogo(){
         Table table = new Table();
         table.center().top().padTop(20);
-        Image logo = new Image(Assets.manager.get(Assets.GAME_LOGO, Texture.class));
+        Image logo = new Image(Assets.getTexture(Assets.GAME_LOGO));
         table.add(logo);
         table.setFillParent(true);
         return table;
@@ -128,7 +129,7 @@ public class MenuScreen implements Screen{
     private Table setCompanyLogo(){
         Table table = new Table();
         table.left().bottom().padBottom(20).padLeft(20);
-        Image logo = new Image(Assets.manager.get(Assets.KORBA_LOGO, Texture.class));
+        Image logo = new Image(Assets.getTexture(Assets.KORBA_LOGO));
         if(game.isDevMode()) {
             final MenuScreen menu = this;
             logo.addListener(new InputListener() {

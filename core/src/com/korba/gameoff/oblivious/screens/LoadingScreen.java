@@ -37,8 +37,8 @@ public class LoadingScreen implements Screen {
     }
 
     private void getLoadingAssets(){
-        gameLogo = new Image(Assets.manager.get(Assets.GAME_LOGO, Texture.class));
-        korbaLogo = new Image(Assets.manager.get(Assets.KORBA_LOGO, Texture.class));
+        gameLogo = new Image(Assets.getTexture(Assets.GAME_LOGO));
+        korbaLogo = new Image(Assets.getTexture(Assets.KORBA_LOGO));
     }
 
     private void loading(float delta){

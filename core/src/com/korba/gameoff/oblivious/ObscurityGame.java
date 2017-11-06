@@ -49,7 +49,7 @@ public class ObscurityGame extends Game {
 	}
 
 	private void createCustomCursor() {
-		customCursor = Gdx.graphics.newCursor(Assets.manager.get(Assets.CURSOR, Pixmap.class), 0, 0);
+		customCursor = Gdx.graphics.newCursor(Assets.getPixmap(Assets.CURSOR), 0, 0);
 		Gdx.graphics.setCursor(customCursor);
 	}
 	

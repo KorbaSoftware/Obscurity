@@ -3,6 +3,7 @@ package com.korba.gameoff.oblivious.assets;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
 public class Assets {
 
@@ -50,5 +51,17 @@ public class Assets {
 
     private static void loadCursor(){
         manager.load(CURSOR, Pixmap.class);
+    }
+
+    public static Texture getTexture(String name){
+        return manager.get(name, Texture.class);
+    }
+
+    public static Pixmap getPixmap(String name){
+        return manager.get(name, Pixmap.class);
+    }
+
+    public static TextureAtlas getAtlas(String name){
+        return manager.get(name, TextureAtlas.class);
     }
 }
