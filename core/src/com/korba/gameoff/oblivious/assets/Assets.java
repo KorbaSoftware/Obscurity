@@ -4,6 +4,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 public class Assets {
 
@@ -18,9 +19,15 @@ public class Assets {
     public static final String KORBA_LOGO   = "korba_logo.png";
     public static final String GAME_LOGO    = "game_logo.png";
     public static final String PLAYER       = "characters/player/lysy64.png";
+    public static final String DEV_FRUK     = "buttons/dev_fruk.png";
+    public static final String DEV_KAMIL    = "buttons/dev_kamil.png";
+    public static final String DEV_KUBA     = "buttons/dev_kuba.png";
 
     //Pixmaps
     public static final String CURSOR       = "custom_cursor.png";
+
+    //Skins
+    public static final String DEFAULT_UI   ="skins/default_ui_skin.json";
 
     public static void loadInitialAssets() {
         loadCursor();
@@ -42,6 +49,9 @@ public class Assets {
         manager.load(OPTIONS, Texture.class);
         manager.load(BACKGROUND, Texture.class);
         manager.load(PLAYER, Texture.class);
+        manager.load(DEV_FRUK, Texture.class);
+        manager.load(DEV_KAMIL, Texture.class);
+        manager.load(DEV_KUBA, Texture.class);
     }
 
     private static void loadLoadingAssets(){
@@ -63,5 +73,10 @@ public class Assets {
 
     public static TextureAtlas getAtlas(String name){
         return manager.get(name, TextureAtlas.class);
+    }
+
+    //not working
+    public static Skin getSkin(String name){
+        return manager.get(name, Skin.class);
     }
 }
