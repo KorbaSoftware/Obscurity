@@ -40,11 +40,11 @@ public class MapManager {
         }
     }
 
-    public void positionCamera(OrthographicCamera camera, Player player){
+    public void positionCamera(OrthographicCamera camera, PlayerPhysics player){
         switch(type){
             case OPEN:{
-                camera.position.x = player.body.getPosition().x;
-                camera.position.y = player.body.getPosition().y;
+                camera.position.x = player.getBody().getPosition().x;
+                camera.position.y = player.getBody().getPosition().y;
             }
             break;
             case ROOM:{

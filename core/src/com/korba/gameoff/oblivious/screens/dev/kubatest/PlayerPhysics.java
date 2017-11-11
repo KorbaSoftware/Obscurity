@@ -9,18 +9,18 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.korba.gameoff.oblivious.assets.Assets;
 import com.korba.gameoff.oblivious.config.GameConfig;
 
-public class Player extends Sprite {
+public class PlayerPhysics{
 
     public World world;
-    public Body body;
-    private TextureRegion playerStand;
 
-    public Player(World world, Vector2 position){
+    public Body getBody() {
+        return body;
+    }
+    private Body body;
+
+    public PlayerPhysics(World world, Vector2 position){
         this.world = world;
         definePlayer(position);
-        playerStand = new TextureRegion(Assets.manager.get(Assets.PLAYER, Texture.class), 0, 0, 32, 64);
-        setRegion(playerStand);
-
     }
 
     private void definePlayer(Vector2 position) {
@@ -40,9 +40,4 @@ public class Player extends Sprite {
         body.createFixture(fixtureDef).setUserData("player");
     }
 
-    public void update(float delta){
-            setBounds(getX(), getY(), 32 / GameConfig.PPM, 64 / GameConfig.PPM);
-            setRegion(playerStand);
-            setPosition(body.getPosition().x - getWidth() / 2, body.getPosition().y + 16 / GameConfig.PPM - getHeight() / 2);
-    }
 }

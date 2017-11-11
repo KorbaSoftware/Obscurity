@@ -4,9 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 
 public class KeyboardHandler{
-    private Player player;
+    private PlayerPhysics player;
     private float velocity;
-    public KeyboardHandler(Player player, float velocity){
+    public KeyboardHandler(PlayerPhysics player, float velocity){
         this.player = player;
         this.velocity = velocity;
     }
@@ -16,19 +16,19 @@ public class KeyboardHandler{
                 || Gdx.input.isKeyPressed(Input.Keys.RIGHT)
                 || Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
             if(Gdx.input.isKeyPressed(Input.Keys.UP)){
-                player.body.setLinearVelocity(0, velocity);
+                player.getBody().setLinearVelocity(0, velocity);
             }
             if(Gdx.input.isKeyPressed(Input.Keys.DOWN)){
-                player.body.setLinearVelocity(0, -velocity);
+                player.getBody().setLinearVelocity(0, -velocity);
             }
             if(Gdx.input.isKeyPressed(Input.Keys.LEFT)){
-                player.body.setLinearVelocity(-velocity, 0);
+                player.getBody().setLinearVelocity(-velocity, 0);
             }
             if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
-                player.body.setLinearVelocity(velocity, 0);
+                player.getBody().setLinearVelocity(velocity, 0);
             }
         } else {
-            player.body.setLinearVelocity(0, 0);
+            player.getBody().setLinearVelocity(0, 0);
         }
 
     }

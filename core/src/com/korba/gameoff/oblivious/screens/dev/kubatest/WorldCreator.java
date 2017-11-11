@@ -32,8 +32,7 @@ public class WorldCreator {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             spawnPoints.add(new Vector2((rect.getX() + 16) / GameConfig.PPM, (rect.getY() + 16) / GameConfig.PPM));
         }
-
-        }
+    }
 
         public Vector2 getPlayerPosition(){
         return spawnPoints.first();
