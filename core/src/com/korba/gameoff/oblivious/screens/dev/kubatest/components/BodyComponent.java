@@ -6,12 +6,8 @@ import com.korba.gameoff.oblivious.config.GameConfig;
 
 public class BodyComponent implements Component {
     public Body body;
-    public BodyComponent(PositionComponent positionCom, Body body) {
-        setBodyAndPosition(positionCom, body);
-    }
-    public void setBodyAndPosition(PositionComponent position, Body body) {
+    public BodyComponent(Body body) {
         this.body = body;
-        this.body.setTransform(position.x / GameConfig.PPM, position.y / GameConfig.PPM, 0);
-    }
+}
 
 }

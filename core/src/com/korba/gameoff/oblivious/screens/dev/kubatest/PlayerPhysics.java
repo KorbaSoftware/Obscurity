@@ -33,7 +33,6 @@ public class PlayerPhysics{
         fixtureDef.filter.categoryBits = GameConfig.PLAYER_BIT;
         fixtureDef.filter.maskBits = GameConfig.STATIC_OBJECT_BIT |
                                      GameConfig.DOOR_BIT;
-
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(16 / GameConfig.PPM, 16 / GameConfig.PPM);
         fixtureDef.shape = shape;

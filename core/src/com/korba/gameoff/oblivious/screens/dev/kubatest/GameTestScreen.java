@@ -38,13 +38,11 @@ public class GameTestScreen extends BasicScreen {
         mapManager = new MapManager(type, game, world);
         player = new PlayerPhysics(world, mapManager.getWorldCreator().getPlayerPosition());
         playerEntity = new Entity();
-        PositionComponent positionComponent =
-                new PositionComponent(mapManager.getWorldCreator().getPlayerPosition().x, mapManager.getWorldCreator().getPlayerPosition().y);
         playerEntity.add(new VelocityComponent(0,0))
-                .add(positionComponent)
+                .add(new PositionComponent(mapManager.getWorldCreator().getPlayerPosition().x, mapManager.getWorldCreator().getPlayerPosition().y))
                 .add(new SpriteComponent(new TextureRegion(Assets.manager.get(Assets.PLAYER, Texture.class), 0, 0, 32, 64)))
                 .add(new RenderableComponent())
-                .add(new BodyComponent(positionComponent, player.getBody()));
+                .add(new BodyComponent(player.getBody()));
         game.getEntityManager().getEngine().addEntity(playerEntity);
         keyboardHandler = new KeyboardHandler(player, mapManager.getMapVelocity());
         mouseHandler = new MouseHandler(player, mapManager.getMapVelocity(), camera);

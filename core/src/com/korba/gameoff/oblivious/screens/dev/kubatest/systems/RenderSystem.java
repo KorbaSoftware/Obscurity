@@ -29,10 +29,10 @@ public class RenderSystem extends EntitySystem {
             SpriteComponent spriteComponent = entity.getComponent(SpriteComponent.class);
             PositionComponent positionComponent = entity.getComponent(PositionComponent.class);
             spriteComponent.sprite.setBounds(spriteComponent.sprite.getX(), spriteComponent.sprite.getY(), 32 / GameConfig.PPM, 64 / GameConfig.PPM);
-            spriteComponent.sprite.setPosition(bodyComponent.body.getPosition().x - spriteComponent.sprite.getWidth() / 2,
-                    bodyComponent.body.getPosition().y + 16 / GameConfig.PPM - spriteComponent.sprite.getHeight() / 2);
+            spriteComponent.sprite.setPosition(positionComponent.x - spriteComponent.sprite.getWidth() / 2,
+                    positionComponent.y - spriteComponent.sprite.getHeight() / 2);
             //batch.draw(spriteComponent.sprite, positionComponent.x, positionComponent.y);
-            spriteComponent.sprite.draw(batch);
+           spriteComponent.sprite.draw(batch);
         }
     }
 }

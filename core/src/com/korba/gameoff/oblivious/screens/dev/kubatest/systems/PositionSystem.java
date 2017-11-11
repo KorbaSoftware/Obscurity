@@ -24,8 +24,8 @@ public class PositionSystem extends IteratingSystem {
         BodyComponent bodyCom = bodyMap.get(entity);
 
         if (bodyCom != null) {
-            positionCom.x = bodyCom.body.getPosition().x - 16 / GameConfig.PPM;
-            positionCom.y = bodyCom.body.getPosition().y - 16 / GameConfig.PPM;
+            positionCom.x = bodyCom.body.getPosition().x;
+            positionCom.y = bodyCom.body.getPosition().y + 16 / GameConfig.PPM;
         }
 
         }
