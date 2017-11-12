@@ -1,6 +1,5 @@
-package com.korba.gameoff.oblivious.screens.dev.kubatest;
+package com.korba.gameoff.oblivious.gameplay.managers;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -10,9 +9,9 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.korba.gameoff.oblivious.ObscurityGame;
 import com.korba.gameoff.oblivious.config.GameConfig;
-import com.korba.gameoff.oblivious.screens.dev.DevKuba;
+import com.korba.gameoff.oblivious.gameplay.mapelements.StaticObject;
 
-public class WorldCreator {
+public class LevelManager {
     private ObscurityGame game;
     private TiledMap map;
     private Array<Vector2> spawnPoints;
@@ -20,7 +19,7 @@ public class WorldCreator {
     private final int WALL_LAYER = 1;
     private final int SPAWN_POINTS = 2;
 
-    public WorldCreator(ObscurityGame game, World world, TiledMap map){
+    public LevelManager(ObscurityGame game, World world, TiledMap map){
             this.game = game;
             // ground layer
             for (MapObject object : map.getLayers().get(WALL_LAYER).getObjects().getByType(RectangleMapObject.class)) {
@@ -32,8 +31,7 @@ public class WorldCreator {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             spawnPoints.add(new Vector2((rect.getX() + 16) / GameConfig.PPM, (rect.getY() + 16) / GameConfig.PPM));
         }
-
-        }
+    }
 
         public Vector2 getPlayerPosition(){
         return spawnPoints.first();

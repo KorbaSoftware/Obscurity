@@ -1,4 +1,4 @@
-package com.korba.gameoff.oblivious.screens.dev.kubatest;
+package com.korba.gameoff.oblivious.gameplay.managers;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -9,12 +9,13 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.World;
 import com.korba.gameoff.oblivious.ObscurityGame;
 import com.korba.gameoff.oblivious.config.GameConfig;
+import com.korba.gameoff.oblivious.gameplay.player.PlayerPhysics;
 
 public class MapManager {
     private TmxMapLoader mapLoader;
     private TiledMap tiledMap;
     private OrthogonalTiledMapRenderer mapRenderer;
-    private WorldCreator worldCreator;
+    private LevelManager levelManager;
     private MapType type;
     private float mapVelocity;
     private String mapPath;
@@ -25,7 +26,7 @@ public class MapManager {
         chooseMapProperties();
         tiledMap = mapLoader.load(mapPath);
         mapRenderer = new OrthogonalTiledMapRenderer(tiledMap, 1f / GameConfig.PPM);
-        worldCreator = new WorldCreator(game, world, tiledMap);
+        levelManager = new LevelManager(game, world, tiledMap);
     }
     private void chooseMapProperties(){
         switch (this.type){
@@ -40,11 +41,11 @@ public class MapManager {
         }
     }
 
-    public void positionCamera(OrthographicCamera camera, Player player){
+    public void positionCamera(OrthographicCamera camera, PlayerPhysics player){
         switch(type){
             case OPEN:{
-                camera.position.x = player.body.getPosition().x;
-                camera.position.y = player.body.getPosition().y;
+                camera.position.x = player.getBody().getPosition().x;
+                camera.position.y = player.getBody().getPosition().y;
             }
             break;
             case ROOM:{
@@ -61,8 +62,8 @@ public class MapManager {
         this.mapVelocity = velocity;
     }
 
-    public WorldCreator getWorldCreator() {
-        return worldCreator;
+    public LevelManager getLevelManager() {
+        return levelManager;
     }
     public OrthogonalTiledMapRenderer getMapRenderer() {
         return mapRenderer;

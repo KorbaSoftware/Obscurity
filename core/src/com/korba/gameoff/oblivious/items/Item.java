@@ -12,7 +12,6 @@ public abstract class Item extends Image implements IItem {
 
     @Override
     public void draw() {
-
     }
 
 }
