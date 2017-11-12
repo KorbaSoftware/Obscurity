@@ -18,6 +18,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.korba.gameoff.oblivious.ObscurityGame;
 import com.korba.gameoff.oblivious.assets.Assets;
 import com.korba.gameoff.oblivious.config.LauncherConfig;
+import com.korba.gameoff.oblivious.gameplay.managers.MapType;
 import com.korba.gameoff.oblivious.screens.dev.DevScreen;
 
 public class MenuScreen implements Screen{
@@ -73,8 +74,11 @@ public class MenuScreen implements Screen{
         newGame.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                //TODO
-                return super.touchDown(event, x, y, pointer, button);
+                return true;
+            }
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                game.setScreen(new GameScreen(batch, game, MapType.OPEN));
             }
         });
         Image loadGame = new Image(Assets.manager.get(Assets.LOAD_GAME, Texture.class));

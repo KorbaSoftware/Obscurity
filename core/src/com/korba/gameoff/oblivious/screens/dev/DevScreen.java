@@ -17,8 +17,6 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.korba.gameoff.oblivious.ObscurityGame;
 import com.korba.gameoff.oblivious.config.LauncherConfig;
 import com.korba.gameoff.oblivious.screens.*;
-import com.korba.gameoff.oblivious.screens.dev.kubatest.GameTestScreen;
-import com.korba.gameoff.oblivious.screens.dev.kubatest.MapType;
 
 public class DevScreen implements Screen {
 

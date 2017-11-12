@@ -24,6 +24,7 @@ public class Assets {
     public static void loadInitialAssets() {
         loadCursor();
         loadLoadingAssets();
+        manager.load(PLAYER, Texture.class);
 
         manager.finishLoading();
     }
@@ -40,7 +41,7 @@ public class Assets {
         manager.load(EXIT, Texture.class);
         manager.load(OPTIONS, Texture.class);
         manager.load(BACKGROUND, Texture.class);
-        manager.load(PLAYER, Texture.class);
+        //manager.load(PLAYER, Texture.class);
     }
 
     private static void loadLoadingAssets(){

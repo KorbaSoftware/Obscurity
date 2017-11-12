@@ -1,4 +1,4 @@
-package com.korba.gameoff.oblivious.screens.dev.kubatest.components;
+package com.korba.gameoff.oblivious.gameplay.components;
 
 import com.badlogic.ashley.core.Component;
 

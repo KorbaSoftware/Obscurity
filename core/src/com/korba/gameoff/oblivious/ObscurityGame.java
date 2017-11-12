@@ -2,14 +2,14 @@ package com.korba.gameoff.oblivious;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.gdx.*;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.World;
 import com.korba.gameoff.oblivious.assets.Assets;
 import com.korba.gameoff.oblivious.config.*;
 import com.korba.gameoff.oblivious.screens.LoadingScreen;
-import com.korba.gameoff.oblivious.screens.MenuScreen;
-import com.korba.gameoff.oblivious.screens.dev.kubatest.EntityManager;
+import com.korba.gameoff.oblivious.gameplay.managers.EntityManager;
 import com.korba.gameoff.oblivious.tools.*;
 
 public class ObscurityGame extends Game {
@@ -18,6 +18,7 @@ public class ObscurityGame extends Game {
 
 	private SpriteBatch batch;
     private Cursor customCursor;
+    private World world;
 	private EntityManager entityManager;
     private boolean showLogger = false;
 
@@ -25,8 +26,9 @@ public class ObscurityGame extends Game {
 	public void create () {
 		Engine engine = new Engine();
 		batch = new SpriteBatch();
-		entityManager = new EntityManager(engine, batch);
 		Assets.loadInitialAssets();
+		world = new World(new Vector2(0, 0), true);
+		entityManager = new EntityManager(engine, batch, world);
 		createCustomCursor();
        	setScreen(new LoadingScreen(batch, this));
 	}
@@ -58,6 +60,7 @@ public class ObscurityGame extends Game {
 	public EntityManager getEntityManager() {
 		return entityManager;
 	}
+	public World getWorld() {return this.world;}
 
 	@Override
 	public void dispose () {

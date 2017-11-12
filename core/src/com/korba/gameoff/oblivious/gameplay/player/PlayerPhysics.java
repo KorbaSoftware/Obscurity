@@ -1,4 +1,4 @@
-package com.korba.gameoff.oblivious.screens.dev.kubatest;
+package com.korba.gameoff.oblivious.gameplay.player;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
@@ -37,6 +37,10 @@ public class PlayerPhysics{
         shape.setAsBox(16 / GameConfig.PPM, 16 / GameConfig.PPM);
         fixtureDef.shape = shape;
         body.createFixture(fixtureDef).setUserData("player");
+    }
+
+    public void setBodyPosition(Vector2 position){
+        body.setTransform(position, 0);
     }
 
 }
