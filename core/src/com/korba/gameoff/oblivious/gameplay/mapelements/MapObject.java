@@ -1,4 +1,4 @@
-package com.korba.gameoff.oblivious.screens.dev.kubatest;
+package com.korba.gameoff.oblivious.gameplay.mapelements;
 
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;

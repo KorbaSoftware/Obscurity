@@ -17,8 +17,6 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.korba.gameoff.oblivious.ObscurityGame;
 import com.korba.gameoff.oblivious.config.LauncherConfig;
 import com.korba.gameoff.oblivious.screens.*;
-import com.korba.gameoff.oblivious.screens.dev.kubatest.GameTestScreen;
-import com.korba.gameoff.oblivious.screens.dev.kubatest.MapType;
 import com.korba.gameoff.oblivious.tools.*;
 
 public class DevScreen implements Screen {
@@ -49,9 +47,9 @@ public class DevScreen implements Screen {
         devButtons.center().top();
         devButtons.padLeft(5).padTop(20);
 
-        addDeveloperButton(new Texture(Gdx.files.internal("buttons/dev_fruk.png")), Dev.FRUK);
-        addDeveloperButton(new Texture(Gdx.files.internal("buttons/dev_kamil.png")), Dev.KAMIL);
-        addDeveloperButton(new Texture(Gdx.files.internal("buttons/dev_kuba.png")), Dev.KUBA);
+        addDeveloperButton(AssetUtils.getTexture(AssetUtils.DEV_FRUK), Dev.FRUK);
+        addDeveloperButton(AssetUtils.getTexture(AssetUtils.DEV_KAMIL), Dev.KAMIL);
+        addDeveloperButton(AssetUtils.getTexture(AssetUtils.DEV_KUBA), Dev.KUBA);
 
         devButtons.setFillParent(true);
         stage.addActor(devButtons);

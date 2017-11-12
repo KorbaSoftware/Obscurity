@@ -1,16 +1,13 @@
 package com.korba.gameoff.oblivious.screens.dev;
 
 import com.badlogic.gdx.*;
-import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.badlogic.gdx.utils.viewport.*;
 import com.korba.gameoff.oblivious.*;
+import com.korba.gameoff.oblivious.gameplay.managers.*;
 import com.korba.gameoff.oblivious.screens.dev.kubatest.GameTestScreen;
-import com.korba.gameoff.oblivious.screens.dev.kubatest.MapType;
 import com.korba.gameoff.oblivious.tools.*;
-import com.korba.gameoff.oblivious.ui.inside.*;
 
 public class DevKuba extends BasicScreen {
 
@@ -25,6 +22,7 @@ public class DevKuba extends BasicScreen {
         screensTable.left().top();
         screensTable.padLeft(20).padTop(20);
 
+        //openTestScreen = new GameTestScreen(batch, game, MapType.OPEN);
         openTestScreen = new GameTestScreen(batch, game, MapType.OPEN);
         additionalScreen(openTestScreen, "Open World");
         screensTable.row().padTop(10);

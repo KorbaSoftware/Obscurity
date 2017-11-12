@@ -17,6 +17,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.korba.gameoff.oblivious.ObscurityGame;
 import com.korba.gameoff.oblivious.config.LauncherConfig;
+import com.korba.gameoff.oblivious.gameplay.managers.MapType;
 import com.korba.gameoff.oblivious.screens.dev.DevScreen;
 import com.korba.gameoff.oblivious.tools.*;
 
@@ -40,6 +41,7 @@ public class MenuScreen implements Screen{
         stage.addActor(setMenuButtons());
         stage.addActor(setGameLogo());
         stage.addActor(setCompanyLogo());
+
         background = AssetUtils.getTexture(AssetUtils.BACKGROUND);
     }
 
@@ -71,14 +73,19 @@ public class MenuScreen implements Screen{
     private Table setMenuButtons(){
         Table table = new Table();
         table.right().bottom().padBottom(20).padRight(20);
+
         Image newGame = new Image(AssetUtils.getTexture(AssetUtils.NEW_GAME));
         newGame.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                //TODO
-                return super.touchDown(event, x, y, pointer, button);
+                return true;
+            }
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                game.setScreen(new GameScreen(batch, game, MapType.OPEN));
             }
         });
+
         Image loadGame = new Image(AssetUtils.getTexture(AssetUtils.LOAD_GAME));
         loadGame.addListener(new InputListener() {
             @Override
@@ -87,6 +94,7 @@ public class MenuScreen implements Screen{
                 return super.touchDown(event, x, y, pointer, button);
             }
         });
+
         Image options = new Image(AssetUtils.getTexture(AssetUtils.OPTIONS));
         options.addListener(new InputListener() {
             @Override
@@ -95,6 +103,7 @@ public class MenuScreen implements Screen{
                 return super.touchDown(event, x, y, pointer, button);
             }
         });
+
         Image exitGame = new Image(AssetUtils.getTexture(AssetUtils.EXIT));
         exitGame.addListener(new InputListener() {
             @Override

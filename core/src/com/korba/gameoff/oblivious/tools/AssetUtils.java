@@ -28,6 +28,9 @@ public class AssetUtils {
     private static final String DEFAULT_SKIN_PATH = "skins/flat/skin.json";
 
     // Other textures
+    public static final String DEV_KAMIL = "buttons/dev_kamil.png";
+    public static final String DEV_KUBA = "buttons/dev_kuba.png";
+    public static final String DEV_FRUK = "buttons/dev_fruk.png";
     public static final String LOAD_GAME = "buttons/load_game.png";
     public static final String NEW_GAME = "buttons/new_game.png";
     public static final String EXIT = "buttons/exit.png";
@@ -59,6 +62,7 @@ public class AssetUtils {
         loadPixmap(CURSOR);
         loadTexture(KORBA_LOGO);
         loadTexture(GAME_LOGO);
+        loadTexture(PLAYER);
     }
 
     public static void loadRemainingAssets() {
@@ -67,12 +71,15 @@ public class AssetUtils {
         loadTexture(EXIT);
         loadTexture(OPTIONS);
         loadTexture(BACKGROUND);
-        loadTexture(PLAYER);
         loadTexture(ITEM_RADIO);
         loadTexture(ITEM_PLACEHOLDER);
 
         loadMap(MAP_TEST0);
         loadMap(MAP_TEST1);
+
+        loadTexture(DEV_KAMIL);
+        loadTexture(DEV_KUBA);
+        loadTexture(DEV_FRUK);
     }
 
     public static void loadTexture(String path) {
