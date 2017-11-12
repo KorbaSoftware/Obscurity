@@ -11,7 +11,6 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.korba.gameoff.oblivious.ObscurityGame;
-import com.korba.gameoff.oblivious.assets.Assets;
 import com.korba.gameoff.oblivious.config.GameConfig;
 import com.korba.gameoff.oblivious.config.LauncherConfig;
 import com.korba.gameoff.oblivious.gameplay.components.*;

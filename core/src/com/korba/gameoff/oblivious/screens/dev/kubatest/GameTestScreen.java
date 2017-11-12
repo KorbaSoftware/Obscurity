@@ -4,13 +4,11 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.korba.gameoff.oblivious.*;
-import com.korba.gameoff.oblivious.assets.Assets;
 import com.korba.gameoff.oblivious.config.GameConfig;
 import com.korba.gameoff.oblivious.config.LauncherConfig;
 import com.korba.gameoff.oblivious.gameplay.components.*;
@@ -18,6 +16,7 @@ import com.korba.gameoff.oblivious.gameplay.managers.MapManager;
 import com.korba.gameoff.oblivious.gameplay.managers.MapType;
 import com.korba.gameoff.oblivious.gameplay.managers.PlayerManager;
 import com.korba.gameoff.oblivious.screens.dev.BasicScreen;
+import com.korba.gameoff.oblivious.tools.*;
 
 public class GameTestScreen extends BasicScreen {
 
@@ -43,7 +42,7 @@ public class GameTestScreen extends BasicScreen {
         playerEntity = new Entity();
         playerEntity.add(new VelocityComponent(mapManager.getMapVelocity()))
                     .add(new PositionComponent(mapManager.getLevelManager().getPlayerPosition().x, mapManager.getLevelManager().getPlayerPosition().y))
-                    .add(new SpriteComponent(new TextureRegion(Assets.manager.get(Assets.PLAYER, Texture.class), 0, 0, 32, 64)))
+                    .add(new SpriteComponent(new TextureRegion(AssetUtils.getTexture(AssetUtils.PLAYER), 0, 0, 32, 64)))
                     .add(new RenderableComponent())
                     .add(new PlayerComponent())
                     .add(new BodyComponent(player.getPhysics().getBody()));

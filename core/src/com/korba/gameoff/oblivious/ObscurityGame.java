@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
-import com.korba.gameoff.oblivious.assets.Assets;
 import com.korba.gameoff.oblivious.config.*;
 import com.korba.gameoff.oblivious.screens.LoadingScreen;
 import com.korba.gameoff.oblivious.gameplay.managers.EntityManager;
@@ -14,10 +13,22 @@ import com.korba.gameoff.oblivious.tools.*;
 
 public class ObscurityGame extends Game {
 
+	public enum GameState {
+		LOADING,
+		IN_MENU,
+		PAUSED,
+		INSIDE,
+		OUTSIDE,
+		FIGHT,
+		CUTSCENE
+	}
+
 	public final static LoggerDev devLOG = new LoggerDev();
 
 	private SpriteBatch batch;
     private Cursor customCursor;
+    private GameState gameState;
+
     private World world;
 	private EntityManager entityManager;
     private boolean showLogger = false;
@@ -26,7 +37,9 @@ public class ObscurityGame extends Game {
 	public void create () {
 		Engine engine = new Engine();
 		batch = new SpriteBatch();
-		Assets.loadInitialAssets();
+		gameState = GameState.LOADING;
+		AssetUtils.loadInitialAssets();
+
 		world = new World(new Vector2(0, 0), true);
 		entityManager = new EntityManager(engine, batch, world);
 		createCustomCursor();
@@ -54,8 +67,20 @@ public class ObscurityGame extends Game {
 	}
 
 	private void createCustomCursor() {
-		customCursor = Gdx.graphics.newCursor(Assets.getPixmap(Assets.CURSOR), 0, 0);
+		customCursor = Gdx.graphics.newCursor(AssetUtils.getPixmap(AssetUtils.CURSOR), 0, 0);
 		Gdx.graphics.setCursor(customCursor);
+	}
+
+	public boolean isDevMode(){
+		return GameConfig.IS_DEVMODE;
+	}
+
+	public void setGameState(GameState gameState) {
+		this.gameState = gameState;
+	}
+
+	public GameState getGameState(){
+		return gameState;
 	}
 	public EntityManager getEntityManager() {
 		return entityManager;
@@ -66,11 +91,7 @@ public class ObscurityGame extends Game {
 	public void dispose () {
 		batch.dispose();
 		customCursor.dispose();
-		Assets.manager.dispose();
-	}
-
-	public boolean isDevMode(){
-		return GameConfig.IS_DEVMODE;
+		AssetUtils.assetManager.dispose();
 	}
 
 }

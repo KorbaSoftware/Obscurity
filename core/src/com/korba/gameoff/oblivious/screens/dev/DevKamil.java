@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.viewport.*;
 import com.korba.gameoff.oblivious.*;
+import com.korba.gameoff.oblivious.tools.*;
 import com.korba.gameoff.oblivious.ui.inside.*;
 
 public class DevKamil extends BasicScreen {
@@ -22,7 +23,8 @@ public class DevKamil extends BasicScreen {
         screensTable.left().top();
         screensTable.padLeft(20).padTop(20);
 
-        insideUiDevScreen = new InsideUiDevScreen(batch, game);
+        insideUiDevScreen = new InsideUiDevScreen(game);
+        //insideUiDevScreen = new InsideUI(camera);
         additionalScreen(insideUiDevScreen, "Inside UI");
 
         screensTable.setFillParent(true);
@@ -30,7 +32,7 @@ public class DevKamil extends BasicScreen {
     }
 
     private void additionalScreen(Screen devScreen, String buttonText) {
-        TextButton btnChangeScreen = new TextButton(buttonText, new Skin(Gdx.files.internal("skins/default_ui_skin.json")));
+        TextButton btnChangeScreen = new TextButton(buttonText, AssetUtils.DEFAULT_SKIN);
         final Screen screen = devScreen;
 
         btnChangeScreen.addListener(new InputListener() {

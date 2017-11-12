@@ -16,10 +16,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.korba.gameoff.oblivious.ObscurityGame;
-import com.korba.gameoff.oblivious.assets.Assets;
 import com.korba.gameoff.oblivious.config.LauncherConfig;
 import com.korba.gameoff.oblivious.gameplay.managers.MapType;
 import com.korba.gameoff.oblivious.screens.dev.DevScreen;
+import com.korba.gameoff.oblivious.tools.*;
 
 public class MenuScreen implements Screen{
 
@@ -33,14 +33,16 @@ public class MenuScreen implements Screen{
     public MenuScreen(SpriteBatch batch, ObscurityGame game){
         this.batch = batch;
         this.game = game;
+        game.setGameState(ObscurityGame.GameState.IN_MENU);
+
         camera = new OrthographicCamera();
         viewport = new FitViewport(LauncherConfig.WIDTH, LauncherConfig.HEIGHT, camera);
         stage =  new Stage(viewport, batch);
         stage.addActor(setMenuButtons());
         stage.addActor(setGameLogo());
         stage.addActor(setCompanyLogo());
-        background = Assets.manager.get(Assets.BACKGROUND, Texture.class);
 
+        background = AssetUtils.getTexture(AssetUtils.BACKGROUND);
     }
 
     @Override
@@ -71,7 +73,8 @@ public class MenuScreen implements Screen{
     private Table setMenuButtons(){
         Table table = new Table();
         table.right().bottom().padBottom(20).padRight(20);
-        Image newGame = new Image(Assets.getTexture(Assets.NEW_GAME));
+
+        Image newGame = new Image(AssetUtils.getTexture(AssetUtils.NEW_GAME));
         newGame.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -82,7 +85,8 @@ public class MenuScreen implements Screen{
                 game.setScreen(new GameScreen(batch, game, MapType.OPEN));
             }
         });
-        Image loadGame = new Image(Assets.getTexture(Assets.LOAD_GAME));
+
+        Image loadGame = new Image(AssetUtils.getTexture(AssetUtils.LOAD_GAME));
         loadGame.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -90,7 +94,8 @@ public class MenuScreen implements Screen{
                 return super.touchDown(event, x, y, pointer, button);
             }
         });
-        Image options = new Image(Assets.getTexture(Assets.OPTIONS));
+
+        Image options = new Image(AssetUtils.getTexture(AssetUtils.OPTIONS));
         options.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -98,7 +103,8 @@ public class MenuScreen implements Screen{
                 return super.touchDown(event, x, y, pointer, button);
             }
         });
-        Image exitGame = new Image(Assets.getTexture(Assets.EXIT));
+
+        Image exitGame = new Image(AssetUtils.getTexture(AssetUtils.EXIT));
         exitGame.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -124,7 +130,7 @@ public class MenuScreen implements Screen{
     private Table setGameLogo(){
         Table table = new Table();
         table.center().top().padTop(20);
-        Image logo = new Image(Assets.getTexture(Assets.GAME_LOGO));
+        Image logo = new Image(AssetUtils.getTexture(AssetUtils.GAME_LOGO));
         table.add(logo);
         table.setFillParent(true);
         return table;
@@ -133,7 +139,7 @@ public class MenuScreen implements Screen{
     private Table setCompanyLogo(){
         Table table = new Table();
         table.left().bottom().padBottom(20).padLeft(20);
-        Image logo = new Image(Assets.getTexture(Assets.KORBA_LOGO));
+        Image logo = new Image(AssetUtils.getTexture(AssetUtils.KORBA_LOGO));
         if(game.isDevMode()) {
             final MenuScreen menu = this;
             logo.addListener(new InputListener() {
