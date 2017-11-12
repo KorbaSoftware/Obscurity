@@ -19,6 +19,7 @@ import com.korba.gameoff.oblivious.config.LauncherConfig;
 import com.korba.gameoff.oblivious.screens.*;
 import com.korba.gameoff.oblivious.screens.dev.kubatest.GameTestScreen;
 import com.korba.gameoff.oblivious.screens.dev.kubatest.MapType;
+import com.korba.gameoff.oblivious.tools.*;
 
 public class DevScreen implements Screen {
 
@@ -103,7 +104,7 @@ public class DevScreen implements Screen {
     public Table setBackButton(){
         Table table = new Table();
         table.left().bottom().padBottom(20).padLeft(20);
-        Image logo = new Image(new Texture("korba_logo.png"));
+        Image logo = new Image(AssetUtils.getTexture(AssetUtils.KORBA_LOGO));
             logo.addListener(new InputListener() {
                 @Override
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {

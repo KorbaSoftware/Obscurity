@@ -6,8 +6,8 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-import com.korba.gameoff.oblivious.assets.Assets;
 import com.korba.gameoff.oblivious.config.GameConfig;
+import com.korba.gameoff.oblivious.tools.*;
 
 public class Player extends Sprite {
 
@@ -18,7 +18,7 @@ public class Player extends Sprite {
     public Player(World world, Vector2 position){
         this.world = world;
         definePlayer(position);
-        playerStand = new TextureRegion(Assets.manager.get(Assets.PLAYER, Texture.class), 0, 0, 32, 64);
+        playerStand = new TextureRegion(AssetUtils.getTexture(AssetUtils.PLAYER), 0, 0, 32, 64);
         setRegion(playerStand);
 
     }

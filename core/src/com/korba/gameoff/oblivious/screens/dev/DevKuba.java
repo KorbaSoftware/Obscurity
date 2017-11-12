@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.viewport.*;
 import com.korba.gameoff.oblivious.*;
 import com.korba.gameoff.oblivious.screens.dev.kubatest.GameTestScreen;
 import com.korba.gameoff.oblivious.screens.dev.kubatest.MapType;
+import com.korba.gameoff.oblivious.tools.*;
 import com.korba.gameoff.oblivious.ui.inside.*;
 
 public class DevKuba extends BasicScreen {
@@ -35,7 +36,7 @@ public class DevKuba extends BasicScreen {
     }
 
     private void additionalScreen(Screen devScreen, String buttonText) {
-        TextButton btnChangeScreen = new TextButton(buttonText, new Skin(Gdx.files.internal("skins/default_ui_skin.json")));
+        TextButton btnChangeScreen = new TextButton(buttonText, AssetUtils.DEFAULT_SKIN);
         final Screen screen = devScreen;
         btnChangeScreen.addListener(new InputListener() {
             @Override

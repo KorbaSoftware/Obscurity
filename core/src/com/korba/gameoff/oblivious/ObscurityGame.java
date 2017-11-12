@@ -4,7 +4,6 @@ import com.badlogic.gdx.*;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.korba.gameoff.oblivious.assets.Assets;
 import com.korba.gameoff.oblivious.config.*;
 import com.korba.gameoff.oblivious.screens.LoadingScreen;
 import com.korba.gameoff.oblivious.screens.MenuScreen;
@@ -34,7 +33,8 @@ public class ObscurityGame extends Game {
 	public void create () {
 		batch = new SpriteBatch();
 		gameState = GameState.LOADING;
-		Assets.loadInitialAssets();
+		//Assets.loadInitialAssets();
+		AssetUtils.loadInitialAssets();
 
 		createCustomCursor();
        	setScreen(new LoadingScreen(batch, this));
@@ -61,7 +61,7 @@ public class ObscurityGame extends Game {
 	}
 
 	private void createCustomCursor() {
-		customCursor = Gdx.graphics.newCursor(Assets.manager.get(Assets.CURSOR, Pixmap.class), 0, 0);
+		customCursor = Gdx.graphics.newCursor(AssetUtils.getPixmap(AssetUtils.CURSOR), 0, 0);
 		Gdx.graphics.setCursor(customCursor);
 	}
 
@@ -81,7 +81,7 @@ public class ObscurityGame extends Game {
 	public void dispose () {
 		batch.dispose();
 		customCursor.dispose();
-		Assets.manager.dispose();
+		AssetUtils.assetManager.dispose();
 	}
 
 }

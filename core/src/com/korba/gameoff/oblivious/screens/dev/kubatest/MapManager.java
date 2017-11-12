@@ -9,6 +9,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.World;
 import com.korba.gameoff.oblivious.ObscurityGame;
 import com.korba.gameoff.oblivious.config.GameConfig;
+import com.korba.gameoff.oblivious.tools.*;
 
 public class MapManager {
     private TmxMapLoader mapLoader;
@@ -23,7 +24,8 @@ public class MapManager {
         this.type = type;
         mapLoader = new TmxMapLoader();
         chooseMapProperties();
-        tiledMap = mapLoader.load(mapPath);
+        //tiledMap = mapLoader.load(mapPath);
+        tiledMap = AssetUtils.getMap(mapPath);
         mapRenderer = new OrthogonalTiledMapRenderer(tiledMap, 1f / GameConfig.PPM);
         worldCreator = new WorldCreator(game, world, tiledMap);
     }
@@ -31,11 +33,11 @@ public class MapManager {
         switch (this.type){
             case OPEN:
                 setMapVelocity(12);
-                this.mapPath = "maps/tmx/test.tmx";
+                this.mapPath = AssetUtils.MAP_TEST0;
                 break;
             case ROOM:
                 setMapVelocity(6);
-                this.mapPath = "maps/tmx/test1.tmx";
+                this.mapPath = AssetUtils.MAP_TEST1;
                 break;
         }
     }
