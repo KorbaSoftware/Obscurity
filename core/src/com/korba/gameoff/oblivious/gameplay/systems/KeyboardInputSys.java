@@ -8,12 +8,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.korba.gameoff.oblivious.config.GameConfig;
 import com.korba.gameoff.oblivious.gameplay.components.*;
 
-public class ControlledMovementSystem extends EntitySystem {
+public class KeyboardInputSys extends EntitySystem {
     private ImmutableArray<Entity> entities;
     private ComponentMapper<BodyComponent> bodyMap = ComponentMapper.getFor(BodyComponent.class);
     private ComponentMapper<VelocityComponent> velocityMap = ComponentMapper.getFor(VelocityComponent.class);
 
-    public ControlledMovementSystem(){
+    public KeyboardInputSys(){
 
     }
 
