@@ -49,7 +49,7 @@ public class GameTestScreen extends BasicScreen {
         playerEntity = new Entity();
         playerEntity.add(new VelocityComponent(mapManager.getMapVelocity()))
                 .add(new PositionComponent(mapManager.getLevelManager().getPlayerPosition().x, mapManager.getLevelManager().getPlayerPosition().y))
-                .add(new SpriteComponent(new TextureRegion(new TextureRegion(new Texture(AssetUtils.PLAYER)), 0, 0, 32, 64)))
+                .add(new SpriteComponent(player.getSprite().getTextureRegion()))
                 .add(new RenderableComponent())
                 .add(new PlayerComponent())
                 .add(new BodyComponent(player.getPhysics().getBody()));
