@@ -16,8 +16,8 @@ public class AssetUtils {
     private static InternalFileHandleResolver fileResolver = new InternalFileHandleResolver();
 
     // Maps
-    public static final String MAP_TEST0 = "maps/tmx/test.tmx";
-    public static final String MAP_TEST1= "maps/tmx/test1.tmx";
+    public static final String MAP_TEST0 = "maps/tmx/newmap.tmx";
+    public static final String MAP_TEST1= "maps/tmx/newmap.tmx";
 
     // Items
     public static final String ITEM_PLACEHOLDER = "items/item_placeholder.png";
