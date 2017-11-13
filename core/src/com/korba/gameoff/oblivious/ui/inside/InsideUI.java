@@ -5,7 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.*;
 import com.korba.gameoff.oblivious.*;
 import com.korba.gameoff.oblivious.ui.*;
 
-public class InsideUI implements UI {
+public class InsideUI  {
 
     ObscurityGame game;
     SpriteBatch batch;
@@ -18,10 +18,4 @@ public class InsideUI implements UI {
 
     }
 
-    @Override
-    public void dispose() {
-        game.dispose();
-        batch.dispose();
-        stage.dispose();
-    }
 }
