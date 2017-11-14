@@ -2,7 +2,6 @@ package com.korba.gameoff.oblivious.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -11,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.korba.gameoff.oblivious.ObscurityGame;
+import com.korba.gameoff.oblivious.config.GamePreferences;
 import com.korba.gameoff.oblivious.config.LauncherConfig;
 import com.korba.gameoff.oblivious.tools.*;
 
@@ -55,7 +55,12 @@ public class LoadingScreen implements Screen {
             }
         }
         if(AssetUtils.assetManager.update() && (timer > LauncherConfig.LOADING_SCREEN_LOGO_LIFETIME *2)){
-            game.setScreen(new MenuScreen(batch, game));
+            if(game.getPreferences().getProfile() == GamePreferences.SelectedProfile.CACHE_PROFILE){
+                game.setScreen(new ProfileScreen(batch, game));
+            }
+            else {
+                game.setScreen(new MenuScreen(batch, game));
+            }
         }
     }
 
@@ -111,4 +116,6 @@ public class LoadingScreen implements Screen {
         batch.dispose();
         game.dispose();
     }
+
+
 }
