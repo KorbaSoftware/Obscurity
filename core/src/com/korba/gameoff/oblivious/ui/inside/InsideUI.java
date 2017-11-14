@@ -87,4 +87,5 @@ public class InsideUI implements Screen{
     public void dispose() {
         stage.dispose();
     }
+
 }

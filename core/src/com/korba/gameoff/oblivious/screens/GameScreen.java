@@ -4,9 +4,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -27,6 +25,7 @@ public class GameScreen extends BasicScreen {
     private OrthographicCamera camera;
     private MapManager mapManager;
     private Entity playerEntity;
+    private Entity cameraEntity;
     private MapType type;
 
     public GameScreen(SpriteBatch batch, ObscurityGame game, MapType type) {
@@ -35,6 +34,9 @@ public class GameScreen extends BasicScreen {
         camera = new OrthographicCamera();
         viewport = new FitViewport(LauncherConfig.WIDTH / GameConfig.PPM / 2,
                 LauncherConfig.HEIGHT / GameConfig.PPM / 2, this.camera);
+        cameraEntity = new Entity();
+        cameraEntity.add(new CameraComponent(camera));
+        game.getEntityManager().getEngine().addEntity(cameraEntity);
 
     }
 
@@ -42,11 +44,11 @@ public class GameScreen extends BasicScreen {
         player.getPhysics().setBodyPosition(mapManager.getLevelManager().getPlayerPosition());
         playerEntity = new Entity();
         playerEntity.add(new VelocityComponent(mapManager.getMapVelocity()))
-                    .add(new PositionComponent(mapManager.getLevelManager().getPlayerPosition().x, mapManager.getLevelManager().getPlayerPosition().y))
-                    .add(new SpriteComponent(player.getSprite().getTextureRegion()))
-                    .add(new RenderableComponent())
-                    .add(new PlayerComponent())
-                    .add(new BodyComponent(player.getPhysics().getBody()));
+                .add(new PositionComponent(mapManager.getLevelManager().getPlayerPosition().x, mapManager.getLevelManager().getPlayerPosition().y))
+                .add(new SpriteComponent(player.getSprite().getTextureRegion()))
+                .add(new RenderableComponent())
+                .add(new PlayerComponent())
+                .add(new BodyComponent(player.getPhysics().getBody()));
         game.getEntityManager().getEngine().addEntity(playerEntity);
     }
 
@@ -59,9 +61,9 @@ public class GameScreen extends BasicScreen {
 
     @Override
     public void render(float delta) {
-        update(delta);
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
+        update(delta);
         mapManager.getMapRenderer().render();
         debugRenderer.render(world, camera.combined);
         this.batch.setProjectionMatrix(camera.combined);
@@ -81,9 +83,20 @@ public class GameScreen extends BasicScreen {
     public void show() {
         world = game.getWorld();
         debugRenderer = new Box2DDebugRenderer();
+        setPhysicsVisibility();
         mapManager = new MapManager(type, game, world);
         player = game.getEntityManager().getPlayer();
+        if(type == MapType.ROOM) game.getEntityManager().getEngine().addSystem(game.getEntityManager().mouseInputSystem);
+        if(type == MapType.OPEN) game.getEntityManager().getEngine().addSystem(game.getEntityManager().keyboardInputSys);
         createPlayerEntity();
     }
-}
 
+    private void setPhysicsVisibility(){
+            debugRenderer.setDrawVelocities(game.isDevMode());
+            debugRenderer.setDrawAABBs(game.isDevMode());
+            debugRenderer.setDrawBodies(game.isDevMode());
+            debugRenderer.setDrawContacts(game.isDevMode());
+            debugRenderer.setDrawInactiveBodies(game.isDevMode());
+            debugRenderer.setDrawJoints(game.isDevMode());
+    }
+}
