@@ -8,54 +8,48 @@ import com.badlogic.gdx.utils.viewport.*;
 import com.korba.gameoff.oblivious.*;
 import com.korba.gameoff.oblivious.config.*;
 
-public class InsideUiDevScreen implements Screen{
+public class InsideUiDevScreen implements Screen {
 
-    private SpriteBatch batch;
-    private ObscurityGame game;
-    private Camera camera;
-    private Viewport viewport;
-    private Stage stage;
+    OrthographicCamera camera;
+    OrthographicCamera uiCamera;
 
-    private InsideUI insideUI;
+    ObscurityGame game;
+    InsideUI insideUI;
 
-    public InsideUiDevScreen(SpriteBatch batch, ObscurityGame game) {
-        this.batch = batch;
+
+    public InsideUiDevScreen(ObscurityGame game) {
         this.game = game;
+        game.setGameState(ObscurityGame.GameState.INSIDE);
 
         camera = new OrthographicCamera();
-        viewport = new FitViewport(LauncherConfig.WIDTH, LauncherConfig.HEIGHT, camera);
-        stage = new Stage(viewport, batch);
+        camera.setToOrtho(false, LauncherConfig.WIDTH, LauncherConfig.HEIGHT);
 
-        insideUI = new InsideUI(game, batch, stage);
+        uiCamera = new OrthographicCamera();
+        uiCamera.setToOrtho(false, camera.viewportWidth, camera.viewportHeight);
+        insideUI = new InsideUI(uiCamera);
+
+        Gdx.input.setInputProcessor(insideUI.getStage());
     }
 
     @Override
     public void show() {
+        Gdx.input.setInputProcessor(insideUI.getStage());
+
 
     }
 
     @Override
     public void render(float delta) {
-        clearScreen();
-        draw();
-    }
-
-    private void clearScreen() {
         Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
-    }
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-    private void draw() {
         camera.update();
-        batch.setProjectionMatrix(camera.combined);
-        batch.begin();
-        batch.end();
-        stage.draw();
+        insideUI.render(delta);
     }
 
     @Override
     public void resize(int width, int height) {
-        viewport.update(width, height);
+
     }
 
     @Override
@@ -75,8 +69,6 @@ public class InsideUiDevScreen implements Screen{
 
     @Override
     public void dispose() {
-        stage.dispose();
-        batch.dispose();
-        game.dispose();
+
     }
 }

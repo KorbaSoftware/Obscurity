@@ -1,4 +1,4 @@
-package com.korba.gameoff.oblivious.equipment.items;
+package com.korba.gameoff.oblivious.equipment;
 
 import com.korba.gameoff.oblivious.equipment.*;
 
