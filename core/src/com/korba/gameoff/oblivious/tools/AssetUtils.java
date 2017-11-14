@@ -16,7 +16,7 @@ public class AssetUtils {
     private static InternalFileHandleResolver fileResolver = new InternalFileHandleResolver();
 
     // Maps
-    public static final String MAP_TEST0 = "maps/tmx/newmap.tmx";
+    public static final String MAP_TEST0 = "maps/tmx/opentest.tmx";
     public static final String MAP_TEST1= "maps/tmx/newmap.tmx";
 
     // Items
@@ -38,7 +38,8 @@ public class AssetUtils {
     public static final String BACKGROUND = "menu_background.png";
     public static final String KORBA_LOGO = "korba_logo.png";
     public static final String GAME_LOGO = "game_logo.png";
-    public static final String PLAYER = "characters/player/lysy64.png";
+    public static final String PLAYER_64 = "characters/player/lysy64.png";
+    public static final String PLAYER_32 = "characters/player/lysy32.png";
     public static final String CURSOR = "custom_cursor.png";
 
 
@@ -62,7 +63,8 @@ public class AssetUtils {
         loadPixmap(CURSOR);
         loadTexture(KORBA_LOGO);
         loadTexture(GAME_LOGO);
-        loadTexture(PLAYER);
+        loadTexture(PLAYER_64);
+        loadTexture(PLAYER_32);
     }
 
     public static void loadRemainingAssets() {

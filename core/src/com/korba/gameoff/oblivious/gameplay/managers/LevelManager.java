@@ -19,9 +19,11 @@ public class LevelManager {
     private final int WALL_LAYER = 3;
     private final int SPAWN_POINTS = 4;
 
+
+
+
     public LevelManager(ObscurityGame game, World world, TiledMap map){
             this.game = game;
-
             for (MapObject object : map.getLayers().get(WALL_LAYER).getObjects().getByType(RectangleMapObject.class)) {
                 Rectangle rect = ((RectangleMapObject) object).getRectangle();
                 new StaticObject(world, map, rect);
