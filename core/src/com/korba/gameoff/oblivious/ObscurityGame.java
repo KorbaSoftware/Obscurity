@@ -24,34 +24,13 @@ public class ObscurityGame extends Game {
 	}
 
 	public final static LoggerDev devLOG = new LoggerDev();
-
 	private SpriteBatch batch;
     private Cursor customCursor;
     private GameState gameState;
-
+	private GamePreferences gamePreferences;
     private World world;
 	private EntityManager entityManager;
     private boolean showLogger = false;
-
-	@Override
-	public void create () {
-		Engine engine = new Engine();
-		batch = new SpriteBatch();
-		gameState = GameState.LOADING;
-		AssetUtils.loadInitialAssets();
-
-		world = new World(new Vector2(0, 0), true);
-		entityManager = new EntityManager(engine, batch, world);
-		createCustomCursor();
-       	setScreen(new LoadingScreen(batch, this));
-	}
-
-	@Override
-	public void render () {
-		super.render();
-		input();
-		drawLogger();
-	}
 
 	private void drawLogger() {
 		if(!showLogger)
@@ -86,6 +65,27 @@ public class ObscurityGame extends Game {
 		return entityManager;
 	}
 	public World getWorld() {return this.world;}
+	public GamePreferences getPreferences() { return gamePreferences; }
+
+	@Override
+	public void create () {
+		Engine engine = new Engine();
+		batch = new SpriteBatch();
+		gameState = GameState.LOADING;
+		AssetUtils.loadInitialAssets();
+		world = new World(new Vector2(0, 0), true);
+		entityManager = new EntityManager(engine, batch, world);
+		createCustomCursor();
+		gamePreferences = new GamePreferences();
+       	setScreen(new LoadingScreen(batch, this));
+	}
+
+	@Override
+	public void render () {
+		super.render();
+		input();
+		drawLogger();
+	}
 
 	@Override
 	public void dispose () {
@@ -93,5 +93,4 @@ public class ObscurityGame extends Game {
 		customCursor.dispose();
 		AssetUtils.assetManager.dispose();
 	}
-
 }

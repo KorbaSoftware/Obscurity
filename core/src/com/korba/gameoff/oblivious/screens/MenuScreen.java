@@ -99,8 +99,11 @@ public class MenuScreen implements Screen{
         options.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                //TODO
-                return super.touchDown(event, x, y, pointer, button);
+                return true;
+            }
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                game.setScreen(new OptionsScreen(batch, game));
             }
         });
 
