@@ -1,5 +1,6 @@
 package com.korba.gameoff.oblivious.inventory;
 
+import com.badlogic.gdx.*;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.*;
@@ -8,38 +9,60 @@ import com.korba.gameoff.oblivious.tools.*;
 
 public class InventorySlot extends Stack {
 
-    private Stack stack;
     private Image customBackground;
+    private Stack defaultBackground;
 
     public InventorySlot() {
-        stack = new Stack();
         customBackground = new Image();
-        if(AssetUtils.isAssetLoaded(AssetUtils.ITEM_PLACEHOLDER))
-            customBackground = new Image(AssetUtils.getTexture(AssetUtils.ITEM_PLACEHOLDER));
+        defaultBackground = new Stack();
+        Image image = new Image(AssetUtils.getTexture(AssetUtils.ITEM_PLACEHOLDER));
 
-        stack.add(customBackground);
-        this.add(stack);
+        defaultBackground.add(image);
+        this.add(defaultBackground);
     }
 
     public InventorySlot(Image  customBackground) {
         this();
         this.customBackground = customBackground;
-        stack.add(customBackground);
+        defaultBackground.add(customBackground);
     }
 
     public static void swapSlots(InventorySlot slotSource, InventorySlot slotTarget, Item dragItem) {
-        slotSource.add(slotTarget.getItem());
+        slotSource.add(slotTarget.removeItem());
         slotTarget.add(dragItem);
     }
 
+    @Override
+    public void add(Actor actor) {
+        super.add(actor);
+    }
+
     public Item getItem() {
+        Item item = null;
+        if(hasItem()) {
+            SnapshotArray<Actor> arrayChildren = this.getChildren();
+            if(arrayChildren.size > 1)
+            item = (Item) arrayChildren.peek();
+        }
+
+        return item;
+    }
+
+    public int itemsInSlot () {
+        return getChildren().size - 1;
+    }
+
+    public Item removeItem() {
+
         Array<Item> items = new Array<>();
         if(hasItem()) {
             SnapshotArray<Actor> arrayChildren = this.getChildren();
             items.add((Item) arrayChildren.pop());
+
+            return items.get(0);
         }
 
-        return items.get(0);
+        return null;
     }
 
     public boolean hasItem() {
@@ -55,7 +78,7 @@ public class InventorySlot extends Stack {
         if(hasChildren()) {
             SnapshotArray<Actor> items = this.getChildren();
             if(items.size > 1) {
-                Item item = (Item) items.pop();
+                Item item = (Item) items.peek();
                 return item.getDescription();
             }
         }

@@ -30,12 +30,7 @@ public class InventorySlotTooltip extends Window {
     }
 
     public void updateDescription(InventorySlot slot) {
-        if(slot.hasItem()) {
-            description.setText(slot.getItemDescription());
-        } else {
-            description.setText("");
-        }
-
+        description.setText(slot.getItemDescription());
         this.pack();
     }
 

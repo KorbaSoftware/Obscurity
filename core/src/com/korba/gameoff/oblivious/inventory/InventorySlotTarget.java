@@ -22,7 +22,6 @@ public class InventorySlotTarget extends DragAndDrop.Target {
     @Override
     public void drop(Source source, Payload payload, float x, float y, int pointer) {
         Item sourceItem = (Item) payload.getDragActor();
-        Item targetItem = targetSlot.getItem();
         InventorySlot sourceSlot = ((InventorySlotSource) source).getSourceSlot();
 
         if(!targetSlot.hasItem())

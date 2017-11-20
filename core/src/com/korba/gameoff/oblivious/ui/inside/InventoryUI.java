@@ -31,30 +31,38 @@ public class InventoryUI extends Window {
         for(int i = 1; i <= slots; i++) {
             InventorySlot slot = new InventorySlot();
             slot.addListener(new InventorySlotTooltipListener(tooltip));
-            dragAndDrop.addTarget(new InventorySlotTarget(slot));
-            inventorySlotsTable.add(slot).size(slotWidth, slotHeight);
 
+            dragAndDrop.addTarget(new InventorySlotTarget(slot));
+
+//            if(i % 3 == 1) {
+//                slot.add(new Item(AssetUtils.getTexture(AssetUtils.ITEM_RADIO), "Broked radio"));
+//                dragAndDrop.addSource(new InventorySlotSource(slot, dragAndDrop));
+//            }
+
+            inventorySlotsTable.add(slot).size(slotWidth, slotHeight);
             if(i % slotsInRow == 0)
                 inventorySlotsTable.row();
         }
 
         inventoryActors.add(tooltip);
 
-        AssetUtils.loadTexture(AssetUtils.ITEM_RADIO);
-        Array<Cell> cells = inventorySlotsTable.getCells();
-        for (int i = 0; i < cells.size; i++) {
-            if(i % 3 == 0) {
-                InventoryItemLocation itemLocation = new InventoryItemLocation(i);
-                InventorySlot slot = ((InventorySlot) cells.get(itemLocation.getInventoryIndex()).getActor());
-                Item item = new Item(AssetUtils.getTexture(AssetUtils.ITEM_RADIO), "Broken radio");
-                slot.add(item);
-                dragAndDrop.addSource(new InventorySlotSource(slot, dragAndDrop));
-            }
-        }
-
         this.add(inventorySlotsTable).colspan(2);
-        this.row();
         this.pack();
+    }
+
+    public void addItemToInventory(Item item) {
+        Array<Cell> sourceCells = inventorySlotsTable.getCells();
+
+        for(int i = 0; i < sourceCells.size; i++) {
+            InventorySlot slot = ((InventorySlot) sourceCells.get(i).getActor());
+            if(slot == null)
+                continue;
+            if(slot.hasItem())
+                continue;
+            slot.add(item);
+            dragAndDrop.addSource(new InventorySlotSource(slot, dragAndDrop));
+            break;
+        }
     }
 
     public DragAndDrop getDragAndDrop() {

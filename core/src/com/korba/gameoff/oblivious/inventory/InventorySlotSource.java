@@ -28,6 +28,9 @@ public class InventorySlotSource extends DragAndDrop.Source {
 
         sourceSlot = slot;
 
+        payload.setDragActor(getActor());
+        dragAndDrop.setDragActorPosition(-x, -y + getActor().getHeight());
+
         return payload;
     }
 
