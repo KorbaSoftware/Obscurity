@@ -17,6 +17,7 @@ public class InsideUI implements Screen{
     private Viewport viewport;
 
     private EqUI eqUI;
+    private InventoryUI inventoryUI;
 
     public InsideUI(Camera camera) {
         this.camera = camera;
@@ -30,14 +31,26 @@ public class InsideUI implements Screen{
         eqUI.setVisible(false);
         eqUI.setPosition(stage.getWidth() / 2 - 64 * 3, stage.getHeight() / 2 - 64*3);
 
+        inventoryUI = new InventoryUI();
+        inventoryUI.setKeepWithinStage(false);
+        inventoryUI.setMovable(false);
+        inventoryUI.setVisible(false);
+        inventoryUI.setPosition(stage.getWidth() / 2 - 64 * 3, stage.getHeight() / 2 - 64*3);
+
         stage.addActor(eqUI);
+        stage.addActor(inventoryUI);
         eqUI.validate();
+        inventoryUI.validate();
 
         Array<Actor> eqActors = eqUI.getEqActors();
         for(Actor actor : eqActors)
             stage.addActor(actor);
 
-        TextButton btnEQ = new TextButton("EQ", AssetUtils.DEFAULT_SKIN);
+        Array<Actor> invActors = inventoryUI.getInventoryActors();
+        for(Actor actor : invActors)
+            stage.addActor(actor);
+
+        TextButton btnEQ = new TextButton("Old EQ", AssetUtils.DEFAULT_SKIN);
         btnEQ.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -45,7 +58,18 @@ public class InsideUI implements Screen{
             }
         });
         btnEQ.setBounds(20, 20, 50 ,50);
+
+        TextButton invEQ = new TextButton("New EQ", AssetUtils.DEFAULT_SKIN);
+        invEQ.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                inventoryUI.setVisible(inventoryUI.isVisible() ? false : true);
+            }
+        });
+        invEQ.setBounds(80, 20, 50, 50);
+
         stage.addActor(btnEQ);
+        stage.addActor(invEQ);
     }
 
     public Stage getStage() {
