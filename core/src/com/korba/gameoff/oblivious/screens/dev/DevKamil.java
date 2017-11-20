@@ -23,8 +23,7 @@ public class DevKamil extends BasicScreen {
         screensTable.left().top();
         screensTable.padLeft(20).padTop(20);
 
-        insideUiDevScreen = new InsideUiDevScreen(batch, game);
-        //insideUiDevScreen = new InsideUI(camera);
+        insideUiDevScreen = new InsideUiDevScreen(game);
         additionalScreen(insideUiDevScreen, "Inside UI");
 
         screensTable.setFillParent(true);

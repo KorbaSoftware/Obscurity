@@ -22,6 +22,7 @@ public class AssetUtils {
     // Items
     public static final String ITEM_PLACEHOLDER = "items/item_placeholder.png";
     public static final String ITEM_RADIO = "items/item_radio.png";
+    public static final String ITEM_PINDOL = "items/item_pindol.png";
 
     // Skins
     private static final String DEFAULT_SKIN_ATLAS_PATH = "skins/flat/skin.atlas";
@@ -74,6 +75,7 @@ public class AssetUtils {
         loadTexture(OPTIONS);
         loadTexture(BACKGROUND);
         loadTexture(ITEM_RADIO);
+        loadTexture(ITEM_PINDOL);
         loadTexture(ITEM_PLACEHOLDER);
 
         loadMap(MAP_TEST0);
