@@ -33,7 +33,7 @@ public abstract class MapObject {
             fixture = body.createFixture(fixtureDef);
         }
 
-        public abstract void onHit();
+        public abstract void onContact();
 
         public void setCategoryFilter(short filterBit) {
             Filter filter = new Filter();

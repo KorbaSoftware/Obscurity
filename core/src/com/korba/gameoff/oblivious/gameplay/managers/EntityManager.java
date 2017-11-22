@@ -24,8 +24,10 @@ public class EntityManager {
         this.world = world;
         mouseInputSystem = new MouseInputSystem();
         keyboardInputSys = new KeyboardInputSys();
+        CollisionSystem collisionSystem = new CollisionSystem(world);
         PositionSystem positionSystem = new PositionSystem();
         RenderSystem renderSystem = new RenderSystem(spriteBatch);
+        engine.addSystem(collisionSystem);
         engine.addSystem(positionSystem);
         engine.addSystem(renderSystem);
         createPlayer();
