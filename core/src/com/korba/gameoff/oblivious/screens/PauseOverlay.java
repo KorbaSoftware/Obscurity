@@ -32,7 +32,7 @@ public class PauseOverlay extends Window {
 
         optionsImage = new Image(AssetUtils.getTexture(AssetUtils.OPTIONS));
         resumeImage = new Image(AssetUtils.getTexture(AssetUtils.RESUME));
-        saveImage = new Image(AssetUtils.getTexture(AssetUtils.LOAD_GAME));
+        saveImage = new Image(AssetUtils.getTexture(AssetUtils.SAVE_GAME));
         loadImage = new Image(AssetUtils.getTexture(AssetUtils.LOAD_GAME));
         exitImage = new Image(AssetUtils.getTexture(AssetUtils.EXIT));
 

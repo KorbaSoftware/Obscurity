@@ -46,6 +46,7 @@ public class AssetUtils {
     public static final String PROFILE_TWO = "buttons/profile_two.png";
     public static final String PROFILE_ONE = "buttons/profile_one.png";
     public static final String RESUME = "buttons/resume.png";
+    public static final String SAVE_GAME ="buttons/save_game.png";
 
 
     public static final TextureAtlas DEFAULT_SKIN_TEXTURE_ATLAS = new TextureAtlas(DEFAULT_SKIN_ATLAS_PATH);
@@ -75,6 +76,7 @@ public class AssetUtils {
     public static void loadRemainingAssets() {
         loadTexture(NEW_GAME);
         loadTexture(LOAD_GAME);
+        loadTexture(SAVE_GAME);
         loadTexture(EXIT);
         loadTexture(OPTIONS);
         loadTexture(BACKGROUND);
