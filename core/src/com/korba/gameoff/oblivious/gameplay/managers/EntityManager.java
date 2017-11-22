@@ -2,6 +2,7 @@ package com.korba.gameoff.oblivious.gameplay.managers;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
@@ -16,8 +17,8 @@ public class EntityManager {
     private World world;
     private PlayerManager player;
     private static Array<Entity> entities = new Array<Entity>();
-    public MouseInputSystem mouseInputSystem;
-    public KeyboardInputSys keyboardInputSys;
+    private MouseInputSystem mouseInputSystem;
+    private KeyboardInputSys keyboardInputSys;
 
     public EntityManager(Engine engine, SpriteBatch spriteBatch, World world){
         this.engine = engine;
@@ -41,14 +42,13 @@ public class EntityManager {
     public void setKeyboardInput() {
         engine.removeSystem(mouseInputSystem);
         engine.addSystem(keyboardInputSys);
+        mouseInputSystem.nullify();
     }
 
     public void setMouseInput() {
         engine.removeSystem(keyboardInputSys);
         engine.addSystem(mouseInputSystem);
     }
-
-
     public void update(float delta){
         engine.update(delta);
     }
@@ -58,5 +58,6 @@ public class EntityManager {
     public PlayerManager getPlayer() {
         return player;
     }
-
+    public KeyboardInputSys getKeyboardInputSys() {return keyboardInputSys;}
+    public MouseInputSystem getMouseInputSystem() {return mouseInputSystem;}
 }

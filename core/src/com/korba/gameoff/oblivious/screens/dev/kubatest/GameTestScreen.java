@@ -38,7 +38,6 @@ public class GameTestScreen extends BasicScreen {
 
     public GameTestScreen(SpriteBatch batch, ObscurityGame game) {
         super(batch, game);
-
     }
 
     private void setViewportAndCamera(){
@@ -84,11 +83,16 @@ public class GameTestScreen extends BasicScreen {
         update(delta);
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
-        if(mapManager.update(delta)){
+        if(mapManager.isMapToChange()){
             player.getPhysics().setBodyPosition(mapManager.getPosition());
+            player.setSpriteType(mapManager.getType());
+            playerEntity.remove(SpriteComponent.class);
+            playerEntity.add(new SpriteComponent(player.getSprite().getTextureRegion()));
+            playerEntity.getComponent(VelocityComponent.class).velocity = mapManager.getMapVelocity();
             mapManager.positionCamera(camera, player.getPhysics());
             mapManager.setMapToChange(false);
         }
+        mapManager.getMapRenderer().render();
         debugRenderer.render(world, camera.combined);
         this.batch.setProjectionMatrix(camera.combined);
         this.batch.begin();
@@ -108,25 +112,16 @@ public class GameTestScreen extends BasicScreen {
 
     @Override
     public void show() {
-        //TODO gettery do systemow
         setViewportAndCamera();
         world = game.getWorld();
         mapManager = new MapManager(MapType.OPEN, game, world);
-        game.getEntityManager().getEngine().addSystem(game.getEntityManager().keyboardInputSys);
+        game.getEntityManager().getEngine().addSystem(game.getEntityManager().getKeyboardInputSys());
         debugRenderer = new Box2DDebugRenderer();
-        setPhysicsVisibility(false);
+        setPhysicsVisibility(GameConfig.IS_DEVMODE);
         createPlayerEntity();
         setLights();
     }
-    private void setPhysicsVisibility(){
-        debugRenderer.setDrawVelocities(game.isDevMode());
-        debugRenderer.setDrawAABBs(game.isDevMode());
-        debugRenderer.setDrawBodies(game.isDevMode());
-        debugRenderer.setDrawContacts(game.isDevMode());
-        debugRenderer.setDrawInactiveBodies(game.isDevMode());
-        debugRenderer.setDrawJoints(game.isDevMode());
 
-    }
     private void setPhysicsVisibility(boolean value){
         debugRenderer.setDrawVelocities(value);
         debugRenderer.setDrawAABBs(value);

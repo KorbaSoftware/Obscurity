@@ -53,8 +53,6 @@ public class MouseInputSystem extends EntitySystem{
         if(pointerPosition != null){
             deltaY = pointerPosition.y - playerPosition.y;
             deltaX = pointerPosition.x - playerPosition.x;
-           System.out.println(deltaX);
-           System.out.println(deltaY);
         }
         if(!(deltaY < 1 && deltaY > -1) || !(deltaX < 1 && deltaX > -1)){
             if (deltaY > 1){
@@ -70,6 +68,12 @@ public class MouseInputSystem extends EntitySystem{
                 bodyComponent.body.setLinearVelocity(-velocityComponent.velocity, bodyComponent.body.getLinearVelocity().y);
             }else bodyComponent.body.setLinearVelocity(0,bodyComponent.body.getLinearVelocity().y);
         }else bodyComponent.body.setLinearVelocity(0,0);
+    }
 
+    public void nullify(){
+        bodyComponent.body.setLinearVelocity(0,0);
+        pointerPosition = null;
+        this.deltaX = 0;
+        this.deltaY = 0;
     }
 }
