@@ -12,7 +12,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 public class AssetUtils {
 
     public static final AssetManager assetManager = new AssetManager();
-
     private static InternalFileHandleResolver fileResolver = new InternalFileHandleResolver();
 
     // Maps
@@ -42,6 +41,10 @@ public class AssetUtils {
     public static final String PLAYER_64 = "characters/player/lysy64.png";
     public static final String PLAYER_32 = "characters/player/lysy32.png";
     public static final String CURSOR = "custom_cursor.png";
+    public static final String PROFILE = "buttons/profile.png";
+    public static final String PROFILE_THREE = "buttons/profile_three.png";
+    public static final String PROFILE_TWO = "buttons/profile_two.png";
+    public static final String PROFILE_ONE = "buttons/profile_one.png";
 
 
     public static final TextureAtlas DEFAULT_SKIN_TEXTURE_ATLAS = new TextureAtlas(DEFAULT_SKIN_ATLAS_PATH);
@@ -66,6 +69,10 @@ public class AssetUtils {
         loadTexture(GAME_LOGO);
         loadTexture(PLAYER_64);
         loadTexture(PLAYER_32);
+        loadTexture(PROFILE);
+        loadTexture(PROFILE_ONE);
+        loadTexture(PROFILE_TWO);
+        loadTexture(PROFILE_THREE);
     }
 
     public static void loadRemainingAssets() {

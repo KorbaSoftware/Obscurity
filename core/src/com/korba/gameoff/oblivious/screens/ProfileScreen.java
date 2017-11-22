@@ -28,9 +28,9 @@ public class ProfileScreen extends BasicScreen {
         profileTable = new Table();
         profileTable.center().top();
         choose = new Label("Choose Profile", AssetUtils.DEFAULT_SKIN);
-        profile1 = new Image(AssetUtils.getTexture(AssetUtils.KORBA_LOGO));
-        profile2 = new Image(AssetUtils.getTexture(AssetUtils.KORBA_LOGO));
-        profile3 = new Image(AssetUtils.getTexture(AssetUtils.KORBA_LOGO));
+        profile1 = new Image(AssetUtils.getTexture(AssetUtils.PROFILE_ONE));
+        profile2 = new Image(AssetUtils.getTexture(AssetUtils.PROFILE_TWO));
+        profile3 = new Image(AssetUtils.getTexture(AssetUtils.PROFILE_THREE));
 
         profile1.addListener(new InputListener() {
             @Override
