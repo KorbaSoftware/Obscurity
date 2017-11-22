@@ -1,5 +1,6 @@
 package com.korba.gameoff.oblivious.inventory;
 
+import com.badlogic.gdx.*;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.*;
@@ -29,7 +30,7 @@ public class InventorySlotSource extends DragAndDrop.Source {
         sourceSlot = slot;
 
         payload.setDragActor(getActor());
-        dragAndDrop.setDragActorPosition(-x, -y + getActor().getHeight());
+        dragAndDrop.setDragActorPosition(x, -y);
 
         return payload;
     }
