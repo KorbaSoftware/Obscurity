@@ -23,10 +23,10 @@ public class DevKuba extends BasicScreen {
         screensTable.padLeft(20).padTop(20);
 
         //openTestScreen = new GameTestScreen(batch, game, MapType.OPEN);
-        openTestScreen = new GameTestScreen(batch, game, MapType.OPEN);
+        openTestScreen = new GameTestScreen(batch, game);
         additionalScreen(openTestScreen, "Open World");
         screensTable.row().padTop(10);
-        roomTestScreen = new GameTestScreen(batch, game, MapType.ROOM);
+        roomTestScreen = new GameTestScreen(batch, game);
         additionalScreen(roomTestScreen, "Room");
 
         screensTable.setFillParent(true);
