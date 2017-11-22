@@ -14,7 +14,7 @@ public class StaticObject extends MapObject {
     }
 
     @Override
-    public void onHit() {
+    public void onContact() {
 
     }
 }
