@@ -16,6 +16,7 @@ public class DesktopLauncher {
 		config.backgroundFPS = LauncherConfig.BACKGROUND_FPS;
 		config.vSyncEnabled = LauncherConfig.vSync;
 		config.fullscreen = LauncherConfig.FULLSCREEN;
+		config.resizable = LauncherConfig.RESIZABLE;
 
 		Application app = new LwjglApplication(new ObscurityGame(), config);
 		Gdx.app = app;
