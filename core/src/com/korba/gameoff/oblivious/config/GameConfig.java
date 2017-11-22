@@ -7,7 +7,7 @@ public class GameConfig {
     //general config vars
     public static final int PPM = 16; //pixels per meter
     public static final int TILE_SIZE = 32;
-    public static final boolean IS_DEVMODE = false;
+    public static final boolean IS_DEVMODE = true;
 
     //colission bits
     public static final short DEFAULT_BIT = 1;
