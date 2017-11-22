@@ -62,8 +62,7 @@ public class MapManager {
         }
     }
 
-    public boolean update(float delta){
-        mapRenderer.render();
+    public boolean isMapToChange(){
         return mapToChange;
     }
 
@@ -83,6 +82,7 @@ public class MapManager {
             position = levels.first().getPlayerPosition();
             game.getEntityManager().setMouseInput();
             type = MapType.ROOM;
+            mapVelocity = 6;
             Gdx.app.debug("MapManago","changed to ROOM");
         }
         else if (type == MapType.ROOM){
@@ -90,6 +90,7 @@ public class MapManager {
             position = levelManager.getPlayerPosition();
             game.getEntityManager().setKeyboardInput();
             type = MapType.OPEN;
+            mapVelocity = 12;
             Gdx.app.debug("MapManago", "changed to OPEN");
         }
         mapRenderer.setMap(currentMap);
