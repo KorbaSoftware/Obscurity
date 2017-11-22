@@ -14,7 +14,9 @@ public class InventoryUI extends Window {
     private final int slotsInRow = 4;
     private final int slotWidth = 64;
     private final int slotHeight = 64;
+
     private Table inventorySlotsTable;
+
     private DragAndDrop dragAndDrop;
     private Array<Actor> inventoryActors;
     private InventorySlotTooltip tooltip;
