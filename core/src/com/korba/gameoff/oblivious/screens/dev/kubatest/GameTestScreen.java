@@ -34,12 +34,11 @@ public class GameTestScreen extends BasicScreen {
     private MapManager mapManager;
     private Entity playerEntity;
     private Entity cameraEntity;
-    private MapType type;
     private RayHandler rayHandler;
+    boolean mapChanged;
 
     public GameTestScreen(SpriteBatch batch, ObscurityGame game, MapType type) {
         super(batch, game);
-        this.type = type;
         setViewportAndCamera();
     }
 
@@ -54,7 +53,7 @@ public class GameTestScreen extends BasicScreen {
 
     private void createPlayerEntity(){
         player = game.getEntityManager().getPlayer();
-        player.setSpriteType(type);
+        player.setSpriteType(mapManager.getType());
         player.getPhysics().setBodyPosition(mapManager.getLevelManager().getPlayerPosition());
         playerEntity = new Entity();
         playerEntity.add(new VelocityComponent(mapManager.getMapVelocity()))
@@ -86,7 +85,10 @@ public class GameTestScreen extends BasicScreen {
         update(delta);
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
-        mapManager.getMapRenderer().render();
+        if(mapManager.update(delta)){
+            player.getPhysics().setBodyPosition(mapManager.getPosition());
+            mapManager.setMapToChange(false);
+        }
         debugRenderer.render(world, camera.combined);
         this.batch.setProjectionMatrix(camera.combined);
         this.batch.begin();
@@ -107,16 +109,11 @@ public class GameTestScreen extends BasicScreen {
     @Override
     public void show() {
         //TODO gettery do systemow
-        if(type == MapType.ROOM){
-            game.getEntityManager().getEngine().addSystem(game.getEntityManager().mouseInputSystem);
-        }
-        if(type == MapType.OPEN){
-            game.getEntityManager().getEngine().addSystem(game.getEntityManager().keyboardInputSys);
-        }
         world = game.getWorld();
+        mapManager = new MapManager(MapType.OPEN, game, world);
+        game.getEntityManager().getEngine().addSystem(game.getEntityManager().keyboardInputSys);
         debugRenderer = new Box2DDebugRenderer();
         setPhysicsVisibility(false);
-        mapManager = new MapManager(type, game, world);
         createPlayerEntity();
         setLights();
     }

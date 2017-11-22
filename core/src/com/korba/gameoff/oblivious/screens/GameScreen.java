@@ -1,7 +1,9 @@
 package com.korba.gameoff.oblivious.screens;
 
+import box2dLight.RayHandler;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -26,21 +28,25 @@ public class GameScreen extends BasicScreen {
     private MapManager mapManager;
     private Entity playerEntity;
     private Entity cameraEntity;
-    private MapType type;
+    private RayHandler rayHandler;
 
     public GameScreen(SpriteBatch batch, ObscurityGame game, MapType type) {
         super(batch, game);
-        this.type = type;
+        setViewportAndCamera();
+    }
+
+    private void setViewportAndCamera(){
         camera = new OrthographicCamera();
         viewport = new FitViewport(LauncherConfig.WIDTH / GameConfig.PPM / 2,
                 LauncherConfig.HEIGHT / GameConfig.PPM / 2, this.camera);
         cameraEntity = new Entity();
         cameraEntity.add(new CameraComponent(camera));
         game.getEntityManager().getEngine().addEntity(cameraEntity);
-
     }
 
     private void createPlayerEntity(){
+        player = game.getEntityManager().getPlayer();
+        player.setSpriteType(mapManager.getType());
         player.getPhysics().setBodyPosition(mapManager.getLevelManager().getPlayerPosition());
         playerEntity = new Entity();
         playerEntity.add(new VelocityComponent(mapManager.getMapVelocity()))
@@ -59,17 +65,30 @@ public class GameScreen extends BasicScreen {
         mapManager.getMapRenderer().setView(camera);
     }
 
+    private void setLights(){
+        rayHandler = new RayHandler(game.getWorld());
+        Color ambientColor = GameConfig.AMBIENT_LIGHT_COLOR;
+        ambientColor.a = GameConfig.AMBIENT_LIGHT_STRENGTH;
+        player.createLight(rayHandler);
+        rayHandler.setAmbientLight(ambientColor);
+    }
+
     @Override
     public void render(float delta) {
+        update(delta);
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
-        update(delta);
-        mapManager.getMapRenderer().render();
+        if(mapManager.update(delta)){
+            player.getPhysics().setBodyPosition(mapManager.getPosition());
+            mapManager.setMapToChange(false);
+        }
         debugRenderer.render(world, camera.combined);
         this.batch.setProjectionMatrix(camera.combined);
         this.batch.begin();
         game.getEntityManager().update(delta);
         this.batch.end();
+        rayHandler.updateAndRender();
+        rayHandler.setCombinedMatrix(camera);
     }
 
     @Override
@@ -77,26 +96,34 @@ public class GameScreen extends BasicScreen {
         super.dispose();
         world.dispose();
         debugRenderer.dispose();
+        rayHandler.dispose();
     }
 
     @Override
     public void show() {
+        //TODO gettery do systemow
         world = game.getWorld();
+        mapManager = new MapManager(MapType.OPEN, game, world);
+        game.getEntityManager().getEngine().addSystem(game.getEntityManager().keyboardInputSys);
         debugRenderer = new Box2DDebugRenderer();
-        setPhysicsVisibility();
-        mapManager = new MapManager(type, game, world);
-        player = game.getEntityManager().getPlayer();
-        if(type == MapType.ROOM) game.getEntityManager().getEngine().addSystem(game.getEntityManager().mouseInputSystem);
-        if(type == MapType.OPEN) game.getEntityManager().getEngine().addSystem(game.getEntityManager().keyboardInputSys);
+        setPhysicsVisibility(false);
         createPlayerEntity();
+        setLights();
     }
-
     private void setPhysicsVisibility(){
-            debugRenderer.setDrawVelocities(game.isDevMode());
-            debugRenderer.setDrawAABBs(game.isDevMode());
-            debugRenderer.setDrawBodies(game.isDevMode());
-            debugRenderer.setDrawContacts(game.isDevMode());
-            debugRenderer.setDrawInactiveBodies(game.isDevMode());
-            debugRenderer.setDrawJoints(game.isDevMode());
+        debugRenderer.setDrawContacts(game.isDevMode());
+        debugRenderer.setDrawInactiveBodies(game.isDevMode());
+        debugRenderer.setDrawJoints(game.isDevMode());
+        debugRenderer.setDrawVelocities(game.isDevMode());
+        debugRenderer.setDrawAABBs(game.isDevMode());
+        debugRenderer.setDrawBodies(game.isDevMode());
+    }
+    private void setPhysicsVisibility(boolean value){
+        debugRenderer.setDrawContacts(value);
+        debugRenderer.setDrawInactiveBodies(value);
+        debugRenderer.setDrawJoints(value);
+        debugRenderer.setDrawVelocities(value);
+        debugRenderer.setDrawAABBs(value);
+        debugRenderer.setDrawBodies(value);
     }
 }
