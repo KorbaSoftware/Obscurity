@@ -2,7 +2,6 @@ package com.korba.gameoff.oblivious.screens;
 
 import box2dLight.RayHandler;
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
@@ -10,11 +9,9 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.korba.gameoff.oblivious.ObscurityGame;
 import com.korba.gameoff.oblivious.config.GameConfig;
-import com.korba.gameoff.oblivious.config.GameState;
 import com.korba.gameoff.oblivious.config.GameState;
 import com.korba.gameoff.oblivious.config.LauncherConfig;
 import com.korba.gameoff.oblivious.gameplay.components.*;
@@ -134,7 +131,7 @@ public class GameScreen extends BasicScreen {
         pause.setVisible(false);
         world = game.getWorld();
         mapManager = new MapManager(MapType.OPEN, game, world);
-        game.getEntityManager().getEngine().addSystem(game.getEntityManager().keyboardInputSys);
+        game.getEntityManager().getEngine().addSystem(game.getEntityManager().getKeyboardInputSys());
         debugRenderer = new Box2DDebugRenderer();
         setPhysicsVisibility(GameConfig.IS_DEVMODE);
         createPlayerEntity();
