@@ -45,6 +45,7 @@ public class AssetUtils {
     public static final String PROFILE_THREE = "buttons/profile_three.png";
     public static final String PROFILE_TWO = "buttons/profile_two.png";
     public static final String PROFILE_ONE = "buttons/profile_one.png";
+    public static final String RESUME = "buttons/resume.png";
 
 
     public static final TextureAtlas DEFAULT_SKIN_TEXTURE_ATLAS = new TextureAtlas(DEFAULT_SKIN_ATLAS_PATH);
@@ -69,10 +70,6 @@ public class AssetUtils {
         loadTexture(GAME_LOGO);
         loadTexture(PLAYER_64);
         loadTexture(PLAYER_32);
-        loadTexture(PROFILE);
-        loadTexture(PROFILE_ONE);
-        loadTexture(PROFILE_TWO);
-        loadTexture(PROFILE_THREE);
     }
 
     public static void loadRemainingAssets() {
@@ -81,6 +78,11 @@ public class AssetUtils {
         loadTexture(EXIT);
         loadTexture(OPTIONS);
         loadTexture(BACKGROUND);
+        loadTexture(PROFILE);
+        loadTexture(PROFILE_ONE);
+        loadTexture(PROFILE_TWO);
+        loadTexture(PROFILE_THREE);
+        loadTexture(RESUME);
         loadTexture(ITEM_RADIO);
         loadTexture(ITEM_PINDOL);
         loadTexture(ITEM_PLACEHOLDER);

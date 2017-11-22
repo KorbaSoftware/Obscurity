@@ -2,6 +2,7 @@ package com.korba.gameoff.oblivious.screens;
 
 import box2dLight.RayHandler;
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
@@ -9,15 +10,20 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.korba.gameoff.oblivious.ObscurityGame;
 import com.korba.gameoff.oblivious.config.GameConfig;
+import com.korba.gameoff.oblivious.config.GameState;
 import com.korba.gameoff.oblivious.config.LauncherConfig;
 import com.korba.gameoff.oblivious.gameplay.components.*;
 import com.korba.gameoff.oblivious.gameplay.managers.MapManager;
 import com.korba.gameoff.oblivious.gameplay.managers.MapType;
 import com.korba.gameoff.oblivious.gameplay.managers.PlayerManager;
 import com.korba.gameoff.oblivious.screens.dev.BasicScreen;
+
+import static com.korba.gameoff.oblivious.config.GameState.State.PAUSED;
+import static com.korba.gameoff.oblivious.config.GameState.State.RUNNING;
 
 public class GameScreen extends BasicScreen {
 
@@ -29,6 +35,7 @@ public class GameScreen extends BasicScreen {
     private Entity playerEntity;
     private Entity cameraEntity;
     private RayHandler rayHandler;
+    private PauseOverlay pause;
 
     public GameScreen(SpriteBatch batch, ObscurityGame game, MapType type) {
         super(batch, game);
@@ -75,20 +82,34 @@ public class GameScreen extends BasicScreen {
 
     @Override
     public void render(float delta) {
-        update(delta);
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
-        if(mapManager.update(delta)){
-            player.getPhysics().setBodyPosition(mapManager.getPosition());
-            mapManager.setMapToChange(false);
+        switch(GameState.getCurrentState()){
+            case RUNNING:{
+                if(pause.isVisible()){
+                   pause.setVisible(false);
+                }
+                update(delta);
+                Gdx.gl.glClearColor(0, 0, 0, 1);
+                Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
+                if (mapManager.update(delta)) {
+                    player.getPhysics().setBodyPosition(mapManager.getPosition());
+                    mapManager.setMapToChange(false);
+                }
+                debugRenderer.render(world, camera.combined);
+                this.batch.setProjectionMatrix(camera.combined);
+                this.batch.begin();
+                game.getEntityManager().update(delta);
+                this.batch.end();
+                rayHandler.updateAndRender();
+                rayHandler.setCombinedMatrix(camera);
+                break;
+
+            }
+            case PAUSED:{
+                pause();
+                break;
+            }
         }
-        debugRenderer.render(world, camera.combined);
-        this.batch.setProjectionMatrix(camera.combined);
-        this.batch.begin();
-        game.getEntityManager().update(delta);
-        this.batch.end();
-        rayHandler.updateAndRender();
-        rayHandler.setCombinedMatrix(camera);
+
     }
 
     @Override
@@ -97,11 +118,17 @@ public class GameScreen extends BasicScreen {
         world.dispose();
         debugRenderer.dispose();
         rayHandler.dispose();
+
     }
 
     @Override
     public void show() {
         //TODO gettery do systemow
+        Gdx.input.setInputProcessor(null);
+        GameState.setCurrentState(RUNNING);
+        pause = new PauseOverlay(stage);
+        pause.center().top();
+        pause.setVisible(false);
         world = game.getWorld();
         mapManager = new MapManager(MapType.OPEN, game, world);
         game.getEntityManager().getEngine().addSystem(game.getEntityManager().keyboardInputSys);
@@ -125,5 +152,13 @@ public class GameScreen extends BasicScreen {
         debugRenderer.setDrawVelocities(value);
         debugRenderer.setDrawAABBs(value);
         debugRenderer.setDrawBodies(value);
+    }
+
+    @Override
+    public void pause(){
+        pause.doThings();
+        if(!pause.isVisible()) {
+            pause.setVisible(true);
+        }
     }
 }

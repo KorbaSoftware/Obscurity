@@ -38,7 +38,7 @@ public class GameTestScreen extends BasicScreen {
 
     public GameTestScreen(SpriteBatch batch, ObscurityGame game) {
         super(batch, game);
-        setViewportAndCamera();
+
     }
 
     private void setViewportAndCamera(){
@@ -109,6 +109,7 @@ public class GameTestScreen extends BasicScreen {
     @Override
     public void show() {
         //TODO gettery do systemow
+        setViewportAndCamera();
         world = game.getWorld();
         mapManager = new MapManager(MapType.OPEN, game, world);
         game.getEntityManager().getEngine().addSystem(game.getEntityManager().keyboardInputSys);
