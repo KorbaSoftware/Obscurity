@@ -37,6 +37,18 @@ public class EntityManager {
         PlayerManager player = new PlayerManager(world);
         this.player = player;
     }
+
+    public void setKeyboardInput() {
+        engine.removeSystem(mouseInputSystem);
+        engine.addSystem(keyboardInputSys);
+    }
+
+    public void setMouseInput() {
+        engine.removeSystem(keyboardInputSys);
+        engine.addSystem(mouseInputSystem);
+    }
+
+
     public void update(float delta){
         engine.update(delta);
     }

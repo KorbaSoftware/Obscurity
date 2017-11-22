@@ -35,9 +35,8 @@ public class GameTestScreen extends BasicScreen {
     private Entity playerEntity;
     private Entity cameraEntity;
     private RayHandler rayHandler;
-    boolean mapChanged;
 
-    public GameTestScreen(SpriteBatch batch, ObscurityGame game, MapType type) {
+    public GameTestScreen(SpriteBatch batch, ObscurityGame game) {
         super(batch, game);
         setViewportAndCamera();
     }
@@ -87,6 +86,7 @@ public class GameTestScreen extends BasicScreen {
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
         if(mapManager.update(delta)){
             player.getPhysics().setBodyPosition(mapManager.getPosition());
+            mapManager.positionCamera(camera, player.getPhysics());
             mapManager.setMapToChange(false);
         }
         debugRenderer.render(world, camera.combined);
@@ -118,19 +118,21 @@ public class GameTestScreen extends BasicScreen {
         setLights();
     }
     private void setPhysicsVisibility(){
-        debugRenderer.setDrawContacts(game.isDevMode());
-        debugRenderer.setDrawInactiveBodies(game.isDevMode());
-        debugRenderer.setDrawJoints(game.isDevMode());
         debugRenderer.setDrawVelocities(game.isDevMode());
         debugRenderer.setDrawAABBs(game.isDevMode());
         debugRenderer.setDrawBodies(game.isDevMode());
+        debugRenderer.setDrawContacts(game.isDevMode());
+        debugRenderer.setDrawInactiveBodies(game.isDevMode());
+        debugRenderer.setDrawJoints(game.isDevMode());
+
     }
     private void setPhysicsVisibility(boolean value){
-        debugRenderer.setDrawContacts(value);
-        debugRenderer.setDrawInactiveBodies(value);
-        debugRenderer.setDrawJoints(value);
         debugRenderer.setDrawVelocities(value);
         debugRenderer.setDrawAABBs(value);
         debugRenderer.setDrawBodies(value);
+        debugRenderer.setDrawContacts(value);
+        debugRenderer.setDrawInactiveBodies(value);
+        debugRenderer.setDrawJoints(value);
+
     }
 }

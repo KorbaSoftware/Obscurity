@@ -81,12 +81,14 @@ public class MapManager {
         if (type == MapType.OPEN){
             currentMap = levels.first().getMap();
             position = levels.first().getPlayerPosition();
+            game.getEntityManager().setMouseInput();
             type = MapType.ROOM;
             Gdx.app.debug("MapManago","changed to ROOM");
         }
         else if (type == MapType.ROOM){
             currentMap = worldMap;
             position = levelManager.getPlayerPosition();
+            game.getEntityManager().setKeyboardInput();
             type = MapType.OPEN;
             Gdx.app.debug("MapManago", "changed to OPEN");
         }
