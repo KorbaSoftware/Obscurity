@@ -1,6 +1,7 @@
 package com.korba.gameoff.oblivious.gameplay.managers;
 
 import box2dLight.RayHandler;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -49,7 +50,7 @@ public class PlayerManager {
     public void setSpriteType(MapType type) {
         if(type == MapType.OPEN){
             sprite = sprite32;
-        }else if(type == MapType.ROOM){
+        }else{
             sprite = sprite64;
         }
     }
