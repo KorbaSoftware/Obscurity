@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.korba.gameoff.oblivious.config.GameConfig;
+import com.korba.gameoff.oblivious.config.GameState;
 import com.korba.gameoff.oblivious.gameplay.components.*;
 
 public class KeyboardInputSys extends EntitySystem {
@@ -29,7 +30,8 @@ public class KeyboardInputSys extends EntitySystem {
             if        (Gdx.input.isKeyPressed(Input.Keys.DOWN)
                     || Gdx.input.isKeyPressed(Input.Keys.UP)
                     || Gdx.input.isKeyPressed(Input.Keys.RIGHT)
-                    || Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+                    || Gdx.input.isKeyPressed(Input.Keys.LEFT)
+                    || Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
                 //Gdx.app.debug("Keyboard input", "key pressed");
                 if(Gdx.input.isKeyPressed(Input.Keys.UP)){
                   //  Gdx.app.debug("Keyboard input", "up pressed");
@@ -47,6 +49,10 @@ public class KeyboardInputSys extends EntitySystem {
                    // Gdx.app.debug("Keyboard input", "right pressed");
                     bodyCom.body.setLinearVelocity(velocityCom.velocity, 0);
                 }
+                if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
+                    GameState.setCurrentState(GameState.State.PAUSED);
+                }
+
             } else {
                 bodyCom.body.setLinearVelocity(0, 0);
             }

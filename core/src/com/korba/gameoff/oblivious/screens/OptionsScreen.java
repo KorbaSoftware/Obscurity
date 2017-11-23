@@ -17,8 +17,8 @@ import com.korba.gameoff.oblivious.tools.AssetUtils;
 public class OptionsScreen extends BasicScreen{
 
     private Slider musicVolumeSlider, soundVolumeSlider;
-    private Table table;
-    private Image optionsLogo, changeProfile, currentUser;
+    private Table table, horizontalGroup;
+    private Image optionsLogo, changeProfile, currentUser, exitImage;
     private Label soundVolumeLabel, musicVolumeLabel;
     private Texture background;
     private GamePreferences preferences;
@@ -36,6 +36,7 @@ public class OptionsScreen extends BasicScreen{
         soundVolumeSlider = new Slider(0.0f, 1.0f, 0.1f, false, AssetUtils.DEFAULT_SKIN); //values to adjust in the future
         optionsLogo = new Image(AssetUtils.getTexture(AssetUtils.OPTIONS));
         changeProfile = new Image(AssetUtils.getTexture(AssetUtils.PROFILE));
+        exitImage = new Image(AssetUtils.getTexture(AssetUtils.EXIT));
         currentUser = new Image(getCurrentUser());
         currentUser.setSize(32, 32);
         muteCheckBox = new CheckBox("MUTE", AssetUtils.DEFAULT_SKIN);
@@ -82,15 +83,20 @@ public class OptionsScreen extends BasicScreen{
         table.row();
         table.add(soundVolumeSlider).width(optionsLogo.getWidth()/2);
         table.row();
-        table.add(soundVolumeLabel).pad(20);
+        table.add(soundVolumeLabel);
         table.row();
-        table.add(muteCheckBox).pad(20);
+        table.add(muteCheckBox).padTop(10);
         table.row();
-        table.add(new Label("CURRENT PROFILE:", AssetUtils.DEFAULT_SKIN));
+
+        horizontalGroup = new Table();
+        horizontalGroup.add(new Label("CURRENT PROFILE:", AssetUtils.DEFAULT_SKIN)).pad(20);
+        horizontalGroup.add(currentUser).width(64).height(64).padLeft(10);
+        table.add(horizontalGroup).pad(10);
+
         table.row();
-        table.add(currentUser).width(64).height(64).pad(20);
+        table.add(changeProfile).padBottom(20);
         table.row();
-        table.add(changeProfile);
+        table.add(exitImage).width(changeProfile.getWidth()).height(changeProfile.getHeight());
 
         musicVolumeSlider.addListener(new ChangeListener() {
             @Override
@@ -123,6 +129,17 @@ public class OptionsScreen extends BasicScreen{
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 game.setScreen(new ProfileScreen(batch, game));
+            }
+        });
+
+        exitImage.addListener(new InputListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                game.setScreen(new MenuScreen(batch, game));
             }
         });
 
