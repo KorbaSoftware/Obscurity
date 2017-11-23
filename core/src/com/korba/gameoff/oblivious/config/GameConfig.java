@@ -14,6 +14,7 @@ public class GameConfig {
     public static final short PLAYER_BIT = 2;
     public static final short STATIC_OBJECT_BIT = 4;
     public static final short DOOR_BIT = 8;
+    public static final short SPAWN_POINT_BIT = 16;
 
     //ambient light
     public static final float AMBIENT_LIGHT_STRENGTH = 0.1f;

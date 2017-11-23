@@ -52,10 +52,10 @@ public class GameTestScreen extends BasicScreen {
     private void createPlayerEntity(){
         player = game.getEntityManager().getPlayer();
         player.setSpriteType(mapManager.getType());
-        player.getPhysics().setBodyPosition(mapManager.getLevelManager().getPlayerPosition());
+        player.getPhysics().setBodyPosition(mapManager.getWorldLevelManager().getPlayerPosition());
         playerEntity = new Entity();
         playerEntity.add(new VelocityComponent(mapManager.getMapVelocity()))
-                .add(new PositionComponent(mapManager.getLevelManager().getPlayerPosition().x, mapManager.getLevelManager().getPlayerPosition().y))
+                .add(new PositionComponent(mapManager.getWorldLevelManager().getPlayerPosition().x, mapManager.getWorldLevelManager().getPlayerPosition().y))
                 .add(new SpriteComponent(player.getSprite().getTextureRegion()))
                 .add(new RenderableComponent())
                 .add(new PlayerComponent())
@@ -84,13 +84,16 @@ public class GameTestScreen extends BasicScreen {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
         if(mapManager.isMapToChange()){
+            MapType type = mapManager.getType();
+            mapManager.setMapToChange(false);
             player.getPhysics().setBodyPosition(mapManager.getPosition());
             player.setSpriteType(mapManager.getType());
+            Gdx.app.debug("render",mapManager.getType().name());
             playerEntity.remove(SpriteComponent.class);
             playerEntity.add(new SpriteComponent(player.getSprite().getTextureRegion()));
             playerEntity.getComponent(VelocityComponent.class).velocity = mapManager.getMapVelocity();
             mapManager.positionCamera(camera, player.getPhysics());
-            mapManager.setMapToChange(false);
+
         }
         mapManager.getMapRenderer().render();
         debugRenderer.render(world, camera.combined);

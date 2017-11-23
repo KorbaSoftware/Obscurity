@@ -48,5 +48,9 @@ public abstract class MapObject {
             return layer.getCell(xCoord, yCoord);
         }
 
+    public Body getBody() {
+        return body;
+    }
+
     }
 

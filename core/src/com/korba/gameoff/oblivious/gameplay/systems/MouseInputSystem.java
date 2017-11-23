@@ -40,14 +40,14 @@ public class MouseInputSystem extends EntitySystem{
         }
         playerPosition = new Vector3(bodyComponent.body.getPosition().x, bodyComponent.body.getPosition().y, 0);
         if(Gdx.input.isButtonPressed(Input.Buttons.RIGHT)) {
-            Gdx.app.debug("player position", playerPosition.toString());
-            System.out.print(".");
+          //  Gdx.app.debug("player position", playerPosition.toString());
+           // System.out.print(".");
             int pointerX = Gdx.input.getX();
             int pointerY = Gdx.input.getY();
 
             pointerPosition = new Vector3(pointerX, pointerY, 0);
             cameraComponent.camera.unproject(pointerPosition);
-            Gdx.app.debug("pointer posiion", pointerPosition.toString());
+         //   Gdx.app.debug("pointer posiion", pointerPosition.toString());
 
         }
         if(pointerPosition != null){

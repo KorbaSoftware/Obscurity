@@ -20,15 +20,16 @@ public class MapManager {
     private ObscurityGame game;
     private TmxMapLoader mapLoader;
     private TiledMap currentMap;
+    private LevelManager currentLevel;
     private Vector2 position;
     private TiledMap worldMap;
     private OrthogonalTiledMapRenderer mapRenderer;
-    private LevelManager levelManager;
+    private WorldLevelManager worldLevelManager;
     private MapType type;
     private float mapVelocity;
-    private String mapPath;
     private Array<TiledMap> maps = null;
-    private Array<LevelManager> levels = null;
+    private Array<MapType> types = null;
+    private Array<IndoorLevelManager> levels = null;
     private boolean mapToChange = false;
 
     public MapManager(MapType type, ObscurityGame game, World world){
@@ -41,24 +42,23 @@ public class MapManager {
         mapVelocity = 12;
         currentMap = worldMap;
         mapRenderer = new OrthogonalTiledMapRenderer(currentMap, 1f / GameConfig.PPM);
-        levelManager = new LevelManager(game, world, currentMap, this);
+        worldLevelManager = new WorldLevelManager(game, world, currentMap, this);
+        currentLevel = worldLevelManager;
+        worldLevelManager.setActive();
     }
 
 
     public void positionCamera(OrthographicCamera camera, PlayerPhysics player){
-        switch(type){
-            case OPEN:{
-                camera.position.x = player.getBody().getPosition().x;
-                camera.position.y = player.getBody().getPosition().y;
-            }
-            break;
-            case ROOM:{
-                TiledMapTileLayer layer0 = (TiledMapTileLayer) mapRenderer.getMap().getLayers().get(0);
-                Vector3 center = new Vector3(layer0.getWidth() * layer0.getTileWidth() / 2 / GameConfig.PPM,
-                                             layer0.getHeight() * layer0.getTileHeight() / 2 / GameConfig.PPM, 0);
-                camera.position.set(center);
-            }
-            break;
+        if (this.type == MapType.OPEN){
+
+            camera.position.x = player.getBody().getPosition().x;
+            camera.position.y = player.getBody().getPosition().y;
+        }
+        else {
+            TiledMapTileLayer layer0 = (TiledMapTileLayer) mapRenderer.getMap().getLayers().get(0);
+            Vector3 center = new Vector3(layer0.getWidth() * layer0.getTileWidth() / 2 / GameConfig.PPM,
+                    layer0.getHeight() * layer0.getTileHeight() / 2 / GameConfig.PPM, 0);
+            camera.position.set(center);
         }
     }
 
@@ -68,42 +68,63 @@ public class MapManager {
 
     private void loadLevels(){
             maps = new Array<>();
+            types = new Array<>();
             levels = new Array<>();
+            maps.add(AssetUtils.getMap(AssetUtils.MAP_METRO));
+            types.add(MapType.METROSTATION);
             maps.add(AssetUtils.getMap(AssetUtils.MAP_TEST1));
+            types.add(MapType.MOTELROOM1);
+            maps.add(AssetUtils.getMap(AssetUtils.MAP_TEST2));
+            types.add(MapType.MOTELROOM2);
+            maps.add(AssetUtils.getMap(AssetUtils.MAP_TEST3));
+            types.add(MapType.MOTELROOM3);
+
 
             for (TiledMap map : maps){
-                levels.add(new LevelManager(game, world, map, this ));
+                levels.add(new IndoorLevelManager(game, world, map, this , types.get(maps.indexOf(map, true))));
             }
     }
 
     public void changeMap(){
-        if (type == MapType.OPEN){
-            currentMap = levels.first().getMap();
-            position = levels.first().getPlayerPosition();
-            game.getEntityManager().setMouseInput();
-            type = MapType.ROOM;
-            mapVelocity = 6;
-            Gdx.app.debug("MapManago","changed to ROOM");
-        }
-        else if (type == MapType.ROOM){
+
             currentMap = worldMap;
-            position = levelManager.getPlayerPosition();
+            currentLevel.setInactive();
+            currentLevel = worldLevelManager;
+            currentLevel.setActive();
+            position = worldLevelManager.lastSpawnPoint;
             game.getEntityManager().setKeyboardInput();
             type = MapType.OPEN;
+        System.out.println(this.type.toString());
             mapVelocity = 12;
             Gdx.app.debug("MapManago", "changed to OPEN");
-        }
+
         mapRenderer.setMap(currentMap);
         mapToChange = true;
 
     }
 
-    private void setMapVelocity(float velocity){
-        this.mapVelocity = velocity;
+    public void changeMap(MapType type){
+        for (IndoorLevelManager levelManager : levels){
+                if(levelManager.getMapType() == type){
+                    currentMap = levelManager.getMap();
+                    currentLevel.setInactive();
+                    currentLevel = levelManager;
+                    currentLevel.setActive();
+                    position = levelManager.getPlayerPosition();
+                    game.getEntityManager().setMouseInput();
+                    this.type = levelManager.getMapType();
+                    System.out.println(this.type.toString());
+                    mapVelocity = 6;
+                    Gdx.app.debug("MapManago","changed to ROOM");
+                }
+            mapRenderer.setMap(currentMap);
+            mapToChange = true;
+        }
     }
+
     public void setMapToChange(boolean mapToChange) {this.mapToChange = mapToChange;}
-    public LevelManager getLevelManager() {
-        return levelManager;
+    public LevelManager getWorldLevelManager() {
+        return worldLevelManager;
     }
     public OrthogonalTiledMapRenderer getMapRenderer() {
         return mapRenderer;

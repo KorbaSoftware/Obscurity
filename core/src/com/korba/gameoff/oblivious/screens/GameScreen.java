@@ -46,10 +46,10 @@ public class GameScreen extends BasicScreen {
     private void createPlayerEntity(){
         player = game.getEntityManager().getPlayer();
         player.setSpriteType(mapManager.getType());
-        player.getPhysics().setBodyPosition(mapManager.getLevelManager().getPlayerPosition());
+        player.getPhysics().setBodyPosition(mapManager.getWorldLevelManager().getPlayerPosition());
         playerEntity = new Entity();
         playerEntity.add(new VelocityComponent(mapManager.getMapVelocity()))
-                .add(new PositionComponent(mapManager.getLevelManager().getPlayerPosition().x, mapManager.getLevelManager().getPlayerPosition().y))
+                .add(new PositionComponent(mapManager.getWorldLevelManager().getPlayerPosition().x, mapManager.getWorldLevelManager().getPlayerPosition().y))
                 .add(new SpriteComponent(player.getSprite().getTextureRegion()))
                 .add(new RenderableComponent())
                 .add(new PlayerComponent())
@@ -82,6 +82,7 @@ public class GameScreen extends BasicScreen {
             player.setSpriteType(mapManager.getType());
             playerEntity.remove(SpriteComponent.class);
             playerEntity.add(new SpriteComponent(player.getSprite().getTextureRegion()));
+            playerEntity.getComponent(VelocityComponent.class).velocity = mapManager.getMapVelocity();
             mapManager.positionCamera(camera, player.getPhysics());
             mapManager.setMapToChange(false);
         }
@@ -105,6 +106,7 @@ public class GameScreen extends BasicScreen {
 
     @Override
     public void show() {
+        Gdx.input.setInputProcessor(null);
         setViewportAndCamera();
         world = game.getWorld();
         mapManager = new MapManager(MapType.OPEN, game, world);

@@ -17,6 +17,9 @@ public class AssetUtils {
     // Maps
     public static final String MAP_TEST0 = "maps/tmx/opentest.tmx";
     public static final String MAP_TEST1= "maps/tmx/newmap.tmx";
+    public static final String MAP_TEST2= "maps/tmx/newmap1.tmx";
+    public static final String MAP_TEST3= "maps/tmx/newmap2.tmx";
+    public static final String MAP_METRO= "maps/tmx/metro.tmx";
 
     // Items
     public static final String ITEM_PLACEHOLDER = "items/item_placeholder.png";
@@ -87,6 +90,9 @@ public class AssetUtils {
 
         loadMap(MAP_TEST0);
         loadMap(MAP_TEST1);
+        loadMap(MAP_TEST2);
+        loadMap(MAP_TEST3);
+        loadMap(MAP_METRO);
 
         loadTexture(DEV_KAMIL);
         loadTexture(DEV_KUBA);
