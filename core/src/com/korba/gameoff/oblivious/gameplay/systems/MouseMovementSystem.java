@@ -13,7 +13,7 @@ import com.korba.gameoff.oblivious.gameplay.components.CameraComponent;
 import com.korba.gameoff.oblivious.gameplay.components.PlayerComponent;
 import com.korba.gameoff.oblivious.gameplay.components.VelocityComponent;
 
-public class MouseInputSystem extends EntitySystem{
+public class MouseMovementSystem extends EntitySystem{
     private ImmutableArray<Entity> entities;
     private ImmutableArray<Entity> cameraEntities;
     BodyComponent bodyComponent;

@@ -2,7 +2,6 @@ package com.korba.gameoff.oblivious.gameplay.managers;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
@@ -17,20 +16,22 @@ public class EntityManager {
     private World world;
     private PlayerManager player;
     private static Array<Entity> entities = new Array<Entity>();
-    private MouseInputSystem mouseInputSystem;
-    private KeyboardInputSys keyboardInputSys;
+    private MouseMovementSystem mouseMovementSystem;
+    private KeyboardMovementSystem keyboardMovementSystem;
 
     public EntityManager(Engine engine, SpriteBatch spriteBatch, World world){
         this.engine = engine;
         this.world = world;
-        mouseInputSystem = new MouseInputSystem();
-        keyboardInputSys = new KeyboardInputSys();
+        mouseMovementSystem = new MouseMovementSystem();
+        keyboardMovementSystem = new KeyboardMovementSystem();
         CollisionSystem collisionSystem = new CollisionSystem(world);
         PositionSystem positionSystem = new PositionSystem();
         RenderSystem renderSystem = new RenderSystem(spriteBatch);
+        KeyboardInputSystem keyboardInputSystem = new KeyboardInputSystem();
         engine.addSystem(collisionSystem);
         engine.addSystem(positionSystem);
         engine.addSystem(renderSystem);
+        engine.addSystem(keyboardInputSystem);
         createPlayer();
     }
 
@@ -40,14 +41,14 @@ public class EntityManager {
     }
 
     public void setKeyboardInput() {
-        engine.removeSystem(mouseInputSystem);
-        engine.addSystem(keyboardInputSys);
-        mouseInputSystem.nullify();
+        engine.removeSystem(mouseMovementSystem);
+        engine.addSystem(keyboardMovementSystem);
+        mouseMovementSystem.nullify();
     }
 
     public void setMouseInput() {
-        engine.removeSystem(keyboardInputSys);
-        engine.addSystem(mouseInputSystem);
+        engine.removeSystem(keyboardMovementSystem);
+        engine.addSystem(mouseMovementSystem);
     }
     public void update(float delta){
         engine.update(delta);
@@ -58,6 +59,6 @@ public class EntityManager {
     public PlayerManager getPlayer() {
         return player;
     }
-    public KeyboardInputSys getKeyboardInputSys() {return keyboardInputSys;}
-    public MouseInputSystem getMouseInputSystem() {return mouseInputSystem;}
+    public KeyboardMovementSystem getKeyboardMovementSystem() {return keyboardMovementSystem;}
+    public MouseMovementSystem getMouseMovementSystem() {return mouseMovementSystem;}
 }
