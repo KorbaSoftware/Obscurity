@@ -31,7 +31,7 @@ public class EntityManager {
         engine.addSystem(collisionSystem);
         engine.addSystem(positionSystem);
         engine.addSystem(renderSystem);
-        engine.addSystem(keyboardInputSystem);
+       // engine.addSystem(keyboardInputSystem);
         createPlayer();
     }
 

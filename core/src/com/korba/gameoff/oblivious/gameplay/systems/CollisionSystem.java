@@ -10,6 +10,7 @@ import com.korba.gameoff.oblivious.config.GameConfig;
 import com.korba.gameoff.oblivious.gameplay.components.BodyComponent;
 import com.korba.gameoff.oblivious.gameplay.mapelements.Door;
 import com.korba.gameoff.oblivious.gameplay.mapelements.SpawnPoint;
+import com.korba.gameoff.oblivious.gameplay.mapelements.StationChanger;
 
 
 public class CollisionSystem extends EntitySystem implements ContactListener {
@@ -40,9 +41,11 @@ public class CollisionSystem extends EntitySystem implements ContactListener {
             case GameConfig.PLAYER_BIT | GameConfig.DOOR_BIT:
                 ((Door)object.getUserData()).onContact();
                 break;
-
             case GameConfig.PLAYER_BIT | GameConfig.SPAWN_POINT_BIT:
                 ((SpawnPoint)object.getUserData()).onContact();
+                break;
+            case GameConfig.PLAYER_BIT | GameConfig.STATION_CHANGE_BIT:
+                ((StationChanger)object.getUserData()).onContact();
                 break;
         }
 
