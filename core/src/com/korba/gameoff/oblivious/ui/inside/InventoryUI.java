@@ -66,7 +66,7 @@ public class InventoryUI extends Window {
             combineSlot.addListener(new InventorySlotTooltipListener(tooltip));
 
             dragAndDrop.addTarget(new InventorySlotTarget(combineSlot));
-            inventorySlotsTable.add(combineSlot).size(slotWidth / 2, slotHeight / 2);
+            inventorySlotsTable.add(combineSlot).size(slotWidth / 2, slotHeight / 2).left();
         }
 
         btnCombine = new TextButton("Combine", AssetUtils.DEFAULT_SKIN);
