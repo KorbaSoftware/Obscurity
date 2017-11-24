@@ -16,6 +16,7 @@ public class ObscurityGame extends Game {
 	public enum GameState {
 		LOADING,
 		IN_MENU,
+		RUNNING,
 		PAUSED,
 		INSIDE,
 		OUTSIDE,
@@ -25,7 +26,7 @@ public class ObscurityGame extends Game {
 
 	private SpriteBatch batch;
     private Cursor customCursor;
-    private GameState gameState;
+    public static GameState gameState;
 	private GamePreferences gamePreferences;
     private World world;
 	private EntityManager entityManager;
@@ -52,11 +53,11 @@ public class ObscurityGame extends Game {
 		return GameConfig.IS_DEVMODE;
 	}
 
-	public void setGameState(GameState gameState) {
-		this.gameState = gameState;
+	public static void setGameState(GameState state) {
+		gameState = state;
 	}
 
-	public GameState getGameState(){
+	public static GameState getGameState(){
 		return gameState;
 	}
 	public EntityManager getEntityManager() {

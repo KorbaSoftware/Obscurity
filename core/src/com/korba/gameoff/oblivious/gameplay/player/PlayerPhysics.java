@@ -1,14 +1,9 @@
 package com.korba.gameoff.oblivious.gameplay.player;
 
-import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.korba.gameoff.oblivious.config.GameConfig;
-import com.korba.gameoff.oblivious.config.GameState;
-import com.korba.gameoff.oblivious.tools.*;
+
 
 public class PlayerPhysics{
 

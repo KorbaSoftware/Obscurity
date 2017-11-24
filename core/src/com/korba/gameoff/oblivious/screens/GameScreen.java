@@ -12,7 +12,6 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.korba.gameoff.oblivious.ObscurityGame;
 import com.korba.gameoff.oblivious.config.GameConfig;
-import com.korba.gameoff.oblivious.config.GameState;
 import com.korba.gameoff.oblivious.config.LauncherConfig;
 import com.korba.gameoff.oblivious.gameplay.components.*;
 import com.korba.gameoff.oblivious.gameplay.managers.MapManager;
@@ -21,7 +20,6 @@ import com.korba.gameoff.oblivious.gameplay.managers.PlayerManager;
 import com.korba.gameoff.oblivious.screens.dev.BasicScreen;
 import com.korba.gameoff.oblivious.tools.GameInputProcessor;
 
-import static com.korba.gameoff.oblivious.config.GameState.State.RUNNING;
 
 public class GameScreen extends BasicScreen {
 
@@ -80,7 +78,7 @@ public class GameScreen extends BasicScreen {
 
     @Override
     public void render(float delta) {
-        switch(GameState.getCurrentState()){
+        switch(ObscurityGame.getGameState()){
             case RUNNING:{
                 if(hasOptionWindowInstance){
 
@@ -128,7 +126,7 @@ public class GameScreen extends BasicScreen {
     public void show() {
         setViewportAndCamera();
         Gdx.input.setInputProcessor(new GameInputProcessor());
-        GameState.setCurrentState(RUNNING);
+        ObscurityGame.setGameState(ObscurityGame.GameState.RUNNING);
         pause = new PauseOverlay(stage);
         pause.center().top();
         pause.setVisible(false);

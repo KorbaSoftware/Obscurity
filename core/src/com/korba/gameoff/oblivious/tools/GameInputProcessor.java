@@ -3,7 +3,6 @@ package com.korba.gameoff.oblivious.tools;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.korba.gameoff.oblivious.ObscurityGame;
-import com.korba.gameoff.oblivious.config.GameState;
 
 public class GameInputProcessor implements InputProcessor {
     @Override
@@ -15,12 +14,12 @@ public class GameInputProcessor implements InputProcessor {
     public boolean keyUp(int keycode) {
         switch(keycode){
             case Input.Keys.ESCAPE:
-                switch(GameState.getCurrentState()){
+                switch(ObscurityGame.getGameState()){
                     case RUNNING:
-                        GameState.setCurrentState(GameState.State.PAUSED);
+                        ObscurityGame.setGameState(ObscurityGame.GameState.PAUSED);
                         break;
                     case PAUSED:
-                        GameState.setCurrentState(GameState.State.RUNNING);
+                        ObscurityGame.setGameState(ObscurityGame.GameState.RUNNING);
                         break;
                 }
                 break;
