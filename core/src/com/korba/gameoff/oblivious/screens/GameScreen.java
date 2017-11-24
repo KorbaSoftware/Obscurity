@@ -34,6 +34,7 @@ public class GameScreen extends BasicScreen {
     private Entity cameraEntity;
     private RayHandler rayHandler;
     private PauseOverlay pause;
+    private Boolean hasOptionWindowInstance = false;
 
     public GameScreen(SpriteBatch batch, ObscurityGame game, MapType type) {
         super(batch, game);
@@ -81,8 +82,9 @@ public class GameScreen extends BasicScreen {
     public void render(float delta) {
         switch(GameState.getCurrentState()){
             case RUNNING:{
-                if(pause.isVisible()){
-                    pause.setVisible(false);
+                if(hasOptionWindowInstance){
+
+                    hasOptionWindowInstance = false;
                 }
                 update(delta);
                 Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -151,9 +153,13 @@ public class GameScreen extends BasicScreen {
 
     @Override
     public void pause(){
-        pause.doThings();
-        if(!pause.isVisible()) {
-            pause.setVisible(true);
+
+        if(!hasOptionWindowInstance){
+            super.clearScreen();
+            pause = new PauseOverlay(stage);
+            hasOptionWindowInstance = true;
         }
+        pause.doThings();
+
     }
 }
