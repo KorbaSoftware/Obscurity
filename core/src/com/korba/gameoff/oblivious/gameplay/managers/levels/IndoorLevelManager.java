@@ -12,6 +12,6 @@ public class IndoorLevelManager extends LevelManager {
     public IndoorLevelManager (ObscurityGame game, World world, TiledMap map, MapManager mapManager, MapType mapType) {
         super(game, world, map, mapManager);
         this.mapType = mapType;
-        setInactive();
+        //setInactive();
     }
 }

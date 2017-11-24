@@ -27,11 +27,9 @@ public class EntityManager {
         CollisionSystem collisionSystem = new CollisionSystem(world);
         PositionSystem positionSystem = new PositionSystem();
         RenderSystem renderSystem = new RenderSystem(spriteBatch);
-        KeyboardInputSystem keyboardInputSystem = new KeyboardInputSystem();
         engine.addSystem(collisionSystem);
         engine.addSystem(positionSystem);
         engine.addSystem(renderSystem);
-       // engine.addSystem(keyboardInputSystem);
         createPlayer();
     }
 

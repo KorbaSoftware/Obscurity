@@ -81,7 +81,7 @@ public class WorldLevelManager extends LevelManager {
             metroExit3 = new Vector2((rect.getX() + 16) / GameConfig.PPM, (rect.getY() + 16) / GameConfig.PPM);
         }
         Gdx.app.debug("WorldLevelManager", "constructor");
-        setInactive();
+       // setInactive();
     }
 
     public Vector2 getExit(MapType type){
