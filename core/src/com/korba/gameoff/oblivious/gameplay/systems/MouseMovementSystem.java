@@ -13,7 +13,7 @@ import com.korba.gameoff.oblivious.gameplay.components.CameraComponent;
 import com.korba.gameoff.oblivious.gameplay.components.PlayerComponent;
 import com.korba.gameoff.oblivious.gameplay.components.VelocityComponent;
 
-public class MouseInputSystem extends EntitySystem{
+public class MouseMovementSystem extends EntitySystem{
     private ImmutableArray<Entity> entities;
     private ImmutableArray<Entity> cameraEntities;
     BodyComponent bodyComponent;
@@ -40,17 +40,19 @@ public class MouseInputSystem extends EntitySystem{
         }
         playerPosition = new Vector3(bodyComponent.body.getPosition().x, bodyComponent.body.getPosition().y, 0);
         if(Gdx.input.isButtonPressed(Input.Buttons.RIGHT)) {
-            System.out.print(".");
+          //  Gdx.app.debug("player position", playerPosition.toString());
+           // System.out.print(".");
             int pointerX = Gdx.input.getX();
             int pointerY = Gdx.input.getY();
+
             pointerPosition = new Vector3(pointerX, pointerY, 0);
             cameraComponent.camera.unproject(pointerPosition);
+         //   Gdx.app.debug("pointer posiion", pointerPosition.toString());
+
         }
         if(pointerPosition != null){
             deltaY = pointerPosition.y - playerPosition.y;
             deltaX = pointerPosition.x - playerPosition.x;
-           // System.out.println(deltaX);
-           // System.out.println(deltaY);
         }
         if(!(deltaY < 1 && deltaY > -1) || !(deltaX < 1 && deltaX > -1)){
             if (deltaY > 1){
@@ -66,6 +68,12 @@ public class MouseInputSystem extends EntitySystem{
                 bodyComponent.body.setLinearVelocity(-velocityComponent.velocity, bodyComponent.body.getLinearVelocity().y);
             }else bodyComponent.body.setLinearVelocity(0,bodyComponent.body.getLinearVelocity().y);
         }else bodyComponent.body.setLinearVelocity(0,0);
+    }
 
+    public void nullify(){
+        bodyComponent.body.setLinearVelocity(0,0);
+        pointerPosition = null;
+        this.deltaX = 0;
+        this.deltaY = 0;
     }
 }

@@ -6,14 +6,15 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.korba.gameoff.oblivious.config.GameConfig;
+import com.korba.gameoff.oblivious.config.GameState;
 import com.korba.gameoff.oblivious.gameplay.components.*;
 
-public class KeyboardInputSys extends EntitySystem {
+public class KeyboardMovementSystem extends EntitySystem {
     private ImmutableArray<Entity> entities;
     private ComponentMapper<BodyComponent> bodyMap = ComponentMapper.getFor(BodyComponent.class);
     private ComponentMapper<VelocityComponent> velocityMap = ComponentMapper.getFor(VelocityComponent.class);
 
-    public KeyboardInputSys(){
+    public KeyboardMovementSystem(){
 
     }
 
@@ -47,6 +48,8 @@ public class KeyboardInputSys extends EntitySystem {
                    // Gdx.app.debug("Keyboard input", "right pressed");
                     bodyCom.body.setLinearVelocity(velocityCom.velocity, 0);
                 }
+
+
             } else {
                 bodyCom.body.setLinearVelocity(0, 0);
             }

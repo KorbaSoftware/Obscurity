@@ -12,12 +12,15 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.korba.gameoff.oblivious.ObscurityGame;
 import com.korba.gameoff.oblivious.config.GameConfig;
+import com.korba.gameoff.oblivious.config.GameState;
 import com.korba.gameoff.oblivious.config.LauncherConfig;
 import com.korba.gameoff.oblivious.gameplay.components.*;
 import com.korba.gameoff.oblivious.gameplay.managers.MapManager;
 import com.korba.gameoff.oblivious.gameplay.managers.MapType;
 import com.korba.gameoff.oblivious.gameplay.managers.PlayerManager;
 import com.korba.gameoff.oblivious.screens.dev.BasicScreen;
+
+import static com.korba.gameoff.oblivious.config.GameState.State.RUNNING;
 
 public class GameScreen extends BasicScreen {
 
@@ -29,10 +32,10 @@ public class GameScreen extends BasicScreen {
     private Entity playerEntity;
     private Entity cameraEntity;
     private RayHandler rayHandler;
+    private PauseOverlay pause;
 
     public GameScreen(SpriteBatch batch, ObscurityGame game, MapType type) {
         super(batch, game);
-        setViewportAndCamera();
     }
 
     private void setViewportAndCamera(){
@@ -47,10 +50,10 @@ public class GameScreen extends BasicScreen {
     private void createPlayerEntity(){
         player = game.getEntityManager().getPlayer();
         player.setSpriteType(mapManager.getType());
-        player.getPhysics().setBodyPosition(mapManager.getLevelManager().getPlayerPosition());
+        player.getPhysics().setBodyPosition(mapManager.getWorldLevelManager().getPlayerPosition());
         playerEntity = new Entity();
         playerEntity.add(new VelocityComponent(mapManager.getMapVelocity()))
-                .add(new PositionComponent(mapManager.getLevelManager().getPlayerPosition().x, mapManager.getLevelManager().getPlayerPosition().y))
+                .add(new PositionComponent(mapManager.getWorldLevelManager().getPlayerPosition().x, mapManager.getWorldLevelManager().getPlayerPosition().y))
                 .add(new SpriteComponent(player.getSprite().getTextureRegion()))
                 .add(new RenderableComponent())
                 .add(new PlayerComponent())
@@ -75,20 +78,39 @@ public class GameScreen extends BasicScreen {
 
     @Override
     public void render(float delta) {
-        update(delta);
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
-        if(mapManager.update(delta)){
-            player.getPhysics().setBodyPosition(mapManager.getPosition());
-            mapManager.setMapToChange(false);
+        switch(GameState.getCurrentState()){
+            case RUNNING:{
+                if(pause.isVisible()){
+                    pause.setVisible(false);
+                }
+                update(delta);
+                Gdx.gl.glClearColor(0, 0, 0, 1);
+                Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
+                if(mapManager.isMapToChange()){
+                    player.getPhysics().setBodyPosition(mapManager.getPosition());
+                    player.setSpriteType(mapManager.getType());
+                    playerEntity.remove(SpriteComponent.class);
+                    playerEntity.add(new SpriteComponent(player.getSprite().getTextureRegion()));
+                    playerEntity.getComponent(VelocityComponent.class).velocity = mapManager.getMapVelocity();
+                    mapManager.positionCamera(camera, player.getPhysics());
+                    mapManager.setMapToChange(false);
+                }
+                mapManager.getMapRenderer().render();
+                debugRenderer.render(world, camera.combined);
+                this.batch.setProjectionMatrix(camera.combined);
+                this.batch.begin();
+                game.getEntityManager().update(delta);
+                this.batch.end();
+                rayHandler.updateAndRender();
+                rayHandler.setCombinedMatrix(camera);
+                break;
+
+            }
+            case PAUSED:{
+                pause();
+                break;
+            }
         }
-        debugRenderer.render(world, camera.combined);
-        this.batch.setProjectionMatrix(camera.combined);
-        this.batch.begin();
-        game.getEntityManager().update(delta);
-        this.batch.end();
-        rayHandler.updateAndRender();
-        rayHandler.setCombinedMatrix(camera);
     }
 
     @Override
@@ -101,29 +123,36 @@ public class GameScreen extends BasicScreen {
 
     @Override
     public void show() {
-        //TODO gettery do systemow
+        setViewportAndCamera();
+        Gdx.input.setInputProcessor(null);
+        GameState.setCurrentState(RUNNING);
+        pause = new PauseOverlay(stage);
+        pause.center().top();
+        pause.setVisible(false);
         world = game.getWorld();
         mapManager = new MapManager(MapType.OPEN, game, world);
-        game.getEntityManager().getEngine().addSystem(game.getEntityManager().keyboardInputSys);
+        game.getEntityManager().getEngine().addSystem(game.getEntityManager().getKeyboardMovementSystem());
         debugRenderer = new Box2DDebugRenderer();
-        setPhysicsVisibility(false);
+        setPhysicsVisibility(GameConfig.IS_DEVMODE);
         createPlayerEntity();
         setLights();
     }
-    private void setPhysicsVisibility(){
-        debugRenderer.setDrawContacts(game.isDevMode());
-        debugRenderer.setDrawInactiveBodies(game.isDevMode());
-        debugRenderer.setDrawJoints(game.isDevMode());
-        debugRenderer.setDrawVelocities(game.isDevMode());
-        debugRenderer.setDrawAABBs(game.isDevMode());
-        debugRenderer.setDrawBodies(game.isDevMode());
-    }
+
     private void setPhysicsVisibility(boolean value){
-        debugRenderer.setDrawContacts(value);
-        debugRenderer.setDrawInactiveBodies(value);
-        debugRenderer.setDrawJoints(value);
         debugRenderer.setDrawVelocities(value);
         debugRenderer.setDrawAABBs(value);
         debugRenderer.setDrawBodies(value);
+        debugRenderer.setDrawContacts(value);
+        debugRenderer.setDrawInactiveBodies(value);
+        debugRenderer.setDrawJoints(value);
+
+    }
+
+    @Override
+    public void pause(){
+        pause.doThings();
+        if(!pause.isVisible()) {
+            pause.setVisible(true);
+        }
     }
 }

@@ -16,26 +16,39 @@ public class EntityManager {
     private World world;
     private PlayerManager player;
     private static Array<Entity> entities = new Array<Entity>();
-    public MouseInputSystem mouseInputSystem;
-    public KeyboardInputSys keyboardInputSys;
+    private MouseMovementSystem mouseMovementSystem;
+    private KeyboardMovementSystem keyboardMovementSystem;
 
     public EntityManager(Engine engine, SpriteBatch spriteBatch, World world){
         this.engine = engine;
         this.world = world;
-        mouseInputSystem = new MouseInputSystem();
-        keyboardInputSys = new KeyboardInputSys();
+        mouseMovementSystem = new MouseMovementSystem();
+        keyboardMovementSystem = new KeyboardMovementSystem();
         CollisionSystem collisionSystem = new CollisionSystem(world);
         PositionSystem positionSystem = new PositionSystem();
         RenderSystem renderSystem = new RenderSystem(spriteBatch);
+        KeyboardInputSystem keyboardInputSystem = new KeyboardInputSystem();
         engine.addSystem(collisionSystem);
         engine.addSystem(positionSystem);
         engine.addSystem(renderSystem);
+        engine.addSystem(keyboardInputSystem);
         createPlayer();
     }
 
     private void createPlayer(){
         PlayerManager player = new PlayerManager(world);
         this.player = player;
+    }
+
+    public void setKeyboardInput() {
+        engine.removeSystem(mouseMovementSystem);
+        engine.addSystem(keyboardMovementSystem);
+        mouseMovementSystem.nullify();
+    }
+
+    public void setMouseInput() {
+        engine.removeSystem(keyboardMovementSystem);
+        engine.addSystem(mouseMovementSystem);
     }
     public void update(float delta){
         engine.update(delta);
@@ -46,5 +59,6 @@ public class EntityManager {
     public PlayerManager getPlayer() {
         return player;
     }
-
+    public KeyboardMovementSystem getKeyboardMovementSystem() {return keyboardMovementSystem;}
+    public MouseMovementSystem getMouseMovementSystem() {return mouseMovementSystem;}
 }

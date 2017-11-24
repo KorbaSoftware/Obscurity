@@ -15,7 +15,10 @@ import com.korba.gameoff.oblivious.gameplay.mapelements.StaticObject;
 public class LevelManager {
     private ObscurityGame game;
     private TiledMap map;
-    private Array<Vector2> spawnPoints;
+    protected Array<Vector2> spawnPoints;
+    private Array<StaticObject> walls;
+    protected Array<Door> doors;
+    protected Vector2 lastSpawnPoint;
     private final int WALL_LAYER = 3;
     private final int SPAWN_POINTS = 4;
     private final int DOOR_LAYER = 5;
@@ -26,24 +29,60 @@ public class LevelManager {
     public LevelManager(ObscurityGame game, World world, TiledMap map, MapManager mapManager){
             this.map = map;
             this.game = game;
-            for (MapObject object : map.getLayers().get(WALL_LAYER).getObjects().getByType(RectangleMapObject.class)) {
+
+        walls = new Array<>();
+        for (MapObject object : map.getLayers().get(WALL_LAYER).getObjects().getByType(RectangleMapObject.class)) {
                 Rectangle rect = ((RectangleMapObject) object).getRectangle();
-                new StaticObject(world, map, rect);
+               walls.add( new StaticObject(world, map, rect));
             }
-        spawnPoints = new Array<Vector2>();
+
+        spawnPoints = new Array<>();
         for (MapObject object : map.getLayers().get(SPAWN_POINTS).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             spawnPoints.add(new Vector2((rect.getX() + 16) / GameConfig.PPM, (rect.getY() + 16) / GameConfig.PPM));
         }
+
+        doors = new Array<>();
         for (MapObject object : map.getLayers().get(DOOR_LAYER).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            new Door(world, map, rect, mapManager);
+            doors.add(new Door(world, map, rect, mapManager));
         }
+
     }
 
+
+        public void setActive(){
+            for (StaticObject wall : walls){
+                //wall.getBody().setActive(true);
+                wall.setCategoryFilter(GameConfig.STATIC_OBJECT_BIT);
+            }
+            for (Door door : doors){
+                //door.getBody().setActive(true);
+                door.setCategoryFilter(GameConfig.DOOR_BIT);
+            }
+
+        }
+
+        public void setInactive(){
+            for (StaticObject wall : walls){
+            //wall.getBody().setActive(false);
+                wall.setCategoryFilter(GameConfig.DEFAULT_BIT);
+             }
+            for (Door door : doors){
+               // door.getBody().setActive(false);
+                door.setCategoryFilter(GameConfig.DEFAULT_BIT);
+            }
+        }
         public Vector2 getPlayerPosition(){
         return spawnPoints.first();
         }
         public TiledMap getMap() {return map;}
 
+    public void setLastSpawnPoint(Vector2 lastSpawnPoint) {
+        this.lastSpawnPoint = lastSpawnPoint;
+    }
+
+    public Vector2 getLastSpawnPoint() {
+        return lastSpawnPoint;
+    }
 }

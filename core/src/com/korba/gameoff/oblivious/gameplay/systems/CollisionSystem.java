@@ -9,6 +9,7 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.korba.gameoff.oblivious.config.GameConfig;
 import com.korba.gameoff.oblivious.gameplay.components.BodyComponent;
 import com.korba.gameoff.oblivious.gameplay.mapelements.Door;
+import com.korba.gameoff.oblivious.gameplay.mapelements.SpawnPoint;
 
 
 public class CollisionSystem extends EntitySystem implements ContactListener {
@@ -30,13 +31,18 @@ public class CollisionSystem extends EntitySystem implements ContactListener {
         Fixture fixtureA = contact.getFixtureA();
         Fixture fixtureB = contact.getFixtureB();
 
+        Fixture player = contact.getFixtureA().getUserData() == "player" ? contact.getFixtureA() : contact.getFixtureB();
+        Fixture object = player == contact.getFixtureA() ? contact.getFixtureB() : contact.getFixtureA();
+
         int collisionBits = fixtureA.getFilterData().categoryBits | fixtureB.getFilterData().categoryBits;
 
         switch(collisionBits){
             case GameConfig.PLAYER_BIT | GameConfig.DOOR_BIT:
-                Fixture player = contact.getFixtureA().getUserData() == "player" ? contact.getFixtureA() : contact.getFixtureB();
-                Fixture object = player == contact.getFixtureA() ? contact.getFixtureB() : contact.getFixtureA();
                 ((Door)object.getUserData()).onContact();
+                break;
+
+            case GameConfig.PLAYER_BIT | GameConfig.SPAWN_POINT_BIT:
+                ((SpawnPoint)object.getUserData()).onContact();
                 break;
         }
 

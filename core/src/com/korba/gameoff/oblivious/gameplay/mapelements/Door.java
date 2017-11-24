@@ -6,9 +6,11 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.World;
 import com.korba.gameoff.oblivious.config.GameConfig;
 import com.korba.gameoff.oblivious.gameplay.managers.MapManager;
+import com.korba.gameoff.oblivious.gameplay.managers.MapType;
 
 public class Door extends MapObject {
     MapManager mapManager;
+    MapType mapType = null;
 
     public Door(World world, TiledMap map, Rectangle bounds, MapManager mapManager) {
         super(world, map, bounds);
@@ -17,10 +19,20 @@ public class Door extends MapObject {
         fixture.setUserData(this);
     }
 
+    public Door(World world, TiledMap map, Rectangle bounds, MapManager mapManager, MapType type) {
+        super(world, map, bounds);
+        this.mapManager = mapManager;
+        this.mapType = type;
+        setCategoryFilter(GameConfig.DOOR_BIT);
+        fixture.setSensor(true);
+        fixture.setUserData(this);
+    }
+
     @Override
     public void onContact() {
         Gdx.app.debug("Door Class", "onContact method");
-        mapManager.changeMap();
+        if(mapType == null) mapManager.changeMap();
+        if(mapType != null) mapManager.changeMap(mapType);
 
     }
 }
