@@ -7,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.*;
 
 public class Item extends Image {
 
-    int id;
+    private int id;
     private String description;
     private boolean combinable;
 

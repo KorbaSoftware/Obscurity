@@ -66,7 +66,7 @@ public class InventoryUI extends Window {
             combineSlot.addListener(new InventorySlotTooltipListener(tooltip));
 
             dragAndDrop.addTarget(new InventorySlotTarget(combineSlot));
-            inventorySlotsTable.add(combineSlot).size(slotWidth / 2, slotHeight / 2).left();
+            inventorySlotsTable.add(combineSlot).size(slotWidth / 2f, slotHeight / 2f).left();
         }
 
         btnCombine = new TextButton("Combine", AssetUtils.DEFAULT_SKIN);
@@ -75,6 +75,16 @@ public class InventoryUI extends Window {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 Gdx.app.debug("InventoryUI", "combine initialized");
+                Item item1 = getItemFromInventory(16, false);
+                Item item2 = getItemFromInventory(17, false);
+                Item item3 = getItemFromInventory(18, false);
+                Item combinedItem = CombineMaszin.combineItems(item1, item2, item3);
+                if(combinedItem != null) {
+                    addItemToInventory(combinedItem);
+                    getItemFromInventory(16, true);
+                    getItemFromInventory(17, true);
+                    getItemFromInventory(18, true);
+                }
             }
         });
 
@@ -94,6 +104,16 @@ public class InventoryUI extends Window {
             dragAndDrop.addSource(new InventorySlotSource(slot, dragAndDrop));
             break;
         }
+    }
+
+    public Item getItemFromInventory(int index, boolean remove) {
+        Array<Cell> cells = inventorySlotsTable.getCells();
+        InventorySlot slot = ((InventorySlot) cells.get(index).getActor());
+
+        if(!remove)
+            return slot.getItem();
+        else
+            return slot.removeItem();
     }
 
     public DragAndDrop getDragAndDrop() {
