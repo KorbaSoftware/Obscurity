@@ -4,9 +4,6 @@ import com.badlogic.ashley.core.*;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.korba.gameoff.oblivious.config.GameConfig;
-import com.korba.gameoff.oblivious.config.GameState;
 import com.korba.gameoff.oblivious.gameplay.components.*;
 
 public class KeyboardMovementSystem extends EntitySystem {
