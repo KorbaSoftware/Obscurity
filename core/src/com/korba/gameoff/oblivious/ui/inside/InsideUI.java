@@ -32,8 +32,8 @@ public class InsideUI implements Screen {
         inventoryUI.setPosition(stage.getWidth() / 2 - 64 * 2, stage.getHeight() / 2 - 64*2);
 
         stage.addActor(inventoryUI);
-        inventoryUI.addItemToInventory(new Item(AssetUtils.getTexture(AssetUtils.ITEM_RADIO), "Broken radio"));
-        inventoryUI.addItemToInventory(new Item(AssetUtils.getTexture(AssetUtils.ITEM_PINDOL), "Pindol"));
+        inventoryUI.addItemToInventory(new Item(AssetUtils.getTexture(AssetUtils.ITEM_RADIO), "Broken radio", true, ItemsIds.BROKEN_RADIO));
+        inventoryUI.addItemToInventory(new Item(AssetUtils.getTexture(AssetUtils.ITEM_PINDOL), "Pindol", true, ItemsIds.PINDOL));
         inventoryUI.validate();
 
 

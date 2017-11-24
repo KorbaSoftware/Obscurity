@@ -88,7 +88,8 @@ public class ObscurityGame extends Game {
 	@Override
 	public void dispose () {
 		batch.dispose();
-		customCursor.dispose();
+		if(!Gdx.app.getType().equals(Application.ApplicationType.WebGL))
+			customCursor.dispose();
 		AssetUtils.assetManager.dispose();
 	}
 }
