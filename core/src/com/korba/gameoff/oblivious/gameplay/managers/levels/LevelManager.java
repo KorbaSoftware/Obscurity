@@ -1,4 +1,4 @@
-package com.korba.gameoff.oblivious.gameplay.managers;
+package com.korba.gameoff.oblivious.gameplay.managers.levels;
 
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
@@ -9,6 +9,8 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.korba.gameoff.oblivious.ObscurityGame;
 import com.korba.gameoff.oblivious.config.GameConfig;
+import com.korba.gameoff.oblivious.gameplay.managers.MapManager;
+import com.korba.gameoff.oblivious.gameplay.managers.MapType;
 import com.korba.gameoff.oblivious.gameplay.mapelements.Door;
 import com.korba.gameoff.oblivious.gameplay.mapelements.StaticObject;
 
@@ -18,6 +20,7 @@ public class LevelManager {
     protected Array<Vector2> spawnPoints;
     private Array<StaticObject> walls;
     protected Array<Door> doors;
+    protected MapType mapType;
     protected Vector2 lastSpawnPoint;
     private final int WALL_LAYER = 3;
     private final int SPAWN_POINTS = 4;
@@ -77,12 +80,12 @@ public class LevelManager {
         return spawnPoints.first();
         }
         public TiledMap getMap() {return map;}
-
-    public void setLastSpawnPoint(Vector2 lastSpawnPoint) {
+        public void setLastSpawnPoint(Vector2 lastSpawnPoint) {
         this.lastSpawnPoint = lastSpawnPoint;
     }
-
-    public Vector2 getLastSpawnPoint() {
+        public Vector2 getLastSpawnPoint() {
         return lastSpawnPoint;
     }
+        public MapType getMapType() {    return mapType; }
+
 }

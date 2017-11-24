@@ -20,6 +20,8 @@ public class AssetUtils {
     public static final String MAP_TEST2= "maps/tmx/newmap1.tmx";
     public static final String MAP_TEST3= "maps/tmx/newmap2.tmx";
     public static final String MAP_METRO= "maps/tmx/metro.tmx";
+    public static final String MAP_METRO3= "maps/tmx/metro3.tmx";
+    public static final String MAP_METRO2= "maps/tmx/metro2.tmx";
 
     // Items
     public static final String ITEM_PLACEHOLDER = "items/item_placeholder.png";
@@ -100,6 +102,8 @@ public class AssetUtils {
         loadMap(MAP_TEST2);
         loadMap(MAP_TEST3);
         loadMap(MAP_METRO);
+        loadMap(MAP_METRO2);
+        loadMap(MAP_METRO3);
 
         loadTexture(DEV_KAMIL);
         loadTexture(DEV_KUBA);

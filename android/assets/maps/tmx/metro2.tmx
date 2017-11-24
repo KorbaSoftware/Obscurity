@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="20" height="10" tilewidth="32" tileheight="32" nextobjectid="48">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="20" height="10" tilewidth="32" tileheight="32" nextobjectid="50">
  <tileset firstgid="1" source="metrosy.tsx"/>
  <tileset firstgid="201" source="szczalki.tsx"/>
+ <tileset firstgid="203" source="meble.tsx"/>
  <layer name="Warstwa Kafelków 1" width="20" height="10">
   <data encoding="csv">
 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,
@@ -21,10 +22,10 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+225,0,0,0,0,0,0,0,0,0,0,0,0,0,0,204,0,0,0,0,
+234,0,0,0,0,0,0,0,0,0,0,0,0,0,0,213,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,202,0,0,0,0,
+0,201,0,0,0,0,0,0,0,0,0,0,0,0,0,202,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
@@ -56,10 +57,11 @@
   <object id="35" x="192" y="32" width="32" height="32"/>
   <object id="36" x="192" y="64" width="32" height="13.875"/>
   <object id="42" x="170.75" y="32.25" width="21.125" height="22"/>
+  <object id="47" x="480" y="128" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="spawn">
   <object id="9" x="162" y="118.667" width="32" height="32"/>
-  <object id="47" x="320" y="160" width="32" height="32"/>
+  <object id="49" x="288" y="160" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="dzrwi">
   <object id="10" x="136.667" y="46" width="16" height="17.3333"/>
@@ -68,6 +70,6 @@
   <object id="45" x="480" y="192" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="previous station">
-  <object id="46" x="0" y="287.5" width="32" height="32"/>
+  <object id="46" x="32" y="192" width="32" height="32"/>
  </objectgroup>
 </map>

@@ -12,6 +12,10 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.korba.gameoff.oblivious.ObscurityGame;
 import com.korba.gameoff.oblivious.config.GameConfig;
+import com.korba.gameoff.oblivious.gameplay.managers.levels.IndoorLevelManager;
+import com.korba.gameoff.oblivious.gameplay.managers.levels.LevelManager;
+import com.korba.gameoff.oblivious.gameplay.managers.levels.MetroStationManager;
+import com.korba.gameoff.oblivious.gameplay.managers.levels.WorldLevelManager;
 import com.korba.gameoff.oblivious.tools.*;
 import com.korba.gameoff.oblivious.gameplay.player.PlayerPhysics;
 
@@ -29,6 +33,7 @@ public class MapManager {
     private float mapVelocity;
     private Array<TiledMap> maps = null;
     private Array<MapType> types = null;
+    private Array<MetroStationManager> stations = null;
     private Array<IndoorLevelManager> levels = null;
     private boolean mapToChange = false;
 
@@ -71,7 +76,11 @@ public class MapManager {
             types = new Array<>();
             levels = new Array<>();
             maps.add(AssetUtils.getMap(AssetUtils.MAP_METRO));
-            types.add(MapType.METROSTATION);
+            types.add(MapType.METROSTATION1);
+            maps.add(AssetUtils.getMap(AssetUtils.MAP_METRO2));
+            types.add(MapType.METROSTATION2);
+            maps.add(AssetUtils.getMap(AssetUtils.MAP_METRO3));
+            types.add(MapType.METROSTATION3);
             maps.add(AssetUtils.getMap(AssetUtils.MAP_TEST1));
             types.add(MapType.MOTELROOM1);
             maps.add(AssetUtils.getMap(AssetUtils.MAP_TEST2));
@@ -80,8 +89,11 @@ public class MapManager {
             types.add(MapType.MOTELROOM3);
 
 
-            for (TiledMap map : maps){
-                levels.add(new IndoorLevelManager(game, world, map, this , types.get(maps.indexOf(map, true))));
+            for (MapType type : types){
+                if (type == MapType.METROSTATION1 || type == MapType.METROSTATION2 || type == MapType.METROSTATION3){
+                    levels.add(new MetroStationManager(game, world, maps.get(types.indexOf(type, true)), this , type));
+                }
+                levels.add(new IndoorLevelManager(game, world, maps.get(types.indexOf(type, true)), this , type));
             }
     }
 
@@ -91,7 +103,7 @@ public class MapManager {
             currentLevel.setInactive();
             currentLevel = worldLevelManager;
             currentLevel.setActive();
-            position = worldLevelManager.lastSpawnPoint;
+            position = worldLevelManager.getLastSpawnPoint();
             game.getEntityManager().setKeyboardInput();
             type = MapType.OPEN;
         System.out.println(this.type.toString());
@@ -134,4 +146,16 @@ public class MapManager {
     }
     public MapType getType() { return type;}
     public Vector2 getPosition(){return position; }
+    public LevelManager getCurrentLevel() {  return currentLevel; }
+
+    public void previousStation() {
+      //  currentLevel.setInactive();
+        Gdx.app.debug("MapManager",  "poprzednia stacja");
+
+    }
+
+    public void nextStation() {
+       // currentLevel.setInactive();
+        Gdx.app.debug("MapManager",  "nastepna stacja");
+    }
 }

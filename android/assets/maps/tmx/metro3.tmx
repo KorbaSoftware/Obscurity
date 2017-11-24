@@ -2,6 +2,7 @@
 <map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="20" height="10" tilewidth="32" tileheight="32" nextobjectid="48">
  <tileset firstgid="1" source="metrosy.tsx"/>
  <tileset firstgid="201" source="szczalki.tsx"/>
+ <tileset firstgid="203" source="meble.tsx"/>
  <layer name="Warstwa Kafelków 1" width="20" height="10">
   <data encoding="csv">
 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,
@@ -24,10 +25,10 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,202,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,201,0,0,0,0,0,0,0,0,0,0,203,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,212,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,208,209,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,217,218
 </data>
  </layer>
  <layer name="Warstwa Kafelków 3" width="20" height="10">
@@ -59,15 +60,15 @@
  </objectgroup>
  <objectgroup name="spawn">
   <object id="9" x="162" y="118.667" width="32" height="32"/>
-  <object id="47" x="320" y="160" width="32" height="32"/>
+  <object id="47" x="224" y="192" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="dzrwi">
   <object id="10" x="136.667" y="46" width="16" height="17.3333"/>
  </objectgroup>
  <objectgroup name="next sation">
-  <object id="45" x="480" y="192" width="32" height="32"/>
+  <object id="45" x="606.5" y="287" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="previous station">
-  <object id="46" x="0" y="287.5" width="32" height="32"/>
+  <object id="46" x="32" y="192" width="32" height="32"/>
  </objectgroup>
 </map>

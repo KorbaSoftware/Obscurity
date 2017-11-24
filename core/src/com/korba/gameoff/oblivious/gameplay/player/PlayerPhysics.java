@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.korba.gameoff.oblivious.config.GameConfig;
+import com.korba.gameoff.oblivious.config.GameState;
 import com.korba.gameoff.oblivious.tools.*;
 
 public class PlayerPhysics{
@@ -33,7 +34,8 @@ public class PlayerPhysics{
         fixtureDef.filter.categoryBits = GameConfig.PLAYER_BIT;
         fixtureDef.filter.maskBits = GameConfig.STATIC_OBJECT_BIT |
                                      GameConfig.DOOR_BIT |
-                                     GameConfig.SPAWN_POINT_BIT;
+                                     GameConfig.SPAWN_POINT_BIT |
+                                     GameConfig.STATION_CHANGE_BIT;
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(16 / GameConfig.PPM, 16 / GameConfig.PPM);
         fixtureDef.shape = shape;
