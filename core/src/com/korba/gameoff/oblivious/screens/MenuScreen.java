@@ -2,7 +2,6 @@ package com.korba.gameoff.oblivious.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -18,7 +17,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.korba.gameoff.oblivious.ObscurityGame;
 import com.korba.gameoff.oblivious.config.LauncherConfig;
 import com.korba.gameoff.oblivious.gameplay.managers.MapType;
-import com.korba.gameoff.oblivious.screens.dev.AreYouSureOverlay;
+import com.korba.gameoff.oblivious.screens.dev.AlertWindow;
 import com.korba.gameoff.oblivious.screens.dev.DevScreen;
 import com.korba.gameoff.oblivious.tools.*;
 
@@ -117,9 +116,7 @@ public class MenuScreen implements Screen{
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                AreYouSureOverlay areYouSure = new AreYouSureOverlay();
-                stage.addActor(areYouSure);
-                stage.draw();
+                new AlertWindow(stage);
             }
         });
         table.add(newGame);

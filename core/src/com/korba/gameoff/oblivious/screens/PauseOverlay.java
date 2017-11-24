@@ -8,7 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.korba.gameoff.oblivious.config.GameState;
 import com.korba.gameoff.oblivious.config.LauncherConfig;
-import com.korba.gameoff.oblivious.screens.dev.AreYouSureOverlay;
+import com.korba.gameoff.oblivious.screens.dev.AlertWindow;
 import com.korba.gameoff.oblivious.tools.AssetUtils;
 
 public class PauseOverlay extends Window {
@@ -55,9 +55,7 @@ public class PauseOverlay extends Window {
             }
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                AreYouSureOverlay areYouSure = new AreYouSureOverlay();
-                stage.addActor(areYouSure);
-                stage.draw();
+                new AlertWindow(stage);
             }
         });
 
