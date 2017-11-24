@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.*;
 import com.badlogic.gdx.utils.*;
 import com.badlogic.gdx.utils.viewport.*;
+import com.korba.gameoff.oblivious.config.*;
 import com.korba.gameoff.oblivious.inventory.items.*;
 import com.korba.gameoff.oblivious.tools.*;
 
@@ -51,10 +52,16 @@ public class InsideUI implements Screen {
         invEQ.setBounds(20, 20, 50, 50);
 
         stage.addActor(invEQ);
+
+        setAllDebug(!GameConfig.IS_DEVMODE);
     }
 
     public Stage getStage() {
         return stage;
+    }
+
+    private void setAllDebug(boolean debug) {
+        stage.setDebugAll(debug);
     }
 
     @Override
