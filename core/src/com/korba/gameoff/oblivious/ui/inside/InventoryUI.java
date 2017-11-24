@@ -1,9 +1,11 @@
 package com.korba.gameoff.oblivious.ui.inside;
 
+import com.badlogic.gdx.*;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.*;
 import com.badlogic.gdx.utils.*;
+import com.korba.gameoff.oblivious.config.*;
 import com.korba.gameoff.oblivious.inventory.*;
 import com.korba.gameoff.oblivious.inventory.items.*;
 import com.korba.gameoff.oblivious.tools.*;
@@ -20,9 +22,10 @@ public class InventoryUI extends Window {
     private DragAndDrop dragAndDrop;
     private Array<Actor> inventoryActors;
     private InventorySlotTooltip tooltip;
+    private TextButton btnCombine;
 
     public InventoryUI() {
-        super("Inventory", AssetUtils.DEFAULT_SKIN);
+        super("", AssetUtils.DEFAULT_SKIN);
 
         dragAndDrop = new DragAndDrop();
         inventoryActors = new Array<>();
@@ -46,10 +49,36 @@ public class InventoryUI extends Window {
                 inventorySlotsTable.row();
         }
 
+        inventorySlotsTable.row().padTop(12).padBottom(3);
+        addCombineRow();
+
         inventoryActors.add(tooltip);
 
-        this.add(inventorySlotsTable).colspan(2);
+        this.add(inventorySlotsTable);
         this.pack();
+
+        setAllDebug(!GameConfig.IS_DEVMODE);
+    }
+
+    private void addCombineRow() {
+        for (int i = 0; i < 3; i++) {
+            InventorySlot combineSlot = new InventorySlot();
+            combineSlot.addListener(new InventorySlotTooltipListener(tooltip));
+
+            dragAndDrop.addTarget(new InventorySlotTarget(combineSlot));
+            inventorySlotsTable.add(combineSlot).size(slotWidth / 2, slotHeight / 2);
+        }
+
+        btnCombine = new TextButton("Combine", AssetUtils.DEFAULT_SKIN);
+
+        btnCombine.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                Gdx.app.debug("InventoryUI", "combine initialized");
+            }
+        });
+
+        inventorySlotsTable.add(btnCombine).fill();
     }
 
     public void addItemToInventory(Item item) {
@@ -77,5 +106,11 @@ public class InventoryUI extends Window {
 
     public Array<Actor> getInventoryActors() {
         return inventoryActors;
+    }
+
+    private void setAllDebug(boolean debug) {
+        setDebug(debug);
+        inventorySlotsTable.setDebug(debug);
+        tooltip.setDebug(debug);
     }
 }

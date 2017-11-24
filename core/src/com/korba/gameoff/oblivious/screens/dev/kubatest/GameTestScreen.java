@@ -18,7 +18,6 @@ import com.korba.gameoff.oblivious.gameplay.managers.MapManager;
 import com.korba.gameoff.oblivious.gameplay.managers.MapType;
 import com.korba.gameoff.oblivious.gameplay.managers.PlayerManager;
 import com.korba.gameoff.oblivious.screens.dev.BasicScreen;
-;
 
 public class GameTestScreen extends BasicScreen {
 
