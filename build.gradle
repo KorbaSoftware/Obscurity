@@ -1,3 +1,9 @@
+apply plugin: 'org.akhikhl.gretty'
+
+gretty {
+    extraResourceBase 'webapp'
+}
+
 buildscript {
 
     repositories {
