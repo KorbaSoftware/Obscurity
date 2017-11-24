@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.korba.gameoff.oblivious.config.GameState;
+import com.korba.gameoff.oblivious.ObscurityGame;
 import com.korba.gameoff.oblivious.screens.dev.AlertWindow;
 import com.korba.gameoff.oblivious.tools.AssetUtils;
 
@@ -46,7 +46,7 @@ public class PauseOverlay extends Dialog {
             }
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                GameState.setCurrentState(GameState.State.RUNNING);
+                ObscurityGame.setGameState(ObscurityGame.GameState.RUNNING);
                 thisOverlay.remove();
             }
         });
