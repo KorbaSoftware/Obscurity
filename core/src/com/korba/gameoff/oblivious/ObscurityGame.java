@@ -42,10 +42,10 @@ public class ObscurityGame extends Game {
 	}
 
 	private void createCustomCursor() {
-		if(!Gdx.app.getType().equals(Application.ApplicationType.WebGL))
-			return;
-		customCursor = Gdx.graphics.newCursor(AssetUtils.getPixmap(AssetUtils.CURSOR), 0, 0);
-		Gdx.graphics.setCursor(customCursor);
+		if(!Gdx.app.getType().equals(Application.ApplicationType.WebGL)){
+			customCursor = Gdx.graphics.newCursor(AssetUtils.getPixmap(AssetUtils.CURSOR), 0, 0);
+			Gdx.graphics.setCursor(customCursor);
+		}
 	}
 
 	public boolean isDevMode(){
