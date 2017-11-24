@@ -1,7 +1,5 @@
 package com.korba.gameoff.oblivious.screens.dev.kubatest;
 
-import box2dLight.ConeLight;
-import box2dLight.PointLight;
 import box2dLight.RayHandler;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
@@ -9,7 +7,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.*;
-import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -21,9 +18,6 @@ import com.korba.gameoff.oblivious.gameplay.managers.MapManager;
 import com.korba.gameoff.oblivious.gameplay.managers.MapType;
 import com.korba.gameoff.oblivious.gameplay.managers.PlayerManager;
 import com.korba.gameoff.oblivious.screens.dev.BasicScreen;
-;
-
-import java.awt.*;
 
 public class GameTestScreen extends BasicScreen {
 

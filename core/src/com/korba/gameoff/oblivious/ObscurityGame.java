@@ -23,7 +23,6 @@ public class ObscurityGame extends Game {
 		CUTSCENE
 	}
 
-	public final static LoggerDev devLOG = new LoggerDev();
 	private SpriteBatch batch;
     private Cursor customCursor;
     private GameState gameState;
@@ -35,9 +34,6 @@ public class ObscurityGame extends Game {
 	private void drawLogger() {
 		if(!showLogger)
 			return;
-
-		devLOG.drawLogs();
-		//TODO draw logger in corner of the screen
 	}
 
 	private void input() {

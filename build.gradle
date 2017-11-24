@@ -116,7 +116,8 @@ project(":core") {
         compile "com.badlogicgames.box2dlights:box2dlights:1.4"
         compile "com.badlogicgames.ashley:ashley:$ashleyVersion"
         compile "com.badlogicgames.gdx:gdx-ai:$aiVersion"
-        
+        compile "com.google.gwt:gwt-user:2.8.0"
+        compile "com.google.gwt:gwt-dev:2.8.0"
     }
 }
 

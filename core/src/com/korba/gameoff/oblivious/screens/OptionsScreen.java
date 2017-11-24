@@ -7,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.google.gwt.i18n.client.*;
 import com.korba.gameoff.oblivious.ObscurityGame;
 import com.korba.gameoff.oblivious.config.LauncherConfig;
 import com.korba.gameoff.oblivious.config.GamePreferences;
@@ -45,11 +45,8 @@ public class OptionsScreen extends BasicScreen{
         muteCheckBox.setChecked(preferences.isMuted());
 
 
-
-        musicVolumeLabel = new Label(String.format(java.util.Locale.US, "%.0f" + "%%",
-                preferences.getMusicVolume()*100), AssetUtils.DEFAULT_SKIN); //value to adjust in the future
-        soundVolumeLabel = new Label(String.format(java.util.Locale.US, "%.0f" + "%%",
-                preferences.getSoundVolume()*100), AssetUtils.DEFAULT_SKIN); //value to adjust in the future
+        musicVolumeLabel = new Label((int)(1 * preferences.getMusicVolume() *100) + "%", AssetUtils.DEFAULT_SKIN);
+        soundVolumeLabel = new Label((int)(1 * preferences.getSoundVolume() *100) + "%", AssetUtils.DEFAULT_SKIN);
     }
 
     private Texture getCurrentUser() {
@@ -96,16 +93,14 @@ public class OptionsScreen extends BasicScreen{
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 preferences.setMusicVolume(musicVolumeSlider.getValue());
-                musicVolumeLabel.setText(String.format(java.util.Locale.US, "%.0f" + "%%",
-                        preferences.getMusicVolume()*100)); //value to adjust in the future
+                musicVolumeLabel.setText((int)(preferences.getMusicVolume() *100) + "%"); //value to adjust in the future
             }
         });
         soundVolumeSlider.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 preferences.setSoundVolume(soundVolumeSlider.getValue());
-                soundVolumeLabel.setText(String.format(java.util.Locale.US, "%.0f" + "%%",
-                        preferences.getSoundVolume()*100)); //value to adjust in the future
+                soundVolumeLabel.setText((int)(1 * preferences.getSoundVolume() *100) + "%"); //value to adjust in the future
             }
         });
         muteCheckBox.addListener(new ChangeListener() {
