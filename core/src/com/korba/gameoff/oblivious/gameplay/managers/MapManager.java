@@ -29,6 +29,7 @@ public class MapManager {
     private TiledMap worldMap;
     private OrthogonalTiledMapRenderer mapRenderer;
     private WorldLevelManager worldLevelManager;
+    private MetroStationManager lastStationEntered;
     private MapType type;
     private float mapVelocity;
     private Array<TiledMap> maps = null;
@@ -49,7 +50,6 @@ public class MapManager {
         mapRenderer = new OrthogonalTiledMapRenderer(currentMap, 1f / GameConfig.PPM);
         worldLevelManager = new WorldLevelManager(game, world, currentMap, this);
         currentLevel = worldLevelManager;
-        worldLevelManager.setActive();
     }
 
 
@@ -75,6 +75,7 @@ public class MapManager {
             maps = new Array<>();
             types = new Array<>();
             levels = new Array<>();
+            stations = new Array<>();
             maps.add(AssetUtils.getMap(AssetUtils.MAP_METRO));
             types.add(MapType.METROSTATION1);
             maps.add(AssetUtils.getMap(AssetUtils.MAP_METRO2));
@@ -91,9 +92,15 @@ public class MapManager {
 
             for (MapType type : types){
                 if (type == MapType.METROSTATION1 || type == MapType.METROSTATION2 || type == MapType.METROSTATION3){
-                    levels.add(new MetroStationManager(game, world, maps.get(types.indexOf(type, true)), this , type));
+                    MetroStationManager temporaryStationObject = new MetroStationManager(game, world, maps.get(types.indexOf(type, true)), this , type);
+                    temporaryStationObject.setInactive();
+                    stations.add(temporaryStationObject);
                 }
-                levels.add(new IndoorLevelManager(game, world, maps.get(types.indexOf(type, true)), this , type));
+
+                    IndoorLevelManager temporaryIndoorLevelObject = new IndoorLevelManager(game, world, maps.get(types.indexOf(type, true)), this , type);
+                    temporaryIndoorLevelObject.setInactive();
+                    levels.add(temporaryIndoorLevelObject);
+
             }
     }
 
@@ -116,22 +123,37 @@ public class MapManager {
     }
 
     public void changeMap(MapType type){
-        for (IndoorLevelManager levelManager : levels){
-                if(levelManager.getMapType() == type){
-                    currentMap = levelManager.getMap();
-                    currentLevel.setInactive();
-                    currentLevel = levelManager;
-                    currentLevel.setActive();
-                    position = levelManager.getPlayerPosition();
-                    game.getEntityManager().setMouseInput();
-                    this.type = levelManager.getMapType();
-                    System.out.println(this.type.toString());
-                    mapVelocity = 6;
-                    Gdx.app.debug("MapManago","changed to ROOM");
+
+        if(type == MapType.METROSTATION1 || type == MapType.METROSTATION2 || type == MapType.METROSTATION3){
+            switch (type){
+                case METROSTATION1:
+                    lastStationEntered = stations.get(0);
+                    break;
+                case METROSTATION2:
+                    lastStationEntered = stations.get(1);
+                    break;
+                case METROSTATION3:
+                    lastStationEntered = stations.get(2);
+                    break;
+            }
+            for (MetroStationManager station : stations){
+                if(station.getMapType() == type){
+                    if(currentLevel != worldLevelManager)
+                    setupRoom(station, station.getAfterTravelSpawnPoint());
+                    else setupRoom(station);
                 }
-            mapRenderer.setMap(currentMap);
-            mapToChange = true;
+            }
         }
+        else {
+            for (IndoorLevelManager levelManager : levels){
+                if(levelManager.getMapType() == type){
+                    setupRoom(levelManager);
+                }
+            }
+        }
+        mapRenderer.setMap(currentMap);
+        mapToChange = true;
+
     }
 
     public void setMapToChange(boolean mapToChange) {this.mapToChange = mapToChange;}
@@ -146,16 +168,43 @@ public class MapManager {
     }
     public MapType getType() { return type;}
     public Vector2 getPosition(){return position; }
-    public LevelManager getCurrentLevel() {  return currentLevel; }
 
     public void previousStation() {
-      //  currentLevel.setInactive();
-        Gdx.app.debug("MapManager",  "poprzednia stacja");
-
+        changeStation(-1);
     }
 
     public void nextStation() {
-       // currentLevel.setInactive();
-        Gdx.app.debug("MapManager",  "nastepna stacja");
+        changeStation(1);
+    }
+
+    public void changeStation(int direction){
+        for(MetroStationManager station : stations){
+            if(lastStationEntered.getMapType() == station.getMapType()){
+                int index = stations.indexOf(station, false) + direction;
+                worldLevelManager.setLastSpawnPoint(worldLevelManager.getExit(stations.get(index).getMapType()));
+                lastStationEntered = stations.get(index);
+                changeMap(lastStationEntered.getMapType());
+                game.getEntityManager().getMouseMovementSystem().nullify();
+                break;
+            }
+        }
+    }
+
+    private void setupRoom(IndoorLevelManager level){
+        currentMap = level.getMap();
+        currentLevel.setInactive();
+        currentLevel = level;
+        currentLevel.setActive();
+        position = level.getPlayerPosition();
+        game.getEntityManager().setMouseInput();
+        this.type = level.getMapType();
+        System.out.println(this.type.toString());
+        mapVelocity = 6;
+        Gdx.app.debug("MapManago","changed to ROOM");
+    }
+
+    private void setupRoom(IndoorLevelManager level, Vector2 position){
+        setupRoom(level);
+        this.position = position;
     }
 }

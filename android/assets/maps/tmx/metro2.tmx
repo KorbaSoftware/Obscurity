@@ -61,7 +61,7 @@
  </objectgroup>
  <objectgroup name="spawn">
   <object id="9" x="162" y="118.667" width="32" height="32"/>
-  <object id="49" x="288" y="160" width="32" height="32"/>
+  <object id="49" x="254.5" y="184" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="dzrwi">
   <object id="10" x="136.667" y="46" width="16" height="17.3333"/>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="20" height="10" tilewidth="32" tileheight="32" nextobjectid="48">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="20" height="10" tilewidth="32" tileheight="32" nextobjectid="49">
  <tileset firstgid="1" source="metrosy.tsx"/>
  <tileset firstgid="201" source="szczalki.tsx"/>
  <layer name="Warstwa Kafelków 1" width="20" height="10">
@@ -59,13 +59,13 @@
  </objectgroup>
  <objectgroup name="spawn">
   <object id="9" x="162" y="118.667" width="32" height="32"/>
-  <object id="47" x="320" y="160" width="32" height="32"/>
+  <object id="47" x="223" y="183.5" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="dzrwi">
   <object id="10" x="136.667" y="46" width="16" height="17.3333"/>
  </objectgroup>
  <objectgroup name="next sation">
-  <object id="45" x="480" y="192" width="32" height="32"/>
+  <object id="48" x="479.5" y="187" width="30.5" height="34.5"/>
  </objectgroup>
  <objectgroup name="previous station">
   <object id="46" x="0" y="287.5" width="32" height="32"/>

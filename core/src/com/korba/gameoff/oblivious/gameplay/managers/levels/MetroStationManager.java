@@ -1,5 +1,6 @@
 package com.korba.gameoff.oblivious.gameplay.managers.levels;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -33,7 +34,19 @@ public class MetroStationManager extends IndoorLevelManager{
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             stationChangers.add( new StationChanger(world, map, rect, mapManager,1));
         }
-       // setInactive();
+
+    }
+
+    @Override
+    public void setInactive(){
+        super.setInactive();
+        stationChangers.forEach(stationChanger -> stationChanger.setCategoryFilter(GameConfig.DEFAULT_BIT));
+    }
+
+    @Override
+    public void setActive(){
+        super.setActive();
+        stationChangers.forEach(stationChanger -> stationChanger.setCategoryFilter(GameConfig.STATION_CHANGE_BIT));
     }
 
 
