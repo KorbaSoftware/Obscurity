@@ -34,6 +34,10 @@ apply plugin: "war"
 apply plugin: 'org.akhikhl.gretty'
 apply plugin: "gwt"
 
+gretty {
+    extraResourceBase 'webapp'
+}
+
 gwt {
     gwtVersion='2.8.0' // Should match the gwt version used for building the gwt backend
     maxHeapSize="1G" // Default 256m is not enough for gwt compiler. GWT is HUNGRY

@@ -69,7 +69,8 @@ public class AssetUtils {
     }
 
     public static void loadInitialAssets() {
-        loadPixmap(CURSOR);
+        if(!Gdx.app.getType().equals(Application.ApplicationType.WebGL))
+            loadPixmap(CURSOR);
         loadTexture(KORBA_LOGO);
         loadTexture(GAME_LOGO);
         loadTexture(PLAYER_64);
