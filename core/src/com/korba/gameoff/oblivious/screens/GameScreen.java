@@ -19,6 +19,7 @@ import com.korba.gameoff.oblivious.gameplay.managers.MapManager;
 import com.korba.gameoff.oblivious.gameplay.managers.MapType;
 import com.korba.gameoff.oblivious.gameplay.managers.PlayerManager;
 import com.korba.gameoff.oblivious.screens.dev.BasicScreen;
+import com.korba.gameoff.oblivious.tools.GameInputProcessor;
 
 import static com.korba.gameoff.oblivious.config.GameState.State.RUNNING;
 
@@ -124,7 +125,7 @@ public class GameScreen extends BasicScreen {
     @Override
     public void show() {
         setViewportAndCamera();
-        Gdx.input.setInputProcessor(null);
+        Gdx.input.setInputProcessor(new GameInputProcessor());
         GameState.setCurrentState(RUNNING);
         pause = new PauseOverlay(stage);
         pause.center().top();

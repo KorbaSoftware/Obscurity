@@ -1,6 +1,7 @@
 package com.korba.gameoff.oblivious.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -75,7 +76,10 @@ public class PauseOverlay extends Window {
     }
 
     public void doThings(){
-        Gdx.input.setInputProcessor(this.stage);
+        InputMultiplexer multiplexer = new InputMultiplexer();
+        multiplexer.addProcessor(Gdx.input.getInputProcessor());
+        multiplexer.addProcessor(this.stage);
+        Gdx.input.setInputProcessor(multiplexer);
         stage.draw();
     }
 }
