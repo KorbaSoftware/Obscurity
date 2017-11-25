@@ -22,6 +22,10 @@ import com.korba.gameoff.oblivious.gameplay.player.PlayerPhysics;
 import java.util.*;
 
 public class MapManager {
+
+    private static final float VELOCITY_OUTSIDE = 12f;
+    private static final float VELOCITY_INSIDE = 6f;
+
     private World world;
     private ObscurityGame game;
     private TmxMapLoader mapLoader;
@@ -47,7 +51,7 @@ public class MapManager {
         loadLevels();
         mapLoader = new TmxMapLoader();
         worldMap = AssetUtils.getMap(AssetUtils.MAP_TEST0);
-        mapVelocity = 12;
+        mapVelocity = VELOCITY_OUTSIDE;
         currentMap = worldMap;
         mapRenderer = new OrthogonalTiledMapRenderer(currentMap, 1f / GameConfig.PPM);
         worldLevelManager = new WorldLevelManager(game, world, currentMap, this);
@@ -114,7 +118,7 @@ public class MapManager {
         game.getEntityManager().setKeyboardInput();
         type = MapType.OPEN;
         System.out.println(this.type.toString());
-        mapVelocity = 12;
+        mapVelocity = VELOCITY_OUTSIDE;
         Gdx.app.debug("MapManago", "changed to OPEN");
 
         mapRenderer.setMap(currentMap);
@@ -207,7 +211,7 @@ public class MapManager {
         game.getEntityManager().setMouseInput();
         this.type = level.getMapType();
         System.out.println(this.type.toString());
-        mapVelocity = 6;
+        mapVelocity = VELOCITY_INSIDE;
         Gdx.app.debug("MapManago", "changed to ROOM");
     }
 
