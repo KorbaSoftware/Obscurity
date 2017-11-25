@@ -19,7 +19,7 @@ public class EntityManager {
     private MouseMovementSystem mouseMovementSystem;
     private KeyboardMovementSystem keyboardMovementSystem;
 
-    public EntityManager(Engine engine, SpriteBatch spriteBatch, World world){
+    public EntityManager(Engine engine, SpriteBatch spriteBatch, World world) {
         this.engine = engine;
         this.world = world;
         mouseMovementSystem = new MouseMovementSystem();
@@ -33,7 +33,7 @@ public class EntityManager {
         createPlayer();
     }
 
-    private void createPlayer(){
+    private void createPlayer() {
         PlayerManager player = new PlayerManager(world);
         this.player = player;
     }
@@ -48,15 +48,24 @@ public class EntityManager {
         engine.removeSystem(keyboardMovementSystem);
         engine.addSystem(mouseMovementSystem);
     }
-    public void update(float delta){
+
+    public void update(float delta) {
         engine.update(delta);
     }
+
     public static void add(Entity entity) {
         entities.add(entity);
     }
+
     public PlayerManager getPlayer() {
         return player;
     }
-    public KeyboardMovementSystem getKeyboardMovementSystem() {return keyboardMovementSystem;}
-    public MouseMovementSystem getMouseMovementSystem() {return mouseMovementSystem;}
+
+    public KeyboardMovementSystem getKeyboardMovementSystem() {
+        return keyboardMovementSystem;
+    }
+
+    public MouseMovementSystem getMouseMovementSystem() {
+        return mouseMovementSystem;
+    }
 }

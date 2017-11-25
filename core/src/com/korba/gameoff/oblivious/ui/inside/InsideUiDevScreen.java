@@ -69,6 +69,7 @@ public class InsideUiDevScreen implements Screen {
 
     @Override
     public void dispose() {
-
+        insideUI.dispose();
+        game.dispose();
     }
 }

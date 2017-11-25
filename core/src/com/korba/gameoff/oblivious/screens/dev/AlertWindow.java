@@ -15,22 +15,23 @@ public class AlertWindow extends Dialog {
         thisOverlay = this;
         thisOverlay.text("Are you sure?");
         thisOverlay.button("Yes", "Yes");
-        thisOverlay.button("No","No");
+        thisOverlay.button("No", "No");
         thisOverlay.show(stage);
     }
 
     @Override
     protected void result(Object obj) {
-        switch(obj.toString()){
-            case "Yes":{
+        switch (obj.toString()) {
+            case "Yes": {
                 Gdx.app.exit();
-            }break;
-            case "No":{
+                break;
+            }
+            case "No": {
                 this.remove();
-            }break;
+                break;
+            }
         }
     }
-
 
 
 }

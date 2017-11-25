@@ -34,6 +34,18 @@ public class GameTestScreen extends BasicScreen {
         super(batch, game);
     }
 
+    @Override
+    public void show() {
+        setViewportAndCamera();
+        world = game.getWorld();
+        mapManager = new MapManager(MapType.OPEN, game, world);
+        game.getEntityManager().getEngine().addSystem(game.getEntityManager().getKeyboardMovementSystem());
+        debugRenderer = new Box2DDebugRenderer();
+        setPhysicsVisibility(GameConfig.IS_DEVMODE);
+        createPlayerEntity();
+        setLights();
+    }
+
     private void setViewportAndCamera(){
         camera = new OrthographicCamera();
         viewport = new FitViewport(LauncherConfig.WIDTH / GameConfig.PPM / 2,
@@ -99,26 +111,6 @@ public class GameTestScreen extends BasicScreen {
         rayHandler.setCombinedMatrix(camera);
     }
 
-    @Override
-    public void dispose() {
-        super.dispose();
-        world.dispose();
-        debugRenderer.dispose();
-        rayHandler.dispose();
-    }
-
-    @Override
-    public void show() {
-        setViewportAndCamera();
-        world = game.getWorld();
-        mapManager = new MapManager(MapType.OPEN, game, world);
-        game.getEntityManager().getEngine().addSystem(game.getEntityManager().getKeyboardMovementSystem());
-        debugRenderer = new Box2DDebugRenderer();
-        setPhysicsVisibility(GameConfig.IS_DEVMODE);
-        createPlayerEntity();
-        setLights();
-    }
-
     private void setPhysicsVisibility(boolean value){
         debugRenderer.setDrawVelocities(value);
         debugRenderer.setDrawAABBs(value);
@@ -126,6 +118,13 @@ public class GameTestScreen extends BasicScreen {
         debugRenderer.setDrawContacts(value);
         debugRenderer.setDrawInactiveBodies(value);
         debugRenderer.setDrawJoints(value);
+    }
 
+    @Override
+    public void dispose() {
+        super.dispose();
+        world.dispose();
+        debugRenderer.dispose();
+        rayHandler.dispose();
     }
 }

@@ -24,6 +24,7 @@ public class InventorySlotTooltipListener extends InputListener {
             slot.localToStageCoordinates(currentCoords);
             tooltip.setPosition(currentCoords.x + offset.x, currentCoords.y + offset.y);
         }
+
         return false;
     }
 

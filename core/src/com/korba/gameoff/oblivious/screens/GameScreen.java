@@ -38,6 +38,23 @@ public class GameScreen extends BasicScreen {
         super(batch, game);
     }
 
+    @Override
+    public void show() {
+        setViewportAndCamera();
+        Gdx.input.setInputProcessor(new GameInputProcessor());
+        ObscurityGame.setGameState(ObscurityGame.GameState.RUNNING);
+        pause = new PauseOverlay(stage);
+        pause.center().top();
+        pause.setVisible(false);
+        world = game.getWorld();
+        mapManager = new MapManager(MapType.OPEN, game, world);
+        game.getEntityManager().getEngine().addSystem(game.getEntityManager().getKeyboardMovementSystem());
+        debugRenderer = new Box2DDebugRenderer();
+        setPhysicsVisibility(GameConfig.IS_DEVMODE);
+        createPlayerEntity();
+        setLights();
+    }
+
     private void setViewportAndCamera(){
         camera = new OrthographicCamera();
         viewport = new FitViewport(LauncherConfig.WIDTH / GameConfig.PPM / 2,
@@ -114,31 +131,6 @@ public class GameScreen extends BasicScreen {
         }
     }
 
-    @Override
-    public void dispose() {
-        super.dispose();
-        world.dispose();
-        debugRenderer.dispose();
-        rayHandler.dispose();
-    }
-
-    @Override
-    public void show() {
-        setViewportAndCamera();
-        Gdx.input.setInputProcessor(new GameInputProcessor());
-        ObscurityGame.setGameState(ObscurityGame.GameState.RUNNING);
-        pause = new PauseOverlay(stage);
-        pause.center().top();
-        pause.setVisible(false);
-        world = game.getWorld();
-        mapManager = new MapManager(MapType.OPEN, game, world);
-        game.getEntityManager().getEngine().addSystem(game.getEntityManager().getKeyboardMovementSystem());
-        debugRenderer = new Box2DDebugRenderer();
-        setPhysicsVisibility(GameConfig.IS_DEVMODE);
-        createPlayerEntity();
-        setLights();
-    }
-
     private void setPhysicsVisibility(boolean value){
         debugRenderer.setDrawVelocities(value);
         debugRenderer.setDrawAABBs(value);
@@ -146,18 +138,24 @@ public class GameScreen extends BasicScreen {
         debugRenderer.setDrawContacts(value);
         debugRenderer.setDrawInactiveBodies(value);
         debugRenderer.setDrawJoints(value);
-
     }
 
     @Override
     public void pause(){
-
         if(!hasOptionWindowInstance){
             super.clearScreen();
             pause = new PauseOverlay(stage);
             hasOptionWindowInstance = true;
         }
-        pause.doThings();
 
+        pause.doThings();
+    }
+
+    @Override
+    public void dispose() {
+        super.dispose();
+        world.dispose();
+        debugRenderer.dispose();
+        rayHandler.dispose();
     }
 }
