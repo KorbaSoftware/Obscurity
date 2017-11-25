@@ -13,84 +13,77 @@ import com.korba.gameoff.oblivious.tools.*;
 
 public class ObscurityGame extends Game {
 
-	public enum GameState {
-		LOADING,
-		IN_MENU,
-		RUNNING,
-		PAUSED,
-		INSIDE,
-		OUTSIDE,
-		FIGHT,
-		CUTSCENE
-	}
+    public enum GameState {
+        LOADING,
+        IN_MENU,
+        RUNNING,
+        PAUSED,
+        INSIDE,
+        OUTSIDE,
+        FIGHT,
+        CUTSCENE
+    }
 
-	private SpriteBatch batch;
+    private SpriteBatch batch;
     private Cursor customCursor;
     public static GameState gameState;
-	private GamePreferences gamePreferences;
+    private GamePreferences gamePreferences;
     private World world;
-	private EntityManager entityManager;
-    private boolean showLogger = false;
+    private EntityManager entityManager;
 
-	private void drawLogger() {
-		if(!showLogger)
-			return;
-	}
+    private void createCustomCursor() {
+        customCursor = Gdx.graphics.newCursor(AssetUtils.getPixmap(AssetUtils.CURSOR), 0, 0);
+        if (!Gdx.app.getType().equals(Application.ApplicationType.WebGL)) {
+            Gdx.graphics.setCursor(customCursor);
+        }
+    }
 
-	private void input() {
-		if(Gdx.input.isKeyJustPressed(Input.Keys.X))
-			showLogger = !showLogger;
-	}
+    public boolean isDevMode() {
+        return GameConfig.IS_DEVMODE;
+    }
 
-	private void createCustomCursor() {
-		if(!Gdx.app.getType().equals(Application.ApplicationType.WebGL)){
-			customCursor = Gdx.graphics.newCursor(AssetUtils.getPixmap(AssetUtils.CURSOR), 0, 0);
-			Gdx.graphics.setCursor(customCursor);
-		}
-	}
+    public static void setGameState(GameState state) {
+        gameState = state;
+    }
 
-	public boolean isDevMode(){
-		return GameConfig.IS_DEVMODE;
-	}
+    public static GameState getGameState() {
+        return gameState;
+    }
 
-	public static void setGameState(GameState state) {
-		gameState = state;
-	}
+    public EntityManager getEntityManager() {
+        return entityManager;
+    }
 
-	public static GameState getGameState(){
-		return gameState;
-	}
-	public EntityManager getEntityManager() {
-		return entityManager;
-	}
-	public World getWorld() {return this.world;}
-	public GamePreferences getPreferences() { return gamePreferences; }
+    public World getWorld() {
+        return this.world;
+    }
 
-	@Override
-	public void create () {
-		Engine engine = new Engine();
-		batch = new SpriteBatch();
-		gameState = GameState.LOADING;
-		AssetUtils.loadInitialAssets();
-		world = new World(new Vector2(0, 0), true);
-		entityManager = new EntityManager(engine, batch, world);
-		createCustomCursor();
-		gamePreferences = new GamePreferences();
-       	setScreen(new LoadingScreen(batch, this));
-	}
+    public GamePreferences getPreferences() {
+        return gamePreferences;
+    }
 
-	@Override
-	public void render () {
-		super.render();
-		input();
-		drawLogger();
-	}
+    @Override
+    public void create() {
+        Engine engine = new Engine();
+        batch = new SpriteBatch();
+        gameState = GameState.LOADING;
+        AssetUtils.loadInitialAssets();
+        world = new World(new Vector2(0, 0), true);
+        entityManager = new EntityManager(engine, batch, world);
+        createCustomCursor();
+        gamePreferences = new GamePreferences();
+        setScreen(new LoadingScreen(batch, this));
+    }
 
-	@Override
-	public void dispose () {
-		batch.dispose();
-		if(!Gdx.app.getType().equals(Application.ApplicationType.WebGL))
-			customCursor.dispose();
-		AssetUtils.assetManager.dispose();
-	}
+    @Override
+    public void render() {
+        super.render();
+    }
+
+    @Override
+    public void dispose() {
+        batch.dispose();
+        customCursor.dispose();
+        AssetUtils.assetManager.dispose();
+    }
 }

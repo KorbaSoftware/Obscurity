@@ -7,8 +7,8 @@ import com.badlogic.gdx.Input;
 import com.korba.gameoff.oblivious.ObscurityGame;
 
 public class KeyboardInputSystem extends EntitySystem {
-    private ImmutableArray<Entity> entities;
 
+    private ImmutableArray<Entity> entities;
 
     public KeyboardInputSystem(){
 

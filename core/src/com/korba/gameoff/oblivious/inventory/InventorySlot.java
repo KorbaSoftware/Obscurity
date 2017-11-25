@@ -82,6 +82,7 @@ public class InventorySlot extends Stack {
                 return item.getDescription();
             }
         }
+
         return "";
     }
 

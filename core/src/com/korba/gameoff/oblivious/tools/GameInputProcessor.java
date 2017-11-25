@@ -5,6 +5,7 @@ import com.badlogic.gdx.InputProcessor;
 import com.korba.gameoff.oblivious.ObscurityGame;
 
 public class GameInputProcessor implements InputProcessor {
+
     @Override
     public boolean keyDown(int keycode) {
         return false;
@@ -12,9 +13,9 @@ public class GameInputProcessor implements InputProcessor {
 
     @Override
     public boolean keyUp(int keycode) {
-        switch(keycode){
+        switch (keycode) {
             case Input.Keys.ESCAPE:
-                switch(ObscurityGame.getGameState()){
+                switch (ObscurityGame.getGameState()) {
                     case RUNNING:
                         ObscurityGame.setGameState(ObscurityGame.GameState.PAUSED);
                         break;

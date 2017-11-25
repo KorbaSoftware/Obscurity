@@ -7,6 +7,7 @@ import com.korba.gameoff.oblivious.config.GameConfig;
 import com.korba.gameoff.oblivious.gameplay.mapelements.MapObject;
 
 public class StaticObject extends MapObject {
+
     public StaticObject(World world, TiledMap map, Rectangle bounds) {
         super(world, map, bounds);
         setCategoryFilter(GameConfig.STATIC_OBJECT_BIT);

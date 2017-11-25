@@ -1,6 +1,7 @@
 package com.korba.gameoff.oblivious.config;
 
 public class LauncherConfig {
+
     public static final String APP_NAME = "Obscurity(pre-alpha)";
     public static final int WIDTH = 1280;
     public static final int HEIGHT = 720;
@@ -10,4 +11,5 @@ public class LauncherConfig {
     public static final boolean FULLSCREEN = false;
     public static final boolean RESIZABLE = false;
     public static final float LOADING_SCREEN_LOGO_LIFETIME = (GameConfig.IS_DEVMODE) ? 0f : 3f;
+
 }

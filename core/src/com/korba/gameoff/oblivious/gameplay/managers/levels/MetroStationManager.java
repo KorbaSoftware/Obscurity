@@ -21,7 +21,6 @@ public class MetroStationManager extends IndoorLevelManager{
     private final Vector2 afterTravelSpawnPoint;
     private Array<StationChanger> stationChangers;
 
-
     public MetroStationManager (ObscurityGame game, World world, TiledMap map, MapManager mapManager, MapType mapType) {
         super(game, world, map, mapManager, mapType);
         afterTravelSpawnPoint = super.spawnPoints.peek();
@@ -34,7 +33,6 @@ public class MetroStationManager extends IndoorLevelManager{
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             stationChangers.add( new StationChanger(world, map, rect, mapManager,1));
         }
-
     }
 
     @Override
@@ -48,8 +46,6 @@ public class MetroStationManager extends IndoorLevelManager{
         super.setActive();
         stationChangers.forEach(stationChanger -> stationChanger.setCategoryFilter(GameConfig.STATION_CHANGE_BIT));
     }
-
-
 
     public Vector2 getAfterTravelSpawnPoint() {
         return afterTravelSpawnPoint;

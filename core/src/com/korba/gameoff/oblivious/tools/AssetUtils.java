@@ -14,6 +14,9 @@ public class AssetUtils {
     public static final AssetManager assetManager = new AssetManager();
     private static InternalFileHandleResolver fileResolver = new InternalFileHandleResolver();
 
+    // Characters
+    public static final String PLAYER_32_SPRITES = "characters/player/lysy_32_frames.png";
+
     // Maps
     public static final String MAP_TEST0 = "maps/tmx/opentest.tmx";
     public static final String MAP_TEST1= "maps/tmx/newmap.tmx";
@@ -72,8 +75,7 @@ public class AssetUtils {
     }
 
     public static void loadInitialAssets() {
-        if(!Gdx.app.getType().equals(Application.ApplicationType.WebGL))
-            loadPixmap(CURSOR);
+        loadPixmap(CURSOR);
         loadTexture(KORBA_LOGO);
         loadTexture(GAME_LOGO);
         loadTexture(PLAYER_64);
@@ -96,6 +98,7 @@ public class AssetUtils {
         loadTexture(ITEM_PINDOL);
         loadTexture(ITEM_PLACEHOLDER);
         loadTexture(ITEM_MECHA_PINDOL);
+        loadTexture(PLAYER_32_SPRITES);
 
         loadMap(MAP_TEST0);
         loadMap(MAP_TEST1);

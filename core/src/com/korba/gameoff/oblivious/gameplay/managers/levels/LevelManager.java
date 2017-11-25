@@ -27,17 +27,15 @@ public class LevelManager {
     private final int DOOR_LAYER = 5;
 
 
-
-
-    public LevelManager(ObscurityGame game, World world, TiledMap map, MapManager mapManager){
-            this.map = map;
-            this.game = game;
+    public LevelManager(ObscurityGame game, World world, TiledMap map, MapManager mapManager) {
+        this.map = map;
+        this.game = game;
 
         walls = new Array<>();
         for (MapObject object : map.getLayers().get(WALL_LAYER).getObjects().getByType(RectangleMapObject.class)) {
-                Rectangle rect = ((RectangleMapObject) object).getRectangle();
-               walls.add( new StaticObject(world, map, rect));
-            }
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+            walls.add(new StaticObject(world, map, rect));
+        }
 
         spawnPoints = new Array<>();
         for (MapObject object : map.getLayers().get(SPAWN_POINTS).getObjects().getByType(RectangleMapObject.class)) {
@@ -54,38 +52,47 @@ public class LevelManager {
     }
 
 
-        public void setActive(){
-            for (StaticObject wall : walls){
-                //wall.getBody().setActive(true);
-                wall.setCategoryFilter(GameConfig.STATIC_OBJECT_BIT);
-            }
-            for (Door door : doors){
-                //door.getBody().setActive(true);
-                door.setCategoryFilter(GameConfig.DOOR_BIT);
-            }
-
+    public void setActive() {
+        for (StaticObject wall : walls) {
+            //wall.getBody().setActive(true);
+            wall.setCategoryFilter(GameConfig.STATIC_OBJECT_BIT);
+        }
+        for (Door door : doors) {
+            //door.getBody().setActive(true);
+            door.setCategoryFilter(GameConfig.DOOR_BIT);
         }
 
-        public void setInactive(){
-            for (StaticObject wall : walls){
+    }
+
+    public void setInactive() {
+        for (StaticObject wall : walls) {
             //wall.getBody().setActive(false);
-                wall.setCategoryFilter(GameConfig.DEFAULT_BIT);
-             }
-            for (Door door : doors){
-               // door.getBody().setActive(false);
-                door.setCategoryFilter(GameConfig.DEFAULT_BIT);
-            }
+            wall.setCategoryFilter(GameConfig.DEFAULT_BIT);
         }
-        public Vector2 getPlayerPosition(){
+        for (Door door : doors) {
+            // door.getBody().setActive(false);
+            door.setCategoryFilter(GameConfig.DEFAULT_BIT);
+        }
+    }
+
+    public Vector2 getPlayerPosition() {
         return spawnPoints.first();
-        }
-        public TiledMap getMap() {return map;}
-        public void setLastSpawnPoint(Vector2 lastSpawnPoint) {
+    }
+
+    public TiledMap getMap() {
+        return map;
+    }
+
+    public void setLastSpawnPoint(Vector2 lastSpawnPoint) {
         this.lastSpawnPoint = lastSpawnPoint;
     }
-        public Vector2 getLastSpawnPoint() {
+
+    public Vector2 getLastSpawnPoint() {
         return lastSpawnPoint;
     }
-        public MapType getMapType() {    return mapType; }
+
+    public MapType getMapType() {
+        return mapType;
+    }
 
 }

@@ -12,15 +12,14 @@ public class PlayerLight extends PointLight {
 
     public PlayerLight(RayHandler rayHandler, int rays, Body body, Color color, float strength, float radius) {
         super(rayHandler, rays);
-        this.color  = color;
+        this.color = color;
         attachToBody(body);
         setStrength(strength);
         setColor(this.color);
         setDistance(radius);
-        setContactFilter((short)0, (short)4,(short)4); //randomowe wartosci
+        setContactFilter((short) 0, (short) 4, (short) 4); //randomowe wartosci
 
     }
-
 
     @Override
     public void update() {

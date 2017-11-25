@@ -6,16 +6,16 @@ import java.util.*;
 
 public class CombineMaszin {
 
-
-
     public static Item combineItems(Item... items) {
         List<Item> itemsList = new ArrayList<>();
+
         for(int i = 0; i < items.length; i++) {
-            if(items[i] == null) {
+            if(items[i] == null)
                 continue;
-            }
+
             if(!items[i].isCombinable())
                 return null;
+
             itemsList.add(items[i]);
         }
 

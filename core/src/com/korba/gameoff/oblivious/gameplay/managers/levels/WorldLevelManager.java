@@ -92,7 +92,8 @@ public class WorldLevelManager extends LevelManager {
                 return metroExit2;
             case METROSTATION3:
                 return metroExit3;
-                default: return new Vector2(0,0);
+            default:
+                return new Vector2(0,0);
         }
     }
 

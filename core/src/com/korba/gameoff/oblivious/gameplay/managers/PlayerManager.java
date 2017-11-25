@@ -19,38 +19,39 @@ public class PlayerManager {
     private World world;
     private PlayerLight light;
 
-    public PlayerManager(World world){
+    public PlayerManager(World world) {
         this.world = world;
         definePhysics(world);
         defineSprite();
     }
 
-    private void definePhysics(World world){
-        this.physics = new PlayerPhysics(world, new Vector2(0,0));
+    private void definePhysics(World world) {
+        this.physics = new PlayerPhysics(world, new Vector2(0, 0));
     }
 
-    private void defineSprite(){
+    private void defineSprite() {
         this.sprite64 = new PlayerSprite(new TextureRegion(AssetUtils.getTexture(AssetUtils.PLAYER_64), 0, 0, 32, 64));
         this.sprite32 = new PlayerSprite(new TextureRegion(AssetUtils.getTexture(AssetUtils.PLAYER_32), 0, 0, 32, 32));
         this.sprite = sprite32;
 
     }
 
-    public void createLight(RayHandler rayHandler){
+    public void createLight(RayHandler rayHandler) {
         light = new PlayerLight(rayHandler, 500, physics.getBody(), Color.BLACK, 1f, 12);
     }
 
     public PlayerPhysics getPhysics() {
         return physics;
     }
+
     public PlayerSprite getSprite() {
         return sprite;
     }
 
     public void setSpriteType(MapType type) {
-        if(type == MapType.OPEN){
+        if (type.equals(MapType.OPEN)) {
             sprite = sprite32;
-        }else{
+        } else {
             sprite = sprite64;
         }
     }

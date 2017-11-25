@@ -32,8 +32,8 @@ public class CollisionSystem extends EntitySystem implements ContactListener {
         Fixture fixtureA = contact.getFixtureA();
         Fixture fixtureB = contact.getFixtureB();
 
-        Fixture player = contact.getFixtureA().getUserData() == "player" ? contact.getFixtureA() : contact.getFixtureB();
-        Fixture object = player == contact.getFixtureA() ? contact.getFixtureB() : contact.getFixtureA();
+        Fixture player = contact.getFixtureA().getUserData().equals("player") ? contact.getFixtureA() : contact.getFixtureB();
+        Fixture object = player.equals(contact.getFixtureA()) ? contact.getFixtureB() : contact.getFixtureA();
 
         int collisionBits = fixtureA.getFilterData().categoryBits | fixtureB.getFilterData().categoryBits;
 
