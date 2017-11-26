@@ -26,16 +26,16 @@ public class KeyboardMovementSystem extends EntitySystem {
             BodyComponent bodyCom = entity.getComponent(BodyComponent.class);
             VelocityComponent velocityCom = entity.getComponent(VelocityComponent.class);
             //Gdx.app.debug("Keyboard input", "key pressed");
-            if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+            if (Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isKeyPressed(Input.Keys.W)) {
                 //  Gdx.app.debug("Keyboard input", "up pressed");
                 bodyCom.body.setLinearVelocity(0, velocityCom.velocity);
-            } else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+            } else if (Gdx.input.isKeyPressed(Input.Keys.DOWN) || Gdx.input.isKeyPressed(Input.Keys.S)) {
                 // Gdx.app.debug("Keyboard input", "down pressed");
                 bodyCom.body.setLinearVelocity(0, -velocityCom.velocity);
-            } else if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+            } else if (Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)) {
                 //  Gdx.app.debug("Keyboard input", "left pressed");
                 bodyCom.body.setLinearVelocity(-velocityCom.velocity, 0);
-            } else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+            } else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)) {
                 // Gdx.app.debug("Keyboard input", "right pressed");
                 bodyCom.body.setLinearVelocity(velocityCom.velocity, 0);
             } else {
