@@ -8,6 +8,8 @@ public class GameConfig {
     public static final int PPM = 16; //pixels per meter
     public static final int TILE_SIZE = 32;
     public static final boolean IS_DEVMODE = true;
+    public static final float OUTDOOR_VELOCITY = 12f;
+    public static final float INDOOR_VELOCITY = 6f;
 
     //collision bits
     public static final short DEFAULT_BIT = 1;
