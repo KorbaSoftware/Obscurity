@@ -80,6 +80,7 @@ public class AssetUtils {
         loadTexture(GAME_LOGO);
         loadTexture(PLAYER_64);
         loadTexture(PLAYER_32);
+        loadTexture(PLAYER_32_SPRITES);
     }
 
     public static void loadRemainingAssets() {
@@ -98,7 +99,6 @@ public class AssetUtils {
         loadTexture(ITEM_PINDOL);
         loadTexture(ITEM_PLACEHOLDER);
         loadTexture(ITEM_MECHA_PINDOL);
-        loadTexture(PLAYER_32_SPRITES);
 
         loadMap(MAP_TEST0);
         loadMap(MAP_TEST1);

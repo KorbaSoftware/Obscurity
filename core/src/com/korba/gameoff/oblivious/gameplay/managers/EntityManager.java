@@ -22,15 +22,15 @@ public class EntityManager {
     public EntityManager(Engine engine, SpriteBatch spriteBatch, World world) {
         this.engine = engine;
         this.world = world;
+        createPlayer();
         mouseMovementSystem = new MouseMovementSystem();
-        keyboardMovementSystem = new KeyboardMovementSystem();
+        keyboardMovementSystem = new KeyboardMovementSystem(player);
         CollisionSystem collisionSystem = new CollisionSystem(world);
         PositionSystem positionSystem = new PositionSystem();
-        RenderSystem renderSystem = new RenderSystem(spriteBatch);
+        RenderSystem renderSystem = new RenderSystem(spriteBatch, player);
         engine.addSystem(collisionSystem);
         engine.addSystem(positionSystem);
         engine.addSystem(renderSystem);
-        createPlayer();
     }
 
     private void createPlayer() {

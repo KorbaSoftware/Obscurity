@@ -74,7 +74,8 @@ public class GameScreen extends BasicScreen {
                 .add(new SpriteComponent(player.getSprite().getTextureRegion()))
                 .add(new RenderableComponent())
                 .add(new PlayerComponent())
-                .add(new BodyComponent(player.getPhysics().getBody()));
+                .add(new BodyComponent(player.getPhysics().getBody()))
+                .add(new AnimationComponent(player.getAnimations()));
         game.getEntityManager().getEngine().addEntity(playerEntity);
     }
 
