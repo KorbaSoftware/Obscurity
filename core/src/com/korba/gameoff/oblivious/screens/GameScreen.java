@@ -32,7 +32,6 @@ public class GameScreen extends BasicScreen {
     private Entity cameraEntity;
     private RayHandler rayHandler;
     private PauseOverlay pause;
-    private Boolean hasOptionWindowInstance = false;
 
     public GameScreen(SpriteBatch batch, ObscurityGame game, MapType type) {
         super(batch, game);
@@ -41,11 +40,9 @@ public class GameScreen extends BasicScreen {
     @Override
     public void show() {
         setViewportAndCamera();
+        pause = null;
         Gdx.input.setInputProcessor(new GameInputProcessor());
         ObscurityGame.setGameState(ObscurityGame.GameState.RUNNING);
-        pause = new PauseOverlay(stage);
-        pause.center().top();
-        pause.setVisible(false);
         world = game.getWorld();
         mapManager = new MapManager(MapType.OPEN, game, world);
         game.getEntityManager().getEngine().addSystem(game.getEntityManager().getKeyboardMovementSystem());
@@ -97,10 +94,7 @@ public class GameScreen extends BasicScreen {
     public void render(float delta) {
         switch(ObscurityGame.getGameState()){
             case RUNNING:{
-                if(hasOptionWindowInstance){
-
-                    hasOptionWindowInstance = false;
-                }
+                pause = null;
                 update(delta);
                 Gdx.gl.glClearColor(0, 0, 0, 1);
                 Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
@@ -142,12 +136,10 @@ public class GameScreen extends BasicScreen {
 
     @Override
     public void pause(){
-        if(!hasOptionWindowInstance){
+        if(pause == null){
             super.clearScreen();
             pause = new PauseOverlay(stage);
-            hasOptionWindowInstance = true;
         }
-
         pause.doThings();
     }
 
