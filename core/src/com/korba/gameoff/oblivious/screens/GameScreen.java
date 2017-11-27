@@ -31,7 +31,7 @@ public class GameScreen extends BasicScreen {
     private Entity playerEntity;
     private Entity cameraEntity;
     private RayHandler rayHandler;
-    private PauseOverlay pause=null;
+    private PauseOverlay pause;
 
     public GameScreen(SpriteBatch batch, ObscurityGame game, MapType type) {
         super(batch, game);
@@ -40,6 +40,7 @@ public class GameScreen extends BasicScreen {
     @Override
     public void show() {
         setViewportAndCamera();
+        pause = null;
         Gdx.input.setInputProcessor(new GameInputProcessor());
         ObscurityGame.setGameState(ObscurityGame.GameState.RUNNING);
         world = game.getWorld();
@@ -139,7 +140,6 @@ public class GameScreen extends BasicScreen {
             super.clearScreen();
             pause = new PauseOverlay(stage);
         }
-
         pause.doThings();
     }
 
