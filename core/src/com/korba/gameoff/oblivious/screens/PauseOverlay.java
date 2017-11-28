@@ -65,7 +65,7 @@ public class PauseOverlay extends Dialog {
         thisOverlay.getContentTable().add(optionsImage).padBottom(10);
 
         for(Image image : imageList){
-            buttonTable.add(image).width(optionsImage.getWidth()-100).height(optionsImage.getHeight()-10).padBottom(10);
+            buttonTable.add(image).width(optionsImage.getWidth()*0.9f).height(optionsImage.getHeight()*0.9f).padBottom(10);
             buttonTable.row();
         }
 

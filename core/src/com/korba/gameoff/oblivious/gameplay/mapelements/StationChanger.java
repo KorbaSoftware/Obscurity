@@ -24,12 +24,7 @@ public class StationChanger extends MapObject{
 
     @Override
     public void onContact() {
-        if(direction == -1){
-            mapManager.previousStation();
-        }
-        if(direction == 1){
-            mapManager.nextStation();
-        }
+        mapManager.changeStation(direction);
 
     }
 }

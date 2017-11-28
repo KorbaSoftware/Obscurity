@@ -78,7 +78,7 @@ public class InventoryUI extends Window {
                 Item item1 = getItemFromInventory(16, false);
                 Item item2 = getItemFromInventory(17, false);
                 Item item3 = getItemFromInventory(18, false);
-                Item combinedItem = CombineMaszin.combineItems(item1, item2, item3);
+                Item combinedItem = CombineMachine.combineItems(item1, item2, item3);
                 if(combinedItem != null) {
                     addItemToInventory(combinedItem);
                     getItemFromInventory(16, true);

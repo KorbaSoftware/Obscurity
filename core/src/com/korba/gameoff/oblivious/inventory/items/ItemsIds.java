@@ -5,7 +5,10 @@ public class ItemsIds {
     // normal item id power of 2
     // combine item id sum of normal ids
 
+    //partial items
     public static final int BROKEN_RADIO = 1;
     public static final int PINDOL = 2;
-    public static final int MECHA_PINDOL = 3; //broken_radio + pindol
+
+    //final items
+    public static final int MECHA_PINDOL = BROKEN_RADIO | PINDOL; //broken_radio + pindol
 }

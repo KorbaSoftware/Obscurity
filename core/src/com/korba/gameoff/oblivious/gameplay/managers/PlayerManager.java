@@ -80,10 +80,10 @@ public class PlayerManager {
             leftFrames32.addAll(frames32[2][0], frames32[2][1], frames32[2][2], frames32[2][3]);
             rightFrames32.addAll(frames32[3][0], frames32[3][1], frames32[3][2], frames32[3][3]);
 
-            animations.put("WALK_DOWN_32", new Animation(1f / 6f, downFrames32));
-            animations.put("WALK_UP_32", new Animation(1f / 6f, upFrames32));
-            animations.put("WALK_LEFT_32", new Animation(1f / 6f, leftFrames32));
-            animations.put("WALK_RIGHT_32", new Animation(1f / 6f, rightFrames32));
+            animations.put("WALK_DOWN_32", new Animation(1f / 8f, downFrames32));
+            animations.put("WALK_UP_32", new Animation(1f / 8f, upFrames32));
+            animations.put("WALK_LEFT_32", new Animation(1f / 8f, leftFrames32));
+            animations.put("WALK_RIGHT_32", new Animation(1f / 8f, rightFrames32));
 
             animations.forEach((k, v) -> v.setPlayMode(Animation.PlayMode.LOOP));
         }
