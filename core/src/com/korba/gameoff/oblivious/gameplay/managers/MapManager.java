@@ -179,14 +179,6 @@ public class MapManager {
         return position;
     }
 
-    public void previousStation() {
-        changeStation(-1);
-    }
-
-    public void nextStation() {
-        changeStation(1);
-    }
-
     public void changeStation(int direction) {
         for (MetroStationManager station : stations) {
             if (lastStationEntered.getMapType().equals(station.getMapType())) {

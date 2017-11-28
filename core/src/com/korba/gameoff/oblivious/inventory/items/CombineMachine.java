@@ -4,7 +4,7 @@ import com.korba.gameoff.oblivious.tools.*;
 
 import java.util.*;
 
-public class CombineMaszin {
+public class CombineMachine {
 
     public static Item combineItems(Item... items) {
         List<Item> itemsList = new ArrayList<>();
