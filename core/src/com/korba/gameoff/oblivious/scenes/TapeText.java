@@ -1,7 +1,5 @@
 package com.korba.gameoff.oblivious.scenes;
 
-import com.badlogic.gdx.utils.Json;
-
 import java.util.LinkedList;
 
 public class TapeText {

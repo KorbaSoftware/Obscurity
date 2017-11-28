@@ -8,7 +8,6 @@ import com.korba.gameoff.oblivious.scenes.TapeText;
 public class TextLoader {
 
     private TapeText tapeText;
-    private String text="";
 
     public TextLoader(int tapeId){
         tapeText = new TapeText(tapeId);
@@ -25,7 +24,6 @@ public class TextLoader {
                        tapeText.addText(value2.getString("text"));
                     }
             }
-
         }
     }
 
@@ -39,6 +37,7 @@ public class TextLoader {
         }
         else return null;
     }
+
     public String getFirst(){
         return tapeText.getFirstText();
     }

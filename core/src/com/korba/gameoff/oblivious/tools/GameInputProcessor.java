@@ -3,7 +3,6 @@ package com.korba.gameoff.oblivious.tools;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.korba.gameoff.oblivious.ObscurityGame;
-import com.korba.gameoff.oblivious.scenes.TapeScene;
 
 public class GameInputProcessor implements InputProcessor {
 
@@ -28,7 +27,7 @@ public class GameInputProcessor implements InputProcessor {
                 }
                 break;
 
-            //BACKSPACE just to test new scene
+            //BACKSPACE just to test new stage
             case Input.Keys.BACKSPACE:{
                 switch (ObscurityGame.getGameState()){
                     case RUNNING:{
@@ -41,15 +40,6 @@ public class GameInputProcessor implements InputProcessor {
                 }
             }
             break;
-
-            case Input.Keys.ENTER:{
-                switch (ObscurityGame.getGameState()){
-                    case CUTSCENE:
-                        ObscurityGame.setGameState(ObscurityGame.GameState.FIGHT);
-                        break;
-
-                }
-            }
         }
         return true;
     }
