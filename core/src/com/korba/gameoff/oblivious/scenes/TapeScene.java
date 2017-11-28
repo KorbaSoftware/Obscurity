@@ -2,7 +2,6 @@ package com.korba.gameoff.oblivious.scenes;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -17,7 +16,6 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.korba.gameoff.oblivious.ObscurityGame;
 import com.korba.gameoff.oblivious.config.LauncherConfig;
-import com.korba.gameoff.oblivious.screens.ProfileScreen;
 import com.korba.gameoff.oblivious.tools.AssetUtils;
 import com.korba.gameoff.oblivious.tools.TextLoader;
 
@@ -36,7 +34,7 @@ public class TapeScene implements Disposable {
         viewport = new FitViewport(LauncherConfig.WIDTH,LauncherConfig.HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, sb);
 
-        txtLoader = new TextLoader(1);
+        txtLoader = new TextLoader(2);
         txtLoader.loadTexts();
         textLabel = new Label(txtLoader.getTextById(0), AssetUtils.DEFAULT_SKIN);
         testImage = new Image(AssetUtils.getTexture(AssetUtils.OPTIONS));
@@ -48,7 +46,6 @@ public class TapeScene implements Disposable {
             }
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("TEST KURWA");
                 nextText();
             }
         });
@@ -63,15 +60,13 @@ public class TapeScene implements Disposable {
     }
 
     public void nextText(){
-
-        if(txtLoader.getTextById(iterator)!=null) {
+        if(txtLoader.getTextById(iterator)!= null) {
             textLabel.setText(txtLoader.getTextById(iterator++));
         }
         else {
             clearScreen();
             textLabel.setText(txtLoader.getFirst());
             iterator = 1;
-            Gdx.input.setInputProcessor(null);
             ObscurityGame.setGameState(ObscurityGame.GameState.RUNNING);
         }
     }

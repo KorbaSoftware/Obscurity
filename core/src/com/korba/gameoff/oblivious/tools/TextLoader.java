@@ -21,8 +21,8 @@ public class TextLoader {
         for(JsonValue value1 : allTapes){                                   //CO JA TU ODJANIEPAWLILEM XD
             if(value1.getInt("tapeId") == tapeText.getTapeId()){
                 for(JsonValue value2 : value1.get("texts")){
-                       tapeText.addText(value2.getString("text"));
-                    }
+                    tapeText.addText(value2.toString());
+                }
             }
         }
     }

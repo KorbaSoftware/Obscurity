@@ -2,42 +2,15 @@
   "tapeText":[
     {
       "tapeId":"0",
-      "texts":[
-
-        {
-          "text":"No i juz"
-        },
-        {
-          "text":"Kolejny tekst"
-        },
-        {
-          "text":"I kolejny"
-        },
-        {
-          "text":"I kolejny"
-        }
-      ]
+      "texts":["Tekst kasety id 0", "1", "2" , "3", "4", "5", "6"]
     },
     {
       "tapeId":"1",
-      "texts":[
-
-        {
-          "text":"Tekst pierwszy "
-        },
-        {
-          "text":"Testk drugi"
-        },
-        {
-          "text":"Tekst trzeci"
-        },
-        {
-          "text":"Tekst czwarty"
-        },
-        {
-          "text":"Tekst piaty - ostatni"
-        }
-      ]
+      "texts":["Tekst pierwszy", "Testk drugi", "Tekst trzeci", "Tekst czwarty", "Tekst piaty - ostatni"]
+    },
+    {
+      "tapeId":"2",
+      "texts":["10", "9", "8", "7", "6", "5", "4", "3", "2" ,"1", "0"]
     }
   ]
 }
