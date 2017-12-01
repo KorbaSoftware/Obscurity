@@ -17,6 +17,7 @@ import com.korba.gameoff.oblivious.gameplay.components.*;
 import com.korba.gameoff.oblivious.gameplay.managers.MapManager;
 import com.korba.gameoff.oblivious.gameplay.managers.MapType;
 import com.korba.gameoff.oblivious.gameplay.managers.PlayerManager;
+import com.korba.gameoff.oblivious.scenes.TapeScene;
 import com.korba.gameoff.oblivious.screens.dev.BasicScreen;
 import com.korba.gameoff.oblivious.tools.GameInputProcessor;
 
@@ -32,6 +33,8 @@ public class GameScreen extends BasicScreen {
     private Entity cameraEntity;
     private RayHandler rayHandler;
     private PauseOverlay pause;
+    private TapeScene tapeScene;
+    private GameInputProcessor gameInputProcessor;
 
     public GameScreen(SpriteBatch batch, ObscurityGame game, MapType type) {
         super(batch, game);
@@ -39,7 +42,9 @@ public class GameScreen extends BasicScreen {
 
     @Override
     public void show() {
+        gameInputProcessor = new GameInputProcessor();
         setViewportAndCamera();
+        tapeScene = new TapeScene(batch, game);
         pause = null;
         Gdx.input.setInputProcessor(new GameInputProcessor());
         ObscurityGame.setGameState(ObscurityGame.GameState.RUNNING);
@@ -95,6 +100,7 @@ public class GameScreen extends BasicScreen {
     public void render(float delta) {
         switch(ObscurityGame.getGameState()){
             case RUNNING:{
+                Gdx.input.setInputProcessor(gameInputProcessor);
                 pause = null;
                 update(delta);
                 Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -122,6 +128,14 @@ public class GameScreen extends BasicScreen {
             case PAUSED:{
                 pause();
                 break;
+            }
+
+
+            case CUTSCENE:{
+                tapeScene.clearScreen();
+                tapeScene.setInput();
+                tapeScene.stage.draw();
+
             }
         }
     }
