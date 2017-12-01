@@ -23,7 +23,7 @@ public class EntityManager {
         this.engine = engine;
         this.world = world;
         createPlayer();
-        mouseMovementSystem = new MouseMovementSystem();
+        mouseMovementSystem = new MouseMovementSystem(player);
         keyboardMovementSystem = new KeyboardMovementSystem(player);
         CollisionSystem collisionSystem = new CollisionSystem(world);
         PositionSystem positionSystem = new PositionSystem();

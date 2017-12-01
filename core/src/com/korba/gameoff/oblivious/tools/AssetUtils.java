@@ -16,6 +16,7 @@ public class AssetUtils {
 
     // Characters
     public static final String PLAYER_32_SPRITES = "characters/player/lysy_32_frames.png";
+    public static final String PLAYER_64_SPRITES = "characters/player/lysy_64_frames.png";
 
     // Maps
     public static final String MAP_TEST0 = "maps/tmx/opentest.tmx";
@@ -81,6 +82,7 @@ public class AssetUtils {
         loadTexture(PLAYER_64);
         loadTexture(PLAYER_32);
         loadTexture(PLAYER_32_SPRITES);
+        loadTexture(PLAYER_64_SPRITES);
     }
 
     public static void loadRemainingAssets() {
