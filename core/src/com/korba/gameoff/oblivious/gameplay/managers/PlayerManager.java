@@ -69,8 +69,9 @@ public class PlayerManager {
 
     private void defineAnimation() {
         animations = new HashMap<>();
-        if(AssetUtils.isAssetLoaded(AssetUtils.PLAYER_32_SPRITES)) {
+        if(AssetUtils.isAssetLoaded(AssetUtils.PLAYER_32_SPRITES) && AssetUtils.isAssetLoaded(AssetUtils.PLAYER_64_SPRITES)) {
             TextureRegion[][] frames32 = TextureRegion.split(AssetUtils.getTexture(AssetUtils.PLAYER_32_SPRITES), 32, 32);
+            TextureRegion[][] frames64 = TextureRegion.split(AssetUtils.getTexture(AssetUtils.PLAYER_64_SPRITES), 32, 64);
             Array<TextureRegion> downFrames32 = new Array<>();
             Array<TextureRegion> upFrames32 = new Array<>();
             Array<TextureRegion> leftFrames32 = new Array<>();
@@ -84,6 +85,18 @@ public class PlayerManager {
             animations.put("WALK_UP_32", new Animation(1f / 8f, upFrames32));
             animations.put("WALK_LEFT_32", new Animation(1f / 8f, leftFrames32));
             animations.put("WALK_RIGHT_32", new Animation(1f / 8f, rightFrames32));
+
+            Array<TextureRegion> downFrames64 = new Array<>();
+            Array<TextureRegion> upFrames64 = new Array<>();
+            Array<TextureRegion> sideFrames64 = new Array<>();
+
+            upFrames64.addAll(frames64[0][0], frames64[0][1], frames64[0][2], frames64[0][3], frames64[0][4], frames64[0][5], frames64[0][6]);
+            downFrames64.addAll(frames64[1][0], frames64[1][1], frames64[1][2], frames64[1][3], frames64[1][4], frames64[1][5], frames64[1][6]);
+            sideFrames64.addAll(frames64[2][0], frames64[2][1], frames64[2][2], frames64[2][3], frames64[2][1], frames64[2][5], frames64[2][6], frames64[2][7], frames64[2][8]);
+
+            animations.put("WALK_DOWN_64", new Animation(1f / 8f, downFrames64));
+            animations.put("WALK_UP_64", new Animation(1f / 8f, upFrames64));
+            animations.put("WALK_SIDE_64", new Animation(1f / 8f, sideFrames64));
 
             animations.forEach((k, v) -> v.setPlayMode(Animation.PlayMode.LOOP));
         }

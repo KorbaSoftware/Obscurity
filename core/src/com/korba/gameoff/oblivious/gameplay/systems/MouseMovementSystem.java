@@ -12,6 +12,7 @@ import com.korba.gameoff.oblivious.gameplay.components.BodyComponent;
 import com.korba.gameoff.oblivious.gameplay.components.CameraComponent;
 import com.korba.gameoff.oblivious.gameplay.components.PlayerComponent;
 import com.korba.gameoff.oblivious.gameplay.components.VelocityComponent;
+import com.korba.gameoff.oblivious.gameplay.managers.*;
 
 public class MouseMovementSystem extends EntitySystem {
 
@@ -24,6 +25,11 @@ public class MouseMovementSystem extends EntitySystem {
     Vector3 playerPosition;
     float deltaX = 0;
     float deltaY = 0;
+    private PlayerManager player;
+
+    public MouseMovementSystem(PlayerManager player) {
+        this.player = player;
+    }
 
     public void addedToEngine(Engine engine) {
         entities = engine.getEntitiesFor(Family.all(BodyComponent.class, VelocityComponent.class, PlayerComponent.class).get());
@@ -60,20 +66,34 @@ public class MouseMovementSystem extends EntitySystem {
         if (!(deltaY < 1 && deltaY > -1) || !(deltaX < 1 && deltaX > -1)) {
             if (deltaY > 1) {
                 bodyComponent.body.setLinearVelocity(bodyComponent.body.getLinearVelocity().x, velocityComponent.velocity);
+                player.setState(PlayerManager.PLAYER_STATE.WALKING);
+                player.setDirection(PlayerManager.PLAYER_DIRECTION.UP);
             } else if (deltaY < -1) {
                 bodyComponent.body.setLinearVelocity(bodyComponent.body.getLinearVelocity().x, -velocityComponent.velocity);
-            } else
+                player.setState(PlayerManager.PLAYER_STATE.WALKING);
+                player.setDirection(PlayerManager.PLAYER_DIRECTION.DOWN);
+            } else {
                 bodyComponent.body.setLinearVelocity(bodyComponent.body.getLinearVelocity().x, 0);
+                player.setState(PlayerManager.PLAYER_STATE.IDLE);
+            }
 
             if (deltaX > 1) {
                 bodyComponent.body.setLinearVelocity(velocityComponent.velocity, bodyComponent.body.getLinearVelocity().y);
+                player.setState(PlayerManager.PLAYER_STATE.WALKING);
+                player.setDirection(PlayerManager.PLAYER_DIRECTION.RIGHT);
             } else if (deltaX < -1) {
                 bodyComponent.body.setLinearVelocity(-velocityComponent.velocity, bodyComponent.body.getLinearVelocity().y);
-            } else
+                player.setState(PlayerManager.PLAYER_STATE.WALKING);
+                player.setDirection(PlayerManager.PLAYER_DIRECTION.LEFT);
+            } else {
                 bodyComponent.body.setLinearVelocity(0, bodyComponent.body.getLinearVelocity().y);
+                player.setState(PlayerManager.PLAYER_STATE.IDLE);
+            }
 
-        } else
+        } else {
             bodyComponent.body.setLinearVelocity(0, 0);
+            player.setState(PlayerManager.PLAYER_STATE.IDLE);
+        }
     }
 
     public void nullify() {

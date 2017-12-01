@@ -59,6 +59,17 @@ public class RenderSystem extends EntitySystem {
                     } else if (direction.equals(PlayerManager.PLAYER_DIRECTION.RIGHT)) {
                         spriteComponent.sprite.setRegion((TextureRegion) player.getAnimations().get("WALK_RIGHT_32").getKeyFrame(walking ? stateTime : 0));
                     }
+                } else {
+                    if (direction.equals(PlayerManager.PLAYER_DIRECTION.UP)) {
+                        spriteComponent.sprite.setRegion((TextureRegion) player.getAnimations().get("WALK_UP_64").getKeyFrame(walking ? stateTime : 0));
+                    } else if (direction.equals(PlayerManager.PLAYER_DIRECTION.DOWN)) {
+                        spriteComponent.sprite.setRegion((TextureRegion) player.getAnimations().get("WALK_DOWN_64").getKeyFrame(walking ? stateTime : 0));
+                    } else if (direction.equals(PlayerManager.PLAYER_DIRECTION.LEFT)) {
+                        spriteComponent.sprite.setRegion((TextureRegion) player.getAnimations().get("WALK_SIDE_64").getKeyFrame(walking ? stateTime : 0));
+                        spriteComponent.sprite.flip(true, false);
+                    } else if (direction.equals(PlayerManager.PLAYER_DIRECTION.RIGHT)) {
+                        spriteComponent.sprite.setRegion((TextureRegion) player.getAnimations().get("WALK_SIDE_64").getKeyFrame(walking ? stateTime : 0));
+                    }
                 }
             }
 
