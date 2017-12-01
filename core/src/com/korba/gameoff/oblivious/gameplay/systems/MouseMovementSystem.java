@@ -74,7 +74,7 @@ public class MouseMovementSystem extends EntitySystem {
                 player.setDirection(PlayerManager.PLAYER_DIRECTION.DOWN);
             } else {
                 bodyComponent.body.setLinearVelocity(bodyComponent.body.getLinearVelocity().x, 0);
-                player.setState(PlayerManager.PLAYER_STATE.IDLE);
+                player.setState(PlayerManager.PLAYER_STATE.WALKING);
             }
 
             if (deltaX > 1) {
@@ -87,7 +87,7 @@ public class MouseMovementSystem extends EntitySystem {
                 player.setDirection(PlayerManager.PLAYER_DIRECTION.LEFT);
             } else {
                 bodyComponent.body.setLinearVelocity(0, bodyComponent.body.getLinearVelocity().y);
-                player.setState(PlayerManager.PLAYER_STATE.IDLE);
+                player.setState(PlayerManager.PLAYER_STATE.WALKING);
             }
 
         } else {
