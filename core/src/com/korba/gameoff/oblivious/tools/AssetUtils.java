@@ -57,6 +57,8 @@ public class AssetUtils {
     public static final String PROFILE_ONE = "buttons/profile_one.png";
     public static final String RESUME = "buttons/resume.png";
     public static final String SAVE_GAME ="buttons/save_game.png";
+    public static final String TAPE_SCREEN = "buttons/tape.png";
+    public static final String TEXT_BG = "buttons/text_bg.png";
 
 
     public static final TextureAtlas DEFAULT_SKIN_TEXTURE_ATLAS = new TextureAtlas(DEFAULT_SKIN_ATLAS_PATH);
@@ -101,6 +103,8 @@ public class AssetUtils {
         loadTexture(ITEM_PINDOL);
         loadTexture(ITEM_PLACEHOLDER);
         loadTexture(ITEM_MECHA_PINDOL);
+        loadTexture(TAPE_SCREEN);
+        loadTexture(TEXT_BG);
 
         loadMap(MAP_TEST0);
         loadMap(MAP_TEST1);
