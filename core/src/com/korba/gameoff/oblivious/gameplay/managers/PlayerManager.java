@@ -94,9 +94,9 @@ public class PlayerManager {
             downFrames64.addAll(frames64[1][0], frames64[1][1], frames64[1][2], frames64[1][3], frames64[1][4], frames64[1][5], frames64[1][6]);
             sideFrames64.addAll(frames64[2][0], frames64[2][1], frames64[2][2], frames64[2][3], frames64[2][1], frames64[2][5], frames64[2][6], frames64[2][7], frames64[2][8]);
 
-            animations.put("WALK_DOWN_64", new Animation(1f / 8f, downFrames64));
-            animations.put("WALK_UP_64", new Animation(1f / 8f, upFrames64));
-            animations.put("WALK_SIDE_64", new Animation(1f / 8f, sideFrames64));
+            animations.put("WALK_DOWN_64", new Animation(1f / 10f, downFrames64));
+            animations.put("WALK_UP_64", new Animation(1f / 10f, upFrames64));
+            animations.put("WALK_SIDE_64", new Animation(1f / 10f, sideFrames64));
 
             animations.forEach((k, v) -> v.setPlayMode(Animation.PlayMode.LOOP));
         }
