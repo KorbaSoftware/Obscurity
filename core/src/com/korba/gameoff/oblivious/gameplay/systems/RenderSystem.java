@@ -45,19 +45,19 @@ public class RenderSystem extends EntitySystem {
 
             if (entity.equals(entities.first())) {
                 stateTime += deltaTime;
-                if (player.getState().equals(PlayerManager.PLAYER_STATE.WALKING)) {
-                    PlayerManager.PLAYER_DIRECTION direction = player.getDirection();
+                PlayerManager.PLAYER_DIRECTION direction = player.getDirection();
 
-                    if(player.getSize().equals(PlayerManager.PLAYER_SIZE.SMALL)) {
-                        if (direction.equals(PlayerManager.PLAYER_DIRECTION.UP)) {
-                            spriteComponent.sprite.setRegion((TextureRegion) player.getAnimations().get("WALK_UP_32").getKeyFrame(stateTime));
-                        } else if (direction.equals(PlayerManager.PLAYER_DIRECTION.DOWN)) {
-                            spriteComponent.sprite.setRegion((TextureRegion) player.getAnimations().get("WALK_DOWN_32").getKeyFrame(stateTime));
-                        } else if (direction.equals(PlayerManager.PLAYER_DIRECTION.LEFT)) {
-                            spriteComponent.sprite.setRegion((TextureRegion) player.getAnimations().get("WALK_LEFT_32").getKeyFrame(stateTime));
-                        } else if (direction.equals(PlayerManager.PLAYER_DIRECTION.RIGHT)) {
-                            spriteComponent.sprite.setRegion((TextureRegion) player.getAnimations().get("WALK_RIGHT_32").getKeyFrame(stateTime));
-                        }
+                boolean walking = (player.getState().equals(PlayerManager.PLAYER_STATE.WALKING));
+
+                if (player.getSize().equals(PlayerManager.PLAYER_SIZE.SMALL)) {
+                    if (direction.equals(PlayerManager.PLAYER_DIRECTION.UP)) {
+                        spriteComponent.sprite.setRegion((TextureRegion) player.getAnimations().get("WALK_UP_32").getKeyFrame(walking ? stateTime : 0));
+                    } else if (direction.equals(PlayerManager.PLAYER_DIRECTION.DOWN)) {
+                        spriteComponent.sprite.setRegion((TextureRegion) player.getAnimations().get("WALK_DOWN_32").getKeyFrame(walking ? stateTime : 0));
+                    } else if (direction.equals(PlayerManager.PLAYER_DIRECTION.LEFT)) {
+                        spriteComponent.sprite.setRegion((TextureRegion) player.getAnimations().get("WALK_LEFT_32").getKeyFrame(walking ? stateTime : 0));
+                    } else if (direction.equals(PlayerManager.PLAYER_DIRECTION.RIGHT)) {
+                        spriteComponent.sprite.setRegion((TextureRegion) player.getAnimations().get("WALK_RIGHT_32").getKeyFrame(walking ? stateTime : 0));
                     }
                 }
             }
