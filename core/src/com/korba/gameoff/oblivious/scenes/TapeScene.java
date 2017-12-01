@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -27,19 +28,21 @@ public class TapeScene implements Disposable {
     private int iterator = 1;
     private Label textLabel;
     private TextLoader txtLoader;
-    private Image testImage;
+    private Image textBackgroundImage, backgroundImage;
 
     public TapeScene(SpriteBatch sb, ObscurityGame game){
         this.game = game;
         viewport = new FitViewport(LauncherConfig.WIDTH,LauncherConfig.HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, sb);
 
-        txtLoader = new TextLoader(2);
+        txtLoader = new TextLoader(1);
         txtLoader.loadTexts();
         textLabel = new Label(txtLoader.getTextById(0), AssetUtils.DEFAULT_SKIN);
-        testImage = new Image(AssetUtils.getTexture(AssetUtils.OPTIONS));
+        textBackgroundImage = new Image(AssetUtils.getTexture(AssetUtils.TEXT_BG));
+        backgroundImage = new Image(AssetUtils.getTexture(AssetUtils.TAPE_SCREEN));
+        textLabel.setFontScale(2,2);
 
-        testImage.addListener(new InputListener() {
+        stage.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
@@ -50,11 +53,17 @@ public class TapeScene implements Disposable {
             }
         });
 
+        Stack textStack = new Stack();
+        backgroundImage.setSize(LauncherConfig.WIDTH, LauncherConfig.HEIGHT*0.75f);
+        textLabel.setAlignment(1);
+        textStack.add(textBackgroundImage);
+        textStack.add(textLabel);
+
         Table table = new Table();
         table.center().top();
-        table.add(testImage).width(LauncherConfig.WIDTH).height(LauncherConfig.HEIGHT*0.75f);;
+        table.add(backgroundImage).width(LauncherConfig.WIDTH).height(LauncherConfig.HEIGHT*0.75f);
         table.row();
-        table.add(textLabel);
+        table.add(textStack).width(LauncherConfig.WIDTH).height(LauncherConfig.HEIGHT*0.25f);
         table.setFillParent(true);
         stage.addActor(table);
     }
@@ -81,7 +90,7 @@ public class TapeScene implements Disposable {
     }
 
     public void clearScreen() {
-        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClearColor(0.55f, 0.1f, 0.1f, 1);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
     }
 }
