@@ -1,6 +1,6 @@
 package com.korba.gameoff.oblivious.gameplay.player;
 
-import javafx.scene.PointLight;
+import box2dLight.PointLight;
 
 public class Player {
 
@@ -21,37 +21,38 @@ public class Player {
         BIG
     }
 
-    private PlayerSprite playerSprite;
-    private PointLight playerLight;
-    private PlayerPhysics playerPhysics;
+    private PlayerSprite sprite32;
+    private PlayerSprite sprite64;
+    private PlayerPhysics physics;
 
-    public Player (PlayerSprite playerSprite, PlayerPhysics playerPhysics, PointLight playerLight) {
-        this.playerSprite = playerSprite;
-        this.playerPhysics = playerPhysics;
-        this.playerLight = playerLight;
+    public Player (PlayerPhysics physics, PlayerSprite sprite32, PlayerSprite sprite64) {
+        this.sprite32 = sprite32;
+        this.sprite64 = sprite64;
+        this.physics = physics;
     }
 
-    public PlayerSprite getPlayerSprite() {
-        return playerSprite;
+    public PlayerPhysics getPhysics() {
+        return physics;
     }
 
-    public void setPlayerSprite(PlayerSprite playerSprite) {
-        this.playerSprite = playerSprite;
+    public void setPhysics(PlayerPhysics physics) {
+        this.physics = physics;
     }
 
-    public PointLight getPlayerLight() {
-        return playerLight;
+    public PlayerSprite getSprite32() {
+        return sprite32;
     }
 
-    public void setPlayerLight(PointLight playerLight) {
-        this.playerLight = playerLight;
+    public void setSprite32(PlayerSprite sprite32) {
+        this.sprite32 = sprite32;
     }
 
-    public PlayerPhysics getPlayerPhysics() {
-        return playerPhysics;
+    public PlayerSprite getSprite64() {
+        return sprite64;
     }
 
-    public void setPlayerPhysics(PlayerPhysics playerPhysics) {
-        this.playerPhysics = playerPhysics;
+    public void setSprite64(PlayerSprite sprite64) {
+        this.sprite64 = sprite64;
     }
+
 }

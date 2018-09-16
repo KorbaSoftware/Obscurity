@@ -21,12 +21,9 @@ public class PlayerManager {
     private Player.DIRECTION direction;
     private Player.SIZE size;
 
-    private PlayerPhysics physics;
-    private PlayerSprite sprite32;
-    private PlayerSprite sprite64;
-    private PlayerSprite sprite;
+    private Player player;
+    private PlayerSprite currentSprite;
     private World world;
-    private PointLight light;
 
     private Map<String, Animation> animations;
 
@@ -34,26 +31,33 @@ public class PlayerManager {
         this.world = world;
         state = Player.STATE.IDLE;
         direction = Player.DIRECTION.DOWN;
-        
-        definePhysics(world);
-        defineSprite();
+        this.player = createPlayer();
+        this.currentSprite = player.getSprite32();
         defineAnimation();
     }
 
-    private void definePhysics(World world) {
-        this.physics = new PlayerPhysics(world, new Vector2(0, 0));
+    private Player createPlayer() {
+        PlayerPhysics physics = definePhysics(world);
+        PlayerSprite sprite64 = new PlayerSprite(new TextureRegion(AssetUtils.getTexture(AssetUtils.PLAYER_64), 0, 0, 32, 64));
+        PlayerSprite sprite32 = new PlayerSprite(new TextureRegion(AssetUtils.getTexture(AssetUtils.PLAYER_32), 0, 0, 32, 32));
+        player = new Player(physics, sprite32, sprite64);
+        return player;
+    }
+
+    private PlayerPhysics definePhysics(World world) {
+        return new PlayerPhysics(world, new Vector2(0, 0));
     }
 
     public void createLight(RayHandler rayHandler) {
-        light = PlayerLight.createLight(rayHandler, 500, physics.getBody(), Color.BLACK, 12);
+        PlayerLight.createLight(rayHandler, 500, player.getPhysics().getBody(), Color.BLACK, 12);
     }
 
     public PlayerPhysics getPhysics() {
-        return physics;
+        return player.getPhysics();
     }
 
     public PlayerSprite getSprite() {
-        return sprite;
+        return currentSprite;
     }
 
     public Map<String, Animation> getAnimations() {
@@ -62,10 +66,10 @@ public class PlayerManager {
 
     public void setSpriteType(MapType type) {
         if (type.equals(MapType.OPEN)) {
-            sprite = sprite32;
+            currentSprite = player.getSprite32();
             setSize(Player.SIZE.SMALL);
         } else {
-            sprite = sprite64;
+            currentSprite = player.getSprite64();
             setSize(Player.SIZE.BIG);
         }
     }
@@ -93,12 +97,6 @@ public class PlayerManager {
     public Player.SIZE getSize() {
         return size;
     }
-
-
-
-
-
-
 
     private void defineAnimation() {
         animations = new HashMap<>();
@@ -133,11 +131,5 @@ public class PlayerManager {
 
             animations.forEach((k, v) -> v.setPlayMode(Animation.PlayMode.LOOP));
         }
-    }
-
-    private void defineSprite() {
-        this.sprite64 = new PlayerSprite(new TextureRegion(AssetUtils.getTexture(AssetUtils.PLAYER_64), 0, 0, 32, 64));
-        this.sprite32 = new PlayerSprite(new TextureRegion(AssetUtils.getTexture(AssetUtils.PLAYER_32), 0, 0, 32, 32));
-        this.sprite = sprite32;
     }
 }
