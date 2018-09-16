@@ -7,7 +7,7 @@ import java.util.*;
 
 public class AnimationComponent implements Component {
 
-    Map<String, Animation> animationMap;
+    private Map<String, Animation> animationMap;
 
     public AnimationComponent(Map<String, Animation> animationMap) {
         this.animationMap = animationMap;

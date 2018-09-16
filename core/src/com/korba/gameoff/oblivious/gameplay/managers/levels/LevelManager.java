@@ -17,17 +17,17 @@ import com.korba.gameoff.oblivious.gameplay.mapelements.StaticObject;
 public class LevelManager {
     private ObscurityGame game;
     private TiledMap map;
-    protected Array<Vector2> spawnPoints;
+    Array<Vector2> spawnPoints;
     private Array<StaticObject> walls;
-    protected Array<Door> doors;
-    protected MapType mapType;
-    protected Vector2 lastSpawnPoint;
+    Array<Door> doors;
+    MapType mapType;
+    Vector2 lastSpawnPoint;
     private final int WALL_LAYER = 3;
     private final int SPAWN_POINTS = 4;
     private final int DOOR_LAYER = 5;
 
 
-    public LevelManager(ObscurityGame game, World world, TiledMap map, MapManager mapManager) {
+    LevelManager(ObscurityGame game, World world, TiledMap map, MapManager mapManager) {
         this.map = map;
         this.game = game;
 
