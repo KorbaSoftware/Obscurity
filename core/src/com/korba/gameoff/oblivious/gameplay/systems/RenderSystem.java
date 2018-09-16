@@ -11,6 +11,7 @@ import com.korba.gameoff.oblivious.gameplay.components.PositionComponent;
 import com.korba.gameoff.oblivious.gameplay.components.RenderableComponent;
 import com.korba.gameoff.oblivious.gameplay.components.SpriteComponent;
 import com.korba.gameoff.oblivious.gameplay.managers.*;
+import com.korba.gameoff.oblivious.gameplay.player.Player;
 
 public class RenderSystem extends EntitySystem {
 
@@ -45,29 +46,29 @@ public class RenderSystem extends EntitySystem {
 
             if (entity.equals(entities.first())) {
                 stateTime += deltaTime;
-                PlayerManager.PLAYER_DIRECTION direction = player.getDirection();
+                Player.DIRECTION direction = player.getDirection();
 
-                boolean walking = (player.getState().equals(PlayerManager.PLAYER_STATE.WALKING));
+                boolean walking = (player.getState().equals(Player.STATE.WALKING));
 
-                if (player.getSize().equals(PlayerManager.PLAYER_SIZE.SMALL)) {
-                    if (direction.equals(PlayerManager.PLAYER_DIRECTION.UP)) {
+                if (player.getSize().equals(Player.SIZE.SMALL)) {
+                    if (direction.equals(Player.DIRECTION.UP)) {
                         spriteComponent.sprite.setRegion((TextureRegion) player.getAnimations().get("WALK_UP_32").getKeyFrame(walking ? stateTime : 0));
-                    } else if (direction.equals(PlayerManager.PLAYER_DIRECTION.DOWN)) {
+                    } else if (direction.equals(Player.DIRECTION.DOWN)) {
                         spriteComponent.sprite.setRegion((TextureRegion) player.getAnimations().get("WALK_DOWN_32").getKeyFrame(walking ? stateTime : 0));
-                    } else if (direction.equals(PlayerManager.PLAYER_DIRECTION.LEFT)) {
+                    } else if (direction.equals(Player.DIRECTION.LEFT)) {
                         spriteComponent.sprite.setRegion((TextureRegion) player.getAnimations().get("WALK_LEFT_32").getKeyFrame(walking ? stateTime : 0));
-                    } else if (direction.equals(PlayerManager.PLAYER_DIRECTION.RIGHT)) {
+                    } else if (direction.equals(Player.DIRECTION.RIGHT)) {
                         spriteComponent.sprite.setRegion((TextureRegion) player.getAnimations().get("WALK_RIGHT_32").getKeyFrame(walking ? stateTime : 0));
                     }
                 } else {
-                    if (direction.equals(PlayerManager.PLAYER_DIRECTION.UP)) {
+                    if (direction.equals(Player.DIRECTION.UP)) {
                         spriteComponent.sprite.setRegion((TextureRegion) player.getAnimations().get("WALK_UP_64").getKeyFrame(walking ? stateTime : 0));
-                    } else if (direction.equals(PlayerManager.PLAYER_DIRECTION.DOWN)) {
+                    } else if (direction.equals(Player.DIRECTION.DOWN)) {
                         spriteComponent.sprite.setRegion((TextureRegion) player.getAnimations().get("WALK_DOWN_64").getKeyFrame(walking ? stateTime : 0));
-                    } else if (direction.equals(PlayerManager.PLAYER_DIRECTION.LEFT)) {
+                    } else if (direction.equals(Player.DIRECTION.LEFT)) {
                         spriteComponent.sprite.setRegion((TextureRegion) player.getAnimations().get("WALK_SIDE_64").getKeyFrame(walking ? stateTime : 0));
                         spriteComponent.sprite.flip(true, false);
-                    } else if (direction.equals(PlayerManager.PLAYER_DIRECTION.RIGHT)) {
+                    } else if (direction.equals(Player.DIRECTION.RIGHT)) {
                         spriteComponent.sprite.setRegion((TextureRegion) player.getAnimations().get("WALK_SIDE_64").getKeyFrame(walking ? stateTime : 0));
                     }
                 }
