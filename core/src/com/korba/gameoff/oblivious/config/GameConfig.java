@@ -1,6 +1,8 @@
 package com.korba.gameoff.oblivious.config;
 
+
 import com.badlogic.gdx.graphics.Color;
+import static com.badlogic.gdx.graphics.Color.NAVY;
 
 public class GameConfig {
 
@@ -21,6 +23,6 @@ public class GameConfig {
 
     //ambient light
     public static final float AMBIENT_LIGHT_STRENGTH = 0.1f;
-    public static final Color AMBIENT_LIGHT_COLOR = Color.NAVY;
+    public static final Color AMBIENT_LIGHT_COLOR = NAVY;
 
 }

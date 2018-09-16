@@ -18,13 +18,13 @@ public class MouseMovementSystem extends EntitySystem {
 
     private ImmutableArray<Entity> entities;
     private ImmutableArray<Entity> cameraEntities;
-    BodyComponent bodyComponent;
-    VelocityComponent velocityComponent;
-    CameraComponent cameraComponent;
-    Vector3 pointerPosition;
-    Vector3 playerPosition;
-    float deltaX = 0;
-    float deltaY = 0;
+    private BodyComponent bodyComponent;
+    private VelocityComponent velocityComponent;
+    private CameraComponent cameraComponent;
+    private Vector3 pointerPosition;
+    private Vector3 playerPosition;
+    private float deltaX = 0;
+    private float deltaY = 0;
     private PlayerManager player;
 
     public MouseMovementSystem(PlayerManager player) {

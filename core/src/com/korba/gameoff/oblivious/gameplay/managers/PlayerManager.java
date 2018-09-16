@@ -1,7 +1,7 @@
 package com.korba.gameoff.oblivious.gameplay.managers;
 
+import box2dLight.PointLight;
 import box2dLight.RayHandler;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Vector2;
@@ -42,11 +42,11 @@ public class PlayerManager {
     private PlayerSprite sprite64;
     private PlayerSprite sprite;
     private World world;
-    private PlayerLight light;
+    private PointLight light;
 
     private Map<String, Animation> animations;
 
-    public PlayerManager(World world) {
+    PlayerManager(World world) {
         this.world = world;
         state = PLAYER_STATE.IDLE;
         direction = PLAYER_DIRECTION.DOWN;
@@ -103,7 +103,7 @@ public class PlayerManager {
     }
 
     public void createLight(RayHandler rayHandler) {
-        light = new PlayerLight(rayHandler, 500, physics.getBody(), Color.BLACK, 1f, 12);
+        light = PlayerLight.createLight(rayHandler, 500, physics.getBody(), Color.BLACK, 12);
     }
 
     public PlayerPhysics getPhysics() {

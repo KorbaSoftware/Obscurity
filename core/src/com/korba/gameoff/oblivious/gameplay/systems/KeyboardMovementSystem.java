@@ -12,12 +12,6 @@ public class KeyboardMovementSystem extends EntitySystem {
     private PlayerManager player;
 
     private ImmutableArray<Entity> entities;
-    private ComponentMapper<BodyComponent> bodyMap = ComponentMapper.getFor(BodyComponent.class);
-    private ComponentMapper<VelocityComponent> velocityMap = ComponentMapper.getFor(VelocityComponent.class);
-
-    public KeyboardMovementSystem() {
-
-    }
 
     public KeyboardMovementSystem(PlayerManager player) {
         this.player = player;

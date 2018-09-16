@@ -34,7 +34,7 @@ public class GamePreferences {
         profile = lastUsedProfile();
     }
 
-    public SelectedProfile lastUsedProfile() {
+    private SelectedProfile lastUsedProfile() {
         if (defaultPrefs.contains(LAST_USED_PROFILE)) {
             profile = SelectedProfile.valueOf(defaultPrefs.getString(LAST_USED_PROFILE));
             prefs = Gdx.app.getPreferences(profile.toString());
@@ -49,13 +49,13 @@ public class GamePreferences {
         }
     }
 
-    public void loadProfileSettings() {
+    private void loadProfileSettings() {
         musicVolume = prefs.getFloat(MUSIC_VOLUME_KEY);
         soundVolume = prefs.getFloat(SOUND_VOLUME_KEY);
         isMuted = prefs.getBoolean(IS_MUTED_KEY);
     }
 
-    public void loadDefaultSettings() {
+    private void loadDefaultSettings() {
         musicVolume = DEFAULT_MUSIC_VOLUME;
         soundVolume = DEFAULT_SOUND_VOLUME;
         isMuted = DEFAULT_IS_MUTED;
@@ -78,7 +78,7 @@ public class GamePreferences {
         defaultPrefs.flush();
     }
 
-    public void setProfileSettings() {
+    private void setProfileSettings() {
         setMusicVolume(musicVolume);
         setSoundVolume(soundVolume);
         setMuted(isMuted);
