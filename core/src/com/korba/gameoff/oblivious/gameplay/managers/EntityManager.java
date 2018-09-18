@@ -34,17 +34,16 @@ public class EntityManager {
     }
 
     private void createPlayer() {
-        PlayerManager player = new PlayerManager(world);
-        this.player = player;
+        this.player = new PlayerManager(world);
     }
 
-    public void setKeyboardInput() {
+    void setKeyboardInput() {
         engine.removeSystem(mouseMovementSystem);
         engine.addSystem(keyboardMovementSystem);
         mouseMovementSystem.nullify();
     }
 
-    public void setMouseInput() {
+    void setMouseInput() {
         engine.removeSystem(keyboardMovementSystem);
         engine.addSystem(mouseMovementSystem);
     }
@@ -65,7 +64,7 @@ public class EntityManager {
         return keyboardMovementSystem;
     }
 
-    public MouseMovementSystem getMouseMovementSystem() {
+    MouseMovementSystem getMouseMovementSystem() {
         return mouseMovementSystem;
     }
 }

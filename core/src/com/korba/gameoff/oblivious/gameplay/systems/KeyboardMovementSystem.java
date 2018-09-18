@@ -6,18 +6,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.korba.gameoff.oblivious.gameplay.components.*;
 import com.korba.gameoff.oblivious.gameplay.managers.*;
+import com.korba.gameoff.oblivious.gameplay.player.Player;
 
 public class KeyboardMovementSystem extends EntitySystem {
 
     private PlayerManager player;
-
     private ImmutableArray<Entity> entities;
-    private ComponentMapper<BodyComponent> bodyMap = ComponentMapper.getFor(BodyComponent.class);
-    private ComponentMapper<VelocityComponent> velocityMap = ComponentMapper.getFor(VelocityComponent.class);
-
-    public KeyboardMovementSystem() {
-
-    }
 
     public KeyboardMovementSystem(PlayerManager player) {
         this.player = player;
@@ -31,39 +25,34 @@ public class KeyboardMovementSystem extends EntitySystem {
         for (Entity entity : entities) {
             BodyComponent bodyCom = entity.getComponent(BodyComponent.class);
             VelocityComponent velocityCom = entity.getComponent(VelocityComponent.class);
-            //Gdx.app.debug("Keyboard input", "key pressed");
             if (Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isKeyPressed(Input.Keys.W)) {
-                //  Gdx.app.debug("Keyboard input", "up pressed");
                 bodyCom.body.setLinearVelocity(0, velocityCom.velocity);
                 if(player != null) {
-                    player.setState(PlayerManager.PLAYER_STATE.WALKING);
-                    player.setDirection(PlayerManager.PLAYER_DIRECTION.UP);
+                    player.setState(Player.STATE.WALKING);
+                    player.setDirection(Player.DIRECTION.UP);
                 }
             } else if (Gdx.input.isKeyPressed(Input.Keys.DOWN) || Gdx.input.isKeyPressed(Input.Keys.S)) {
-                // Gdx.app.debug("Keyboard input", "down pressed");
                 bodyCom.body.setLinearVelocity(0, -velocityCom.velocity);
                 if(player != null) {
-                    player.setState(PlayerManager.PLAYER_STATE.WALKING);
-                    player.setDirection(PlayerManager.PLAYER_DIRECTION.DOWN);
+                    player.setState(Player.STATE.WALKING);
+                    player.setDirection(Player.DIRECTION.DOWN);
                 }
             } else if (Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)) {
-                //  Gdx.app.debug("Keyboard input", "left pressed");
                 bodyCom.body.setLinearVelocity(-velocityCom.velocity, 0);
                 if(player != null) {
-                    player.setState(PlayerManager.PLAYER_STATE.WALKING);
-                    player.setDirection(PlayerManager.PLAYER_DIRECTION.LEFT);
+                    player.setState(Player.STATE.WALKING);
+                    player.setDirection(Player.DIRECTION.LEFT);
                 }
             } else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)) {
-                // Gdx.app.debug("Keyboard input", "right pressed");
                 bodyCom.body.setLinearVelocity(velocityCom.velocity, 0);
                 if(player != null) {
-                    player.setState(PlayerManager.PLAYER_STATE.WALKING);
-                    player.setDirection(PlayerManager.PLAYER_DIRECTION.RIGHT);
+                    player.setState(Player.STATE.WALKING);
+                    player.setDirection(Player.DIRECTION.RIGHT);
                 }
             } else {
                 bodyCom.body.setLinearVelocity(0, 0);
                 if(player != null) {
-                    player.setState(PlayerManager.PLAYER_STATE.IDLE);
+                    player.setState(Player.STATE.IDLE);
                 }
             }
         }

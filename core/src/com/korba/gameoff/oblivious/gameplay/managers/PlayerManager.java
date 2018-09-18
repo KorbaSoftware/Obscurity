@@ -1,12 +1,13 @@
 package com.korba.gameoff.oblivious.gameplay.managers;
 
+import box2dLight.PointLight;
 import box2dLight.RayHandler;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.*;
+import com.korba.gameoff.oblivious.gameplay.player.Player;
 import com.korba.gameoff.oblivious.gameplay.player.PlayerLight;
 import com.korba.gameoff.oblivious.gameplay.player.PlayerPhysics;
 import com.korba.gameoff.oblivious.gameplay.player.PlayerSprite;
@@ -16,55 +17,85 @@ import java.util.*;
 
 public class PlayerManager {
 
-    public enum PLAYER_STATE {
-        IDLE,
-        WALKING
-    }
+    private Player.STATE state;
+    private Player.DIRECTION direction;
+    private Player.SIZE size;
 
-    public enum PLAYER_DIRECTION {
-        UP,
-        DOWN,
-        LEFT,
-        RIGHT
-    }
-
-    public enum PLAYER_SIZE {
-        SMALL,
-        BIG
-    }
-
-    private PLAYER_STATE state;
-    private PLAYER_DIRECTION direction;
-    private PLAYER_SIZE size;
-
-    private PlayerPhysics physics;
-    private PlayerSprite sprite32;
-    private PlayerSprite sprite64;
-    private PlayerSprite sprite;
+    private Player player;
+    private PlayerSprite currentSprite;
     private World world;
-    private PlayerLight light;
 
     private Map<String, Animation> animations;
 
-    public PlayerManager(World world) {
+    PlayerManager(World world) {
         this.world = world;
-        state = PLAYER_STATE.IDLE;
-        direction = PLAYER_DIRECTION.DOWN;
-        
-        definePhysics(world);
-        defineSprite();
+        state = Player.STATE.IDLE;
+        direction = Player.DIRECTION.DOWN;
+        this.player = createPlayer();
+        this.currentSprite = player.getSprite32();
         defineAnimation();
     }
 
-    private void definePhysics(World world) {
-        this.physics = new PlayerPhysics(world, new Vector2(0, 0));
+    private Player createPlayer() {
+        PlayerPhysics physics = definePhysics(world);
+        PlayerSprite sprite64 = new PlayerSprite(new TextureRegion(AssetUtils.getTexture(AssetUtils.PLAYER_64), 0, 0, 32, 64));
+        PlayerSprite sprite32 = new PlayerSprite(new TextureRegion(AssetUtils.getTexture(AssetUtils.PLAYER_32), 0, 0, 32, 32));
+        player = new Player(physics, sprite32, sprite64);
+        return player;
     }
 
-    private void defineSprite() {
-        this.sprite64 = new PlayerSprite(new TextureRegion(AssetUtils.getTexture(AssetUtils.PLAYER_64), 0, 0, 32, 64));
-        this.sprite32 = new PlayerSprite(new TextureRegion(AssetUtils.getTexture(AssetUtils.PLAYER_32), 0, 0, 32, 32));
-        this.sprite = sprite32;
+    private PlayerPhysics definePhysics(World world) {
+        return new PlayerPhysics(world, new Vector2(0, 0));
+    }
 
+    public void createLight(RayHandler rayHandler) {
+        PlayerLight.createLight(rayHandler, 500, player.getPhysics().getBody(), Color.BLACK, 12);
+    }
+
+    public PlayerPhysics getPhysics() {
+        return player.getPhysics();
+    }
+
+    public PlayerSprite getSprite() {
+        return currentSprite;
+    }
+
+    public Map<String, Animation> getAnimations() {
+        return animations;
+    }
+
+    public void setSpriteType(MapType type) {
+        if (type.equals(MapType.OPEN)) {
+            currentSprite = player.getSprite32();
+            setSize(Player.SIZE.SMALL);
+        } else {
+            currentSprite = player.getSprite64();
+            setSize(Player.SIZE.BIG);
+        }
+    }
+
+    public Player.STATE getState() {
+        return state;
+    }
+
+    public void setState(Player.STATE state) {
+        this.state = state;
+    }
+
+    public Player.DIRECTION getDirection() {
+        return direction;
+    }
+
+    public void setDirection(Player.DIRECTION direction) {
+        this.direction = direction;
+    }
+
+    public void setSize(Player.SIZE size) {
+        this.size = size;
+    }
+
+    public Player.SIZE getSize() {
+        return size;
     }
 
     private void defineAnimation() {
@@ -100,55 +131,5 @@ public class PlayerManager {
 
             animations.forEach((k, v) -> v.setPlayMode(Animation.PlayMode.LOOP));
         }
-    }
-
-    public void createLight(RayHandler rayHandler) {
-        light = new PlayerLight(rayHandler, 500, physics.getBody(), Color.BLACK, 1f, 12);
-    }
-
-    public PlayerPhysics getPhysics() {
-        return physics;
-    }
-
-    public PlayerSprite getSprite() {
-        return sprite;
-    }
-
-    public Map<String, Animation> getAnimations() {
-        return animations;
-    }
-
-    public void setSpriteType(MapType type) {
-        if (type.equals(MapType.OPEN)) {
-            sprite = sprite32;
-            setSize(PLAYER_SIZE.SMALL);
-        } else {
-            sprite = sprite64;
-            setSize(PLAYER_SIZE.BIG);
-        }
-    }
-
-    public PLAYER_STATE getState() {
-        return state;
-    }
-
-    public void setState(PLAYER_STATE state) {
-        this.state = state;
-    }
-
-    public PLAYER_DIRECTION getDirection() {
-        return direction;
-    }
-
-    public void setDirection(PLAYER_DIRECTION direction) {
-        this.direction = direction;
-    }
-
-    public void setSize(PLAYER_SIZE size) {
-        this.size = size;
-    }
-
-    public PLAYER_SIZE getSize() {
-        return size;
     }
 }

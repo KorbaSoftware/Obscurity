@@ -30,8 +30,11 @@ public class Door extends MapObject {
 
     @Override
     public void onContact() {
-        Gdx.app.debug("Door Class", "onContact method");
-        if(mapType == null) mapManager.changeMap();
-        if(mapType != null) mapManager.changeMap(mapType);
+        if (mapType == null) {
+            mapManager.changeMap();
+        }
+        else {
+            mapManager.changeMap(mapType);
+        }
     }
 }

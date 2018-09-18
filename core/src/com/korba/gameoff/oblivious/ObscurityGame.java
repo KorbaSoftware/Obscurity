@@ -26,7 +26,7 @@ public class ObscurityGame extends Game {
 
     private SpriteBatch batch;
     private Cursor customCursor;
-    public static GameState gameState;
+    private static GameState gameState;
     private GamePreferences gamePreferences;
     private World world;
     private EntityManager entityManager;

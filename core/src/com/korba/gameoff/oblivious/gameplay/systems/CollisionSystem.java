@@ -14,13 +14,12 @@ import com.korba.gameoff.oblivious.gameplay.mapelements.StationChanger;
 
 
 public class CollisionSystem extends EntitySystem implements ContactListener {
-    ImmutableArray<Entity> entities;
+    private ImmutableArray<Entity> entities;
 
     public CollisionSystem(World world){
         super(-1);
         world.setContactListener(this);
     }
-
 
     public void addedToEngine(Engine engine){
         entities = engine.getEntitiesFor(Family.all(BodyComponent.class).get());
@@ -28,7 +27,6 @@ public class CollisionSystem extends EntitySystem implements ContactListener {
 
     @Override
     public void beginContact(Contact contact) {
-
         Fixture fixtureA = contact.getFixtureA();
         Fixture fixtureB = contact.getFixtureB();
 
@@ -48,22 +46,17 @@ public class CollisionSystem extends EntitySystem implements ContactListener {
                 ((StationChanger)object.getUserData()).onContact();
                 break;
         }
-
-
     }
 
     @Override
     public void endContact(Contact contact) {
-
     }
 
     @Override
     public void preSolve(Contact contact, Manifold oldManifold) {
-
     }
 
     @Override
     public void postSolve(Contact contact, ContactImpulse impulse) {
-
     }
 }

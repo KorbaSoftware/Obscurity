@@ -10,6 +10,7 @@ public class PlayerSprite extends Sprite{
     public PlayerSprite(TextureRegion textureRegion){
         this.textureRegion = textureRegion;
     }
+
     public TextureRegion getTextureRegion() {
         return textureRegion;
     }
