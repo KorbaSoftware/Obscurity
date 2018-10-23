@@ -11,7 +11,7 @@ import com.korba.gameoff.oblivious.tools.*;
 
 public class DevKuba extends BasicScreen {
 
-    private Table screensTable;
+    private final Table screensTable;
 
     Screen openTestScreen;
     Screen roomTestScreen;

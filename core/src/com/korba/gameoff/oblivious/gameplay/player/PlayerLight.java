@@ -7,12 +7,13 @@ import com.badlogic.gdx.physics.box2d.Body;
 
 public class PlayerLight {
 
-    public static PointLight createLight(RayHandler rayHandler, int rays, Body body, Color color, float radius) {
+    private PlayerLight(){}
+
+    public static void createLight(RayHandler rayHandler, int rays, Body body, Color color, float radius) {
         PointLight pointLight = new PointLight(rayHandler, rays);
         pointLight.attachToBody(body);
         pointLight.setColor(color);
         pointLight.setDistance(radius);
         pointLight.setContactFilter((short) 0, (short) 4, (short) 4); //random values
-        return pointLight;
     }
 }

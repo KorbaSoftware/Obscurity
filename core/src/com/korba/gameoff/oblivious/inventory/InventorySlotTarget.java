@@ -7,7 +7,7 @@ import com.korba.gameoff.oblivious.inventory.items.*;
 
 public class InventorySlotTarget extends DragAndDrop.Target {
 
-    private InventorySlot targetSlot;
+    private final InventorySlot targetSlot;
 
     public InventorySlotTarget(InventorySlot slot) {
         super(slot);

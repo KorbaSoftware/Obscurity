@@ -12,7 +12,7 @@ import com.korba.gameoff.oblivious.ui.inside.*;
 
 public class DevKamil extends BasicScreen {
 
-    private Table screensTable;
+    private final Table screensTable;
 
     Screen insideUiDevScreen;
 

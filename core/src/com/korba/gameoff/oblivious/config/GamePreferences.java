@@ -23,7 +23,7 @@ public class GamePreferences {
     private final String LAST_USED_PROFILE = "cashedProfile";
 
     private Preferences prefs;
-    private Preferences defaultPrefs;
+    private final Preferences defaultPrefs;
     private SelectedProfile profile;
     private float musicVolume;
     private float soundVolume;

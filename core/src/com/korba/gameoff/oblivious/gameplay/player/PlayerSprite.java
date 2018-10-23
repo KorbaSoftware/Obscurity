@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class PlayerSprite extends Sprite{
     //TODO
-    private TextureRegion textureRegion;
+    private final TextureRegion textureRegion;
 
     public PlayerSprite(TextureRegion textureRegion){
         this.textureRegion = textureRegion;

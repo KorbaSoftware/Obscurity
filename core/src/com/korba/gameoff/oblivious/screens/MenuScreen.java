@@ -23,12 +23,12 @@ import com.korba.gameoff.oblivious.tools.*;
 
 public class MenuScreen implements Screen{
 
-    private SpriteBatch batch;
-    private ObscurityGame game;
-    private Camera camera;
-    private Viewport viewport;
-    private Stage stage;
-    private Texture background;
+    private final SpriteBatch batch;
+    private final ObscurityGame game;
+    private final Camera camera;
+    private final Viewport viewport;
+    private final Stage stage;
+    private final Texture background;
 
     public MenuScreen(SpriteBatch batch, ObscurityGame game){
         this.batch = batch;

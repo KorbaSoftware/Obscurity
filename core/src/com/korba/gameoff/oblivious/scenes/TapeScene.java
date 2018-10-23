@@ -22,13 +22,14 @@ import com.korba.gameoff.oblivious.tools.TextLoader;
 
 public class TapeScene implements Disposable {
 
-    private Viewport viewport;
+    private final Viewport viewport;
     public Stage stage;
-    private ObscurityGame game;
+    private final ObscurityGame game;
     private int iterator = 1;
-    private Label textLabel;
-    private TextLoader txtLoader;
-    private Image textBackgroundImage, backgroundImage;
+    private final Label textLabel;
+    private final TextLoader txtLoader;
+    private final Image textBackgroundImage;
+    private final Image backgroundImage;
 
     public TapeScene(SpriteBatch sb, ObscurityGame game){
         this.game = game;

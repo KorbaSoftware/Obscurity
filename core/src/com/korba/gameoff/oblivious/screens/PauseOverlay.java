@@ -15,9 +15,9 @@ import java.util.LinkedList;
 public class PauseOverlay extends Dialog {
 
     private Image resumeImage,optionsImage, saveImage, loadImage, exitImage;
-    private Stage stage;
-    private PauseOverlay thisOverlay;
-    private LinkedList<Image> imageList;
+    private final Stage stage;
+    private final PauseOverlay thisOverlay;
+    private final LinkedList<Image> imageList;
 
     public PauseOverlay(Stage stage) {
         super("", AssetUtils.DEFAULT_SKIN, "dialog");

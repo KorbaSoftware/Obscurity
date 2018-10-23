@@ -1,6 +1,5 @@
 package com.korba.gameoff.oblivious.gameplay.managers.levels;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -12,14 +11,13 @@ import com.korba.gameoff.oblivious.ObscurityGame;
 import com.korba.gameoff.oblivious.config.GameConfig;
 import com.korba.gameoff.oblivious.gameplay.managers.MapManager;
 import com.korba.gameoff.oblivious.gameplay.managers.MapType;
-import com.korba.gameoff.oblivious.gameplay.mapelements.Door;
 import com.korba.gameoff.oblivious.gameplay.mapelements.StationChanger;
 
 public class MetroStationManager extends IndoorLevelManager{
-    private final int PREVIOUS_STATION = 7;
-    private final int NEXT_STATION = 6;
+    private static final int PREVIOUS_STATION = 7;
+    private static final int NEXT_STATION = 6;
     private final Vector2 afterTravelSpawnPoint;
-    private Array<StationChanger> stationChangers;
+    private final Array<StationChanger> stationChangers;
 
     public MetroStationManager (ObscurityGame game, World world, TiledMap map, MapManager mapManager, MapType mapType) {
         super(game, world, map, mapManager, mapType);

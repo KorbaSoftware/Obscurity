@@ -10,8 +10,8 @@ import com.korba.gameoff.oblivious.gameplay.managers.MapType;
 
 public class StationChanger extends MapObject{
 
-    private MapManager mapManager;
-    private int direction;
+    private final MapManager mapManager;
+    private final int direction;
 
     public StationChanger(World world, TiledMap map, Rectangle bounds, MapManager mapManager, int direction){
         super(world, map, bounds);

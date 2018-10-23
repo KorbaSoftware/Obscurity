@@ -18,11 +18,11 @@ public class LoadingScreen implements Screen {
 
     private Image gameLogo;
     private Image korbaLogo;
-    private SpriteBatch batch;
-    private ObscurityGame game;
-    private Camera camera;
-    private Viewport viewport;
-    private Stage stage;
+    private final SpriteBatch batch;
+    private final ObscurityGame game;
+    private final Camera camera;
+    private final Viewport viewport;
+    private final Stage stage;
     private float timer = 0;
     private boolean isFirstTime = true;
 

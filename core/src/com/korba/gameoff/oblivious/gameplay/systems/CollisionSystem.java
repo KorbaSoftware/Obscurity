@@ -14,6 +14,8 @@ import com.korba.gameoff.oblivious.gameplay.mapelements.StationChanger;
 
 
 public class CollisionSystem extends EntitySystem implements ContactListener {
+
+    @SuppressWarnings("unused")
     private ImmutableArray<Entity> entities;
 
     public CollisionSystem(World world){
@@ -21,6 +23,7 @@ public class CollisionSystem extends EntitySystem implements ContactListener {
         world.setContactListener(this);
     }
 
+    @Override
     public void addedToEngine(Engine engine){
         entities = engine.getEntitiesFor(Family.all(BodyComponent.class).get());
     }
@@ -50,13 +53,16 @@ public class CollisionSystem extends EntitySystem implements ContactListener {
 
     @Override
     public void endContact(Contact contact) {
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void preSolve(Contact contact, Manifold oldManifold) {
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void postSolve(Contact contact, ContactImpulse impulse) {
+        throw new UnsupportedOperationException();
     }
 }

@@ -21,7 +21,7 @@ public class OptionsScreen extends BasicScreen{
     private Image optionsLogo, changeProfile, currentUser, exitImage;
     private Label soundVolumeLabel, musicVolumeLabel;
     private Texture background;
-    private GamePreferences preferences;
+    private final GamePreferences preferences;
     private CheckBox muteCheckBox;
 
     public OptionsScreen(SpriteBatch batch, ObscurityGame game){

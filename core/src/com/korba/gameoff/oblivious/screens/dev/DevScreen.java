@@ -27,13 +27,13 @@ public class DevScreen implements Screen {
         KUBA
     }
 
-    private SpriteBatch batch;
-    private ObscurityGame game;
-    private MenuScreen menu;
-    private Camera camera;
-    private Viewport viewport;
-    private Stage stage;
-    private Table devButtons;
+    private final SpriteBatch batch;
+    private final ObscurityGame game;
+    private final MenuScreen menu;
+    private final Camera camera;
+    private final Viewport viewport;
+    private final Stage stage;
+    private final Table devButtons;
 
     public DevScreen(SpriteBatch batch, ObscurityGame game, MenuScreen menu){
         this.batch = batch;
