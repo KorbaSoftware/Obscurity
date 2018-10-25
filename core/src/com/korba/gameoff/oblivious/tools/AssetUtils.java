@@ -9,6 +9,9 @@ import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.maps.tiled.*;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 public class AssetUtils {
 
     public static final AssetManager assetManager = new AssetManager();
@@ -60,8 +63,7 @@ public class AssetUtils {
     public static final String TAPE_SCREEN = "buttons/tape.png";
     public static final String TEXT_BG = "buttons/text_bg.png";
 
-
-    public static final TextureAtlas DEFAULT_SKIN_TEXTURE_ATLAS = new TextureAtlas(DEFAULT_SKIN_ATLAS_PATH);
+    public static final TextureAtlas DEFAULT_SKIN_TEXTURE_ATLAS = new TextureAtlas(Gdx.files.internal(DEFAULT_SKIN_ATLAS_PATH));
     public static final Skin DEFAULT_SKIN = new Skin(Gdx.files.internal(DEFAULT_SKIN_PATH), DEFAULT_SKIN_TEXTURE_ATLAS);
 
     public static void dearManagerPleaseFeelFreeToRemoveThisFuckerFromYourMajesticMemory(String path) {

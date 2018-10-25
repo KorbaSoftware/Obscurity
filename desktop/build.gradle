@@ -5,7 +5,7 @@ targetCompatibility = 1.8
 sourceSets.main.java.srcDirs = [ "src/" ]
 
 project.ext.mainClassName = "com.korba.gameoff.oblivious.desktop.DesktopLauncher"
-project.ext.assetsDir = new File("../android/assets");
+project.ext.assetsDir = new File("../desktop/assets");
 
 task run(dependsOn: classes, type: JavaExec) {
     main = project.mainClassName
