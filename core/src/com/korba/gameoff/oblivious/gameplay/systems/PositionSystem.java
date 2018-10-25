@@ -12,8 +12,8 @@ import com.korba.gameoff.oblivious.gameplay.components.VelocityComponent;
 
 public class PositionSystem extends IteratingSystem {
 
-    private ComponentMapper<PositionComponent> positionMap = ComponentMapper.getFor(PositionComponent.class);
-    private ComponentMapper<BodyComponent> bodyMap = ComponentMapper.getFor(BodyComponent.class);
+    private final ComponentMapper<PositionComponent> positionMap = ComponentMapper.getFor(PositionComponent.class);
+    private final ComponentMapper<BodyComponent> bodyMap = ComponentMapper.getFor(BodyComponent.class);
 
     public PositionSystem() {
         super(Family.all(PositionComponent.class, VelocityComponent.class, BodyComponent.class).get());

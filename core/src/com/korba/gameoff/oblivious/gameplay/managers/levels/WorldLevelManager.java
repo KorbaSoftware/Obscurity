@@ -1,6 +1,5 @@
 package com.korba.gameoff.oblivious.gameplay.managers.levels;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -28,7 +27,7 @@ public class WorldLevelManager extends LevelManager {
     private final int METRO_EXIT_2_LAYER = 14;
     private final int METRO_EXIT_3_LAYER = 15;
 
-    private Array<SpawnPoint> positions;
+    private final Array<SpawnPoint> positions;
     private Vector2 metroExit1;
     private Vector2 metroExit2;
     private Vector2 metroExit3;
@@ -80,8 +79,6 @@ public class WorldLevelManager extends LevelManager {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             metroExit3 = new Vector2((rect.getX() + 16) / GameConfig.PPM, (rect.getY() + 16) / GameConfig.PPM);
         }
-        Gdx.app.debug("WorldLevelManager", "constructor");
-       // setInactive();
     }
 
     public Vector2 getExit(MapType type){

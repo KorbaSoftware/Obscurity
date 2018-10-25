@@ -17,11 +17,11 @@ public class InventoryUI extends Window {
     private final int slotWidth = 64;
     private final int slotHeight = 64;
 
-    private Table inventorySlotsTable;
+    private final Table inventorySlotsTable;
 
-    private DragAndDrop dragAndDrop;
-    private Array<Actor> inventoryActors;
-    private InventorySlotTooltip tooltip;
+    private final DragAndDrop dragAndDrop;
+    private final Array<Actor> inventoryActors;
+    private final InventorySlotTooltip tooltip;
     private TextButton btnCombine;
 
     public InventoryUI() {

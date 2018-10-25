@@ -10,7 +10,7 @@ import com.korba.gameoff.oblivious.gameplay.player.Player;
 
 public class KeyboardMovementSystem extends EntitySystem {
 
-    private PlayerManager player;
+    private final PlayerManager player;
     private ImmutableArray<Entity> entities;
 
     public KeyboardMovementSystem(PlayerManager player) {

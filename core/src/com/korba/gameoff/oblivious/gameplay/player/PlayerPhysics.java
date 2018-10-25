@@ -7,7 +7,7 @@ import com.korba.gameoff.oblivious.config.GameConfig;
 
 public class PlayerPhysics {
 
-    private World world;
+    private final World world;
     private Body body;
 
     public PlayerPhysics(World world, Vector2 position) {

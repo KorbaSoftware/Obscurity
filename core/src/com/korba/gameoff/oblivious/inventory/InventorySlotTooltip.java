@@ -5,8 +5,8 @@ import com.korba.gameoff.oblivious.tools.*;
 
 public class InventorySlotTooltip extends Window {
 
-    private Label description;
-    private Skin skin = AssetUtils.DEFAULT_SKIN;
+    private final Label description;
+    private final Skin skin = AssetUtils.DEFAULT_SKIN;
 
     public InventorySlotTooltip() {
         super("", AssetUtils.DEFAULT_SKIN);

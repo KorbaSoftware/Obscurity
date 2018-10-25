@@ -1,7 +1,5 @@
 package com.korba.gameoff.oblivious.gameplay.player;
 
-import box2dLight.PointLight;
-
 public class Player {
 
     public enum STATE {
@@ -43,16 +41,9 @@ public class Player {
         return sprite32;
     }
 
-    public void setSprite32(PlayerSprite sprite32) {
-        this.sprite32 = sprite32;
-    }
-
     public PlayerSprite getSprite64() {
         return sprite64;
     }
 
-    public void setSprite64(PlayerSprite sprite64) {
-        this.sprite64 = sprite64;
-    }
 
 }

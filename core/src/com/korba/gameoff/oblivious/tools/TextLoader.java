@@ -7,7 +7,7 @@ import com.korba.gameoff.oblivious.scenes.TapeText;
 
 public class TextLoader {
 
-    private TapeText tapeText;
+    private final TapeText tapeText;
 
     public TextLoader(int tapeId){
         tapeText = new TapeText(tapeId);

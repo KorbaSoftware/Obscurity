@@ -13,14 +13,12 @@ import com.korba.gameoff.oblivious.tools.*;
 
 public class InsideUI implements Screen {
 
-    private Stage stage;
-    private Camera camera;
-    private Viewport viewport;
+    private final Stage stage;
+    private final Viewport viewport;
 
-    private InventoryUI inventoryUI;
+    private final InventoryUI inventoryUI;
 
-    public InsideUI(Camera camera) {
-        this.camera = camera;
+     InsideUI(Camera camera) {
         viewport = new ScreenViewport(camera);
         stage = new Stage(viewport);
         stage.setDebugAll(true);
@@ -46,7 +44,7 @@ public class InsideUI implements Screen {
         invEQ.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                inventoryUI.setVisible(inventoryUI.isVisible() ? false : true);
+                inventoryUI.setVisible(!inventoryUI.isVisible());
             }
         });
         invEQ.setBounds(20, 20, 50, 50);
@@ -66,7 +64,7 @@ public class InsideUI implements Screen {
 
     @Override
     public void show() {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -82,22 +80,21 @@ public class InsideUI implements Screen {
 
     @Override
     public void pause() {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void resume() {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void hide() {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void dispose() {
         stage.dispose();
     }
-
 }

@@ -26,19 +26,20 @@ public class MouseMovementSystem extends EntitySystem {
     private Vector3 playerPosition;
     private float deltaX = 0;
     private float deltaY = 0;
-    private PlayerManager player;
+    private final PlayerManager player;
 
     public MouseMovementSystem(PlayerManager player) {
         this.player = player;
     }
 
+    @Override
     public void addedToEngine(Engine engine) {
         entities = engine.getEntitiesFor(Family.all(BodyComponent.class, VelocityComponent.class, PlayerComponent.class).get());
         cameraEntities = engine.getEntitiesFor(Family.all(CameraComponent.class).get());
     }
 
+    @Override
     public void update(float deltaTime) {
-        //TODO bardziej wydajny sposob
         for (Entity cameraEntity : cameraEntities) {
             cameraComponent = cameraEntity.getComponent(CameraComponent.class);
             for (Entity entity : entities) {
@@ -50,15 +51,11 @@ public class MouseMovementSystem extends EntitySystem {
         playerPosition = new Vector3(bodyComponent.body.getPosition().x, bodyComponent.body.getPosition().y, 0);
 
         if (Gdx.input.isButtonPressed(Input.Buttons.RIGHT)) {
-            //  Gdx.app.debug("player position", playerPosition.toString());
-            // System.out.print(".");
             int pointerX = Gdx.input.getX();
             int pointerY = Gdx.input.getY();
 
             pointerPosition = new Vector3(pointerX, pointerY, 0);
             cameraComponent.camera.unproject(pointerPosition);
-            //   Gdx.app.debug("pointer posiion", pointerPosition.toString());
-
         }
         if (pointerPosition != null) {
             deltaY = pointerPosition.y - playerPosition.y;

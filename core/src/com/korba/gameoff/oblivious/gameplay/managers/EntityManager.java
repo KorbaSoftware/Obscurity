@@ -12,12 +12,12 @@ public class EntityManager {
         return engine;
     }
 
-    private Engine engine;
-    private World world;
+    private final Engine engine;
+    private final World world;
     private PlayerManager player;
-    private static Array<Entity> entities = new Array<Entity>();
-    private MouseMovementSystem mouseMovementSystem;
-    private KeyboardMovementSystem keyboardMovementSystem;
+    private static final Array<Entity> entities = new Array<>();
+    private final MouseMovementSystem mouseMovementSystem;
+    private final KeyboardMovementSystem keyboardMovementSystem;
 
     public EntityManager(Engine engine, SpriteBatch spriteBatch, World world) {
         this.engine = engine;

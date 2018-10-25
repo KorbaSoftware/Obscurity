@@ -8,7 +8,7 @@ import com.korba.gameoff.oblivious.tools.AssetUtils;
 
 public class AlertWindow extends Dialog {
 
-    private AlertWindow thisOverlay;
+    private final AlertWindow thisOverlay;
 
     public AlertWindow(Stage stage) {
         super("", AssetUtils.DEFAULT_SKIN, "dialog");

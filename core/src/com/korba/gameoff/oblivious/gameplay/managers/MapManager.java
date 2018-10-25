@@ -24,15 +24,14 @@ import java.util.*;
 
 public class MapManager {
 
-    private World world;
-    private ObscurityGame game;
-    private TmxMapLoader mapLoader;
+    private final World world;
+    private final ObscurityGame game;
     private TiledMap currentMap;
     private LevelManager currentLevel;
     private Vector2 position;
-    private TiledMap worldMap;
-    private OrthogonalTiledMapRenderer mapRenderer;
-    private WorldLevelManager worldLevelManager;
+    private final TiledMap worldMap;
+    private final OrthogonalTiledMapRenderer mapRenderer;
+    private final WorldLevelManager worldLevelManager;
     private MetroStationManager lastStationEntered;
     private MapType type;
     private float mapVelocity;
@@ -47,7 +46,6 @@ public class MapManager {
         this.game = game;
         this.world = world;
         loadLevels();
-        mapLoader = new TmxMapLoader();
         worldMap = AssetUtils.getMap(AssetUtils.MAP_TEST0);
         mapVelocity = GameConfig.OUTDOOR_VELOCITY;
         currentMap = worldMap;
@@ -115,9 +113,7 @@ public class MapManager {
         position = worldLevelManager.getLastSpawnPoint();
         game.getEntityManager().setKeyboardInput();
         type = MapType.OPEN;
-        System.out.println(this.type.toString());
         mapVelocity = GameConfig.OUTDOOR_VELOCITY;
-        Gdx.app.debug("MapManago", "changed to OPEN");
 
         mapRenderer.setMap(currentMap);
         mapToChange = true;
@@ -200,9 +196,7 @@ public class MapManager {
         position = level.getPlayerPosition();
         game.getEntityManager().setMouseInput();
         this.type = level.getMapType();
-        System.out.println(this.type.toString());
         mapVelocity = GameConfig.INDOOR_VELOCITY;
-        Gdx.app.debug("MapManago", "changed to ROOM");
     }
 
     private void setupRoom(IndoorLevelManager level, Vector2 position) {

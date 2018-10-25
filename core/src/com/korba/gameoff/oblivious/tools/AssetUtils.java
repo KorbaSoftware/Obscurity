@@ -12,7 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 public class AssetUtils {
 
     public static final AssetManager assetManager = new AssetManager();
-    private static InternalFileHandleResolver fileResolver = new InternalFileHandleResolver();
+    private static final InternalFileHandleResolver fileResolver = new InternalFileHandleResolver();
 
     // Characters
     public static final String PLAYER_32_SPRITES = "characters/player/lysy_32_frames.png";

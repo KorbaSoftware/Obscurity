@@ -1,6 +1,5 @@
 package com.korba.gameoff.oblivious.gameplay.managers;
 
-import box2dLight.PointLight;
 import box2dLight.RayHandler;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.*;
@@ -23,11 +22,11 @@ public class PlayerManager {
 
     private Player player;
     private PlayerSprite currentSprite;
-    private World world;
+    private final World world;
 
     private Map<String, Animation> animations;
 
-    PlayerManager(World world) {
+    PlayerManager(final World world) {
         this.world = world;
         state = Player.STATE.IDLE;
         direction = Player.DIRECTION.DOWN;

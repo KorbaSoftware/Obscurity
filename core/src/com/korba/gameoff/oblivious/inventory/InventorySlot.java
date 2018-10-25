@@ -10,7 +10,7 @@ import com.korba.gameoff.oblivious.tools.*;
 public class InventorySlot extends Stack {
 
     private Image customBackground;
-    private Stack defaultBackground;
+    private final Stack defaultBackground;
 
     public InventorySlot() {
         customBackground = new Image();
